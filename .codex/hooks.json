@@ -1,5 +1,5 @@
 {
-  "description": "LERNECKE: Lernstand beim Sessionstart einspielen",
+  "description": "LERNECKE: Lernstand beim Sessionstart einspielen (richtet beim ersten Start auf einem neuen Rechner automatisch die .venv ein)",
   "hooks": {
     "SessionStart": [
       {
@@ -7,10 +7,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$(git rev-parse --show-toplevel)/.venv/bin/python\" -m lern brief --hook",
-            "commandWindows": "powershell -NoProfile -Command \"& (Join-Path (git rev-parse --show-toplevel) '.venv/Scripts/python.exe') -m lern brief --hook\"",
-            "timeout": 30,
-            "statusMessage": "Lade Lernstand"
+            "command": "sh \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)/lern\" brief --hook",
+            "commandWindows": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$w = git rev-parse --show-toplevel 2>$null; if (-not $w) { $w = (Get-Location).Path }; & (Join-Path $w 'lern.cmd') brief --hook\"",
+            "timeout": 600,
+            "statusMessage": "Lade Lernstand (beim ersten Start: Einrichtung)"
           }
         ]
       }

@@ -71,6 +71,8 @@ def _gueltige_karten(kurs: Kurs) -> list[Karte]:
 def exportiere_apkg(kurs: Kurs, ziel: Path | None = None) -> tuple[Path, int]:
     import genanki
 
+    # Felder der Notiztypen nie ändern: Schema-Änderungen erzwingen in Anki eine vollständige
+    # Synchronisation (Gefahr, Handy-Fortschritt zu überschreiben). Neue Infos → Feld „Zusatz“.
     basis = genanki.Model(
         _stabile_zahl(MODELL_BASIS), MODELL_BASIS,
         fields=[{"name": n} for n in ("Vorderseite", "Rückseite", "ID", "Quelle", "Thema", "Zusatz")],
@@ -105,8 +107,9 @@ def exportiere_apkg(kurs: Kurs, ziel: Path | None = None) -> tuple[Path, int]:
 
 def ankiconnect(aktion: str, url: str = ANKICONNECT_URL, **params):
     anfrage = json.dumps({"action": aktion, "version": 6, "params": params}).encode("utf-8")
+    zeit = 180 if aktion in ("sync", "importPackage") else 10  # AnkiWeb-Sync kann dauern
     try:
-        with urllib.request.urlopen(urllib.request.Request(url, anfrage), timeout=10) as antwort:
+        with urllib.request.urlopen(urllib.request.Request(url, anfrage), timeout=zeit) as antwort:
             daten = json.loads(antwort.read().decode("utf-8"))
     except OSError as e:
         raise LernFehler("AnkiConnect nicht erreichbar – läuft Anki-Desktop mit dem Add-on AnkiConnect "
@@ -116,37 +119,24 @@ def ankiconnect(aktion: str, url: str = ANKICONNECT_URL, **params):
     return daten.get("result")
 
 
-def _modelle_sicherstellen(rufe) -> None:
-    vorhanden = set(rufe("modelNames"))
-    if MODELL_BASIS not in vorhanden:
-        rufe("createModel", modelName=MODELL_BASIS, css=_CSS,
-             inOrderFields=["Vorderseite", "Rückseite", "ID", "Quelle", "Thema", "Zusatz"],
-             cardTemplates=[{"Name": "Karte", "Front": "{{Vorderseite}}",
-                             "Back": "{{FrontSide}}<hr id=answer>{{Rückseite}}" + _FUSS}])
-    if MODELL_CLOZE not in vorhanden:
-        rufe("createModel", modelName=MODELL_CLOZE, css=_CSS, isCloze=True,
-             inOrderFields=["Text", "ID", "Quelle", "Thema", "Zusatz"],
-             cardTemplates=[{"Name": "Lückentext", "Front": "{{cloze:Text}}", "Back": "{{cloze:Text}}" + _FUSS}])
+def karten_hash(kurs: Kurs) -> str | None:
+    """Fingerabdruck aller Karteninhalte – Push nur, wenn sich daran etwas geändert hat."""
+    karten = _gueltige_karten(kurs)
+    if not karten:
+        return None
+    inhalt = sorted((k.id, deck_name(kurs, k), json.dumps(_felder(k), sort_keys=True)) for k in karten)
+    return hashlib.sha1(json.dumps(inhalt, ensure_ascii=False).encode("utf-8")).hexdigest()
 
 
-def push(kurs: Kurs, rufe=ankiconnect) -> dict[str, int]:
-    _modelle_sicherstellen(rufe)
-    neu = aktualisiert = 0
-    for k in _gueltige_karten(kurs):
-        deck = deck_name(kurs, k)
-        rufe("createDeck", deck=deck)
-        modell = MODELL_CLOZE if k.ist_cloze else MODELL_BASIS
-        felder = _felder(k)
-        treffer = rufe("findNotes", query=f'"note:{modell}" "ID:{k.id}"')
-        if treffer:
-            rufe("updateNoteFields", note={"id": treffer[0], "fields": felder})
-            aktualisiert += 1
-        else:
-            rufe("addNote", note={"deckName": deck, "modelName": modell, "fields": felder,
-                                  "tags": [f"lernecke::{kurs.id}", f"thema::{k.thema or 'ohne'}"],
-                                  "options": {"allowDuplicate": False}})
-            neu += 1
-    return {"neu": neu, "aktualisiert": aktualisiert}
+def push(kurs: Kurs, rufe=ankiconnect) -> int:
+    """Karten per AnkiConnect übertragen – als .apkg-Import, damit GUIDs mit `anki export` identisch sind
+    (kein Duplikat, egal welcher Weg; bestehende Karten behalten ihre Lernhistorie)."""
+    ziel, n = exportiere_apkg(kurs)
+    rufe("importPackage", path=str(ziel.resolve()))
+    zustand = lade_sync_zustand(kurs)
+    zustand.update(karten_hash=karten_hash(kurs), letzter_push=_jetzt())
+    _speichere_sync_zustand(kurs, zustand)
+    return n
 
 
 def pull(kurs: Kurs, rufe=ankiconnect) -> int:
@@ -168,3 +158,77 @@ def pull(kurs: Kurs, rufe=ankiconnect) -> int:
     datei.write_text(json.dumps({"stand": datetime.now().replace(microsecond=0).isoformat(), "karten": stats},
                                 ensure_ascii=False, indent=1), encoding="utf-8")
     return len(stats)
+
+
+# ---------------------------------------------------------------- Sync-Workflow
+
+SYNC_DATEI = "anki-sync.json"
+
+
+class AnkiNichtErreichbar(LernFehler):
+    pass
+
+
+def _jetzt() -> str:
+    return datetime.now().replace(microsecond=0).isoformat()
+
+
+def lade_sync_zustand(kurs: Kurs) -> dict:
+    datei = kurs.lernstand / SYNC_DATEI
+    return json.loads(datei.read_text(encoding="utf-8")) if datei.is_file() else {}
+
+
+def _speichere_sync_zustand(kurs: Kurs, zustand: dict) -> None:
+    datei = kurs.lernstand / SYNC_DATEI
+    datei.parent.mkdir(parents=True, exist_ok=True)
+    datei.write_text(json.dumps(zustand, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def _ankiweb_sync(rufe) -> bool:
+    """True = synchronisiert, False = kein AnkiWeb-Login (nur lokal). Andere Fehler → Abbruch."""
+    try:
+        rufe("sync")
+        return True
+    except LernFehler as e:
+        text = str(e).lower()
+        if "auth" in text or "login" in text:
+            return False
+        raise LernFehler(f"AnkiWeb-Sync fehlgeschlagen – es wurde nichts übertragen. ({e})\n"
+                         "Meist ist eine vollständige Synchronisation nötig: siehe Skill `anki`, Abschnitt Probleme.") from e
+
+
+def synchronisiere(kurs: Kurs, rufe=None, mit_push: bool = True) -> list[str]:
+    """Sicherer Abgleich in fester Reihenfolge:
+    1. AnkiWeb → Desktop (Handy-Wiederholungen holen, bevor irgendetwas geändert wird)
+    2. Statistik ziehen  3. geänderte Karten importieren  4. Desktop → AnkiWeb (fürs Handy)."""
+    rufe = rufe or ankiconnect
+    try:
+        rufe("version")
+    except LernFehler as e:
+        raise AnkiNichtErreichbar(str(e)) from e
+    protokoll = []
+    web = _ankiweb_sync(rufe)
+    protokoll.append("AnkiWeb → Desktop synchronisiert" if web else
+                     "WARNUNG: kein AnkiWeb-Login in Anki-Desktop – Handy-Fortschritt fehlt, nur lokaler Abgleich")
+    in_anki = pull(kurs, rufe)
+    protokoll.append(f"Statistik für {in_anki} Karten geholt")
+    zustand = lade_sync_zustand(kurs)
+    h = karten_hash(kurs)
+    fehlen = len(_gueltige_karten(kurs)) - in_anki  # z. B. nach „Herunterladen“ bei vollständiger Synchronisation
+    if not mit_push:
+        protokoll.append("Push übersprungen (--ohne-push)")
+    elif h is None:
+        protokoll.append("Keine Karten im Kurs – nichts zu übertragen")
+    elif h == zustand.get("karten_hash") and fehlen <= 0:
+        protokoll.append("Karten unverändert – kein Push nötig")
+    else:
+        protokoll.append(f"{push(kurs, rufe)} Karten importiert (neu/aktualisiert)")
+        if web:
+            _ankiweb_sync(rufe)
+            protokoll.append("Desktop → AnkiWeb hochgeladen (Handy jetzt synchronisieren)")
+    zustand = lade_sync_zustand(kurs)
+    zustand["letzter_abgleich"] = _jetzt()
+    if web:
+        zustand["letzter_ankiweb_sync"] = zustand["letzter_abgleich"]
+    _speichere_sync_zustand(kurs, zustand)
+    return protokoll

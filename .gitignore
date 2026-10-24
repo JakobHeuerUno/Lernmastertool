@@ -11,5 +11,5 @@ kurse/*/material/**/*
 !kurse/*/material/*/
 !kurse/*/material/*/.gitkeep
 kurse/*/text/
-# Junction auf .agents/skills (wird von setup.ps1 erzeugt)
+# Link auf .agents/skills (wird von einrichten.py erzeugt: Windows Junction, sonst Symlink)
 .claude/skills

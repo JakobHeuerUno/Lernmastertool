@@ -3,17 +3,40 @@
 Dieses Repo ist eine persönliche Lernumgebung für Uni-Kurse. Du bist **Tutor**, nicht Lösungsautomat.
 Ziel: dass der Nutzer die Klausur besteht und den Stoff wirklich kann. Sprache: **Deutsch**, Anrede „du“.
 
+## 0. Einrichtung (neuer Rechner, frischer Klon, anderes Betriebssystem)
+
+Das Tool `lern` läuft in einer lokalen `.venv` (nicht in Git, gehört immer zu genau einem Rechner + OS).
+Aufgerufen wird es **nur über den Launcher**, der das OS erkennt und die richtige `.venv` wählt:
+
+| System / Shell | Launcher | Einrichtung (idempotent, jederzeit wiederholbar) |
+|---|---|---|
+| macOS, Linux, Git Bash (auch Claude Codes Bash-Tool unter Windows) | `./lern <befehl>` | `sh setup.sh` |
+| Windows PowerShell / cmd (z. B. Codex unter Windows) | `.\lern.cmd <befehl>` | `powershell -ExecutionPolicy Bypass -File .\setup.ps1` |
+
+- **Automatisch:** Der SessionStart-Hook ruft `lern brief --hook` über den Launcher auf. Fehlt die `.venv` oder passt sie
+  nicht (von anderem Rechner/OS kopiert, kaputt), richtet der Launcher sie selbst ein (`einrichten.py`, ca. 1 Minute) und
+  liefert danach den Lernstand. Dasselbe passiert bei jedem anderen `lern`-Aufruf.
+- **Meldet der Hook „noch nicht eingerichtet“**: Es fehlt meist Python ≥ 3.11. Dann `sh setup.sh` bzw. `setup.ps1` ausführen –
+  ohne `--auto` installieren die Skripte Python selbst (macOS: `brew install python@3.12`, Windows: `winget`).
+  Fehlt auch Homebrew/winget: dem Nutzer den Installer von python.org nennen. Apples `/usr/bin/python3` (3.9) ist zu alt.
+- Weitere Optionen: `--neu` (.venv komplett neu), `--tests` (Testsuite danach). Windows: `-Neu`, `-Tests`.
+- Die Skills liegen in `.agents/skills/`; das Setup verlinkt `.claude/skills` darauf (Windows: Junction, sonst Symlink).
+  Fehlen `/lernen`, `/aufgabe` … nach der Ersteinrichtung: Session einmal neu starten.
+- Nie `pip install` ins System-Python, nie `.venv` committen.
+
 ## 1. Sessionstart (immer)
 
 1. Der Lernstand wird per SessionStart-Hook eingespielt („LERNECKE – Lernstand“). Fehlt er:
-   `.venv/Scripts/python -m lern brief` ausführen. Kann kein Code laufen: `STAND.md` lesen.
+   `./lern brief` (bzw. `.\lern.cmd brief`) ausführen – das richtet bei Bedarf auch die `.venv` ein (Abschnitt 0).
+   Kann kein Code laufen: `STAND.md` lesen.
 2. Den Lernstand **aktiv nutzen**: offene Fehler, letzte „Nächste Schritte“, fällige Nachrechen-Aufgaben.
 3. Ohne konkreten Auftrag: Skill `lernen` (Warm-up mit 2–3 Abruffragen → Sitzungsplan).
 4. Kursspezifisches steht in `kurse/<kurs>/kurs.yaml` (Klausur, Hilfsmittel, Notation) und `kurse/<kurs>/KURS.md` – vor dem Unterrichten lesen.
 
 ## 2. Werkzeug `lern` (der Lernstand wird NUR darüber gezählt)
 
-Aufruf immer aus dem Repo-Wurzelordner: `.venv/Scripts/python -m lern <befehl>` (PowerShell und Bash). Hilfe: `… -m lern <befehl> -h`.
+Aufruf über den Launcher (Abschnitt 0): `./lern <befehl>` (macOS/Linux/Git Bash) bzw. `.\lern.cmd <befehl>` (Windows PowerShell).
+In dieser Datei und in den Skills steht kurz `lern <befehl>`. Hilfe: `lern <befehl> -h`.
 
 | Wann | Befehl |
 |---|---|
@@ -24,7 +47,7 @@ Aufruf immer aus dem Repo-Wurzelordner: `.venv/Scripts/python -m lern <befehl>` 
 | Fehler später korrekt gemeistert | `fehler behoben F-007` |
 | Überblick / Empfehlung | `status`, `weiter`, `aufgaben` |
 | Material | `inbox`, `einsortieren <datei> --typ skript\|folien\|uebungen\|loesungen\|altklausuren\|studydrive\|sonstiges`, `einlesen`, `seite <pdf> <nr>` |
-| Karten / Anki | `karten naechste-id`, `anki export` (Standard), `anki push` / `anki pull` (nur wenn Anki mit AnkiConnect läuft) |
+| Karten / Anki | `karten naechste-id`; mit Anki-Desktop + AnkiConnect: `anki sync [--still]` (holen → Statistik → Karten → hochladen, Details: Skill `anki`); sonst `anki export` |
 | Nach Bearbeiten von YAML/Karten | `pruefen` |
 
 Regeln fürs Loggen:
@@ -76,4 +99,4 @@ profil/lernprofil.md            kursübergreifendes Lernprofil
 
 ## 6. Skills
 
-`lernen` · `aufgabe` · `thema` · `kurs-einrichten` · `karten` · `klausur` · `sitzung-ende` (in `.agents/skills/`, für Claude gespiegelt nach `.claude/skills/`).
+`lernen` · `aufgabe` · `thema` · `kurs-einrichten` · `karten` · `anki` (Einrichtung, Sync, Handy; bei jedem ausdrücklichen Anki-Bezug) · `klausur` · `sitzung-ende` (in `.agents/skills/`, für Claude gespiegelt nach `.claude/skills/`).

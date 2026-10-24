@@ -188,22 +188,58 @@ def test_apkg_export_stabile_guid(kurs, tmp_path):
     assert any("Fourier-Gesetz (1D)?" in f for f in nachher.values())
 
 
-def test_ankiconnect_push_pull(kurs):
-    (kurs.pfad / "karten" / "wl.md").write_text(KARTEN, encoding="utf-8")
-    aufrufe = []
+class FakeAnki:
+    def __init__(self, sync_fehler=None):
+        self.aufrufe, self.sync_fehler = [], sync_fehler
 
-    def rufe(aktion, **p):
-        aufrufe.append(aktion)
-        return {"modelNames": [], "findNotes": [], "findCards": [1, 2],
+    def __call__(self, aktion, **p):
+        self.aufrufe.append(aktion)
+        if aktion == "sync" and self.sync_fehler:
+            raise LernFehler(f"AnkiConnect-Fehler bei sync: {self.sync_fehler}")
+        return {"version": 6, "findCards": [1, 2], "importPackage": True,
                 "cardsInfo": [{"fields": {"ID": {"value": "dem-0001"}}, "lapses": 4, "reps": 9, "interval": 3},
                               {"fields": {"ID": {"value": "dem-0002"}}, "lapses": 0, "reps": 2, "interval": 10}]}.get(aktion)
 
-    assert anki.push(kurs, rufe) == {"neu": 2, "aktualisiert": 0}
-    assert aufrufe.count("createModel") == 2
-    assert anki.pull(kurs, rufe) == 2
+
+def test_ankiconnect_sync(kurs, tmp_path):
+    (kurs.pfad / "karten" / "wl.md").write_text(KARTEN, encoding="utf-8")
+    anki_ = FakeAnki()
+    anki.synchronisiere(kurs, anki_)
+    # Reihenfolge: erst holen, dann Statistik, dann importieren, dann hochladen
+    assert anki_.aufrufe == ["version", "sync", "findCards", "cardsInfo", "importPackage", "sync"]
     schreibe(kurs, v("2026-11-01", "selbst"), v("2026-11-09", "selbst"))
     s = themen_stand(kurs, HEUTE)["a"]
     assert s.roh_stufe == 4 and s.stufe == 3 and s.anki_schwach == 1
+
+    anki_.aufrufe.clear()  # Karten unverändert → kein Import, kein zweiter Sync
+    anki.synchronisiere(kurs, anki_)
+    assert anki_.aufrufe == ["version", "sync", "findCards", "cardsInfo"]
+    assert "Anki:" in brief(kurs.repo, heute=HEUTE)
+
+    leer = FakeAnki()  # Karten fehlen in Anki (z. B. nach vollständigem Download) → trotz gleichem Hash importieren
+    anki.synchronisiere(kurs, lambda aktion, **p: [] if aktion in ("findCards", "cardsInfo") else leer(aktion, **p))
+    assert "importPackage" in leer.aufrufe
+
+
+def test_ankiconnect_sync_fehler_bricht_vor_import_ab(kurs):
+    (kurs.pfad / "karten" / "wl.md").write_text(KARTEN, encoding="utf-8")
+    anki_ = FakeAnki(sync_fehler="Sync status 3 not one of [0, 1]")
+    with pytest.raises(LernFehler, match="nichts übertragen"):
+        anki.synchronisiere(kurs, anki_)
+    assert "importPackage" not in anki_.aufrufe
+
+    ohne_login = FakeAnki(sync_fehler="sync: auth not configured")
+    protokoll = anki.synchronisiere(kurs, ohne_login)
+    assert "importPackage" in ohne_login.aufrufe and ohne_login.aufrufe.count("sync") == 1
+    assert protokoll[0].startswith("WARNUNG")
+
+
+def test_anki_sync_still_ohne_anki(kurs, monkeypatch, capsys):
+    def weg(aktion, **p):
+        raise LernFehler("AnkiConnect nicht erreichbar")
+    monkeypatch.setattr(anki, "ankiconnect", weg)
+    assert main(["--kurs", kurs.id, "anki", "sync", "--still"]) == 0
+    assert "übersprungen" in capsys.readouterr().out
 
 
 # ------------------------------------------------------------------ Einlesen / Dashboard / Prüfen
@@ -236,3 +272,23 @@ def test_pruefen_findet_fehler(kurs):
     assert pruefe_kurs(kurs) == []
     schreibe(kurs, v("2026-11-01", "selbst", ["gibtsnicht"]))
     assert any("gibtsnicht" in p for p in pruefe_kurs(kurs))
+
+
+def test_materialpfade_nfc(kurs):
+    """macOS liefert Umlaute in Dateinamen teils als NFD – im Index immer NFC."""
+    import unicodedata
+    from lern.einlesen import _rel
+    nfd = unicodedata.normalize("NFD", "Übung.pdf")
+    assert _rel(kurs, kurs.pfad / "material" / "uebungen" / nfd) == "material/uebungen/Übung.pdf"
+
+
+def test_einrichten_erkennt_os_und_venv_pfad():
+    import importlib.util
+    from conftest import WURZEL
+    spec = importlib.util.spec_from_file_location("einrichten", WURZEL / "einrichten.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    assert mod.os_name() in ("windows", "macos", "linux")
+    assert mod.venv_python("windows").as_posix().endswith(".venv/Scripts/python.exe")
+    assert mod.venv_python("macos").as_posix().endswith(".venv/bin/python")
+    assert "brew" in mod.python_hinweis("macos")

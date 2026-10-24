@@ -6,8 +6,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR/.venv/Scripts/python.exe\" -m lern brief --hook",
-            "timeout": 30
+            "command": "sh \"$CLAUDE_PROJECT_DIR/lern\" brief --hook",
+            "timeout": 600
           }
         ]
       }
@@ -15,9 +15,14 @@
   },
   "permissions": {
     "allow": [
+      "Bash(./lern:*)",
+      "Bash(sh lern:*)",
+      "Bash(sh ./lern:*)",
+      "Bash(./lern.cmd:*)",
+      "Bash(.venv/bin/python -m lern:*)",
       "Bash(.venv/Scripts/python -m lern:*)",
       "Bash(.venv/Scripts/python.exe -m lern:*)",
-      "Bash(./lern.cmd:*)"
+      "Bash(sh setup.sh:*)"
     ]
   }
 }

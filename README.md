@@ -5,7 +5,13 @@ Jede Session weiß automatisch, wo du stehst, welche Fehler offen sind und welch
 
 ## Schnellstart
 
-1. Einmalig (oder nach dem Klonen auf einen neuen PC): `powershell -ExecutionPolicy Bypass -File .\setup.ps1`
+1. Einrichten (einmalig pro Rechner – nach dem Klonen, auf einem neuen PC/Mac oder wenn der Ordner kopiert wurde):
+   - **macOS / Linux:** `sh setup.sh` (installiert bei Bedarf Python 3.12 über Homebrew)
+   - **Windows:** `powershell -ExecutionPolicy Bypass -File .\setup.ps1` (installiert bei Bedarf Python 3.12 über winget)
+
+   Das Setup erkennt das Betriebssystem, legt `.venv` an (bzw. neu an, wenn sie von einem anderen Rechner/OS stammt),
+   installiert das Tool `lern` und verlinkt die Skills. Vergisst du es, erledigt das der Sessionstart-Hook automatisch,
+   sobald ein Python ≥ 3.11 vorhanden ist.
 2. Repo-Ordner öffnen in
    - **Claude Desktop → Tab „Code“** (empfohlen: Bilder/PDFs per Drag & Drop) oder `claude` im Terminal,
    - **Codex-App** oder `codex` im Terminal. Beim ersten Start mit `/hooks` den Lernstand-Hook als vertrauenswürdig bestätigen.
@@ -21,9 +27,9 @@ Jede Session weiß automatisch, wo du stehst, welche Fehler offen sind und welch
 
 Sag dem Agenten „Neuer Kurs: <Name>“ (Skill `kurs-einrichten`) oder manuell:
 
-```powershell
-.\lern.cmd kurs neu technische-mechanik-2 "Technische Mechanik 2" --kuerzel tm2
-.\lern.cmd kurs aktiv technische-mechanik-2
+```sh
+./lern kurs neu technische-mechanik-2 "Technische Mechanik 2" --kuerzel tm2   # Windows PowerShell: .\lern.cmd …
+./lern kurs aktiv technische-mechanik-2
 ```
 
 Danach Unterlagen in `kurse/<kurs>/inbox/` legen. Der Agent sortiert sie ein, liest sie und baut die Themenlandkarte.
@@ -45,7 +51,7 @@ Das Sprachmodell **beurteilt** (Fehlerursachen, Missverständnisse), das Tool `l
 - **Wurde eine Aufgabe nur erklärt, gilt sie nicht als gekonnt.** Sie wird nach 3 Tagen zum Nachrechnen ohne Hilfe eingeplant, nach Erfolg nochmal nach 10 Tagen.
 - Abdeckung und Beherrschung sind nach Klausurrelevanz (1–3) gewichtet.
 
-## Befehle (`.\lern.cmd …` bzw. `.venv/Scripts/python -m lern …`)
+## Befehle (`./lern …` auf macOS/Linux/Git Bash, `.\lern.cmd …` in Windows PowerShell)
 
 | Befehl | Zweck |
 |---|---|
@@ -59,16 +65,32 @@ Das Sprachmodell **beurteilt** (Fehlerursachen, Missverständnisse), das Tool `l
 
 ## Anki
 
-- Standard: `lern anki export` erzeugt `ausgabe/<kurs>.apkg`. In Anki über **Datei → Importieren** einlesen. Ein erneuter Import aktualisiert die Karten, dein Lernfortschritt bleibt erhalten.
-- Komfortabler: Anki-Desktop installieren und das Add-on **AnkiConnect** hinzufügen (Code `2055492159`). Dann schickt der Agent die Karten direkt in Anki (`anki push`). Mit `anki pull` liest er aus, welche Karten du oft vergisst, und berücksichtigt das bei Lernstand und Empfehlungen. Pro Kurs nur einen der beiden Wege nutzen.
-- Handy: Anki über AnkiWeb synchronisieren (AnkiDroid/AnkiMobile).
+Datenfluss: Repo → Anki-Desktop (AnkiConnect) ⇄ AnkiWeb ⇄ Handy (AnkiDroid/AnkiMobile). Einrichtung und Hilfe bei Problemen: Sag dem Agenten einfach „Anki“ (Skill `anki`).
+
+Einrichtung in Kurzform:
+1. Anki-Desktop von https://apps.ankiweb.net installieren.
+2. Extras → Erweiterungen → „Erweiterungen herunterladen…“ → Code `2055492159` (AnkiConnect).
+3. **Anki komplett schließen und neu starten.** Erst dann ist AnkiConnect aktiv.
+4. AnkiWeb-Konto auf https://ankiweb.net anlegen. In Anki auf „Synchronisieren“ klicken und anmelden.
+5. Am Handy AnkiDroid (Android) oder AnkiMobile (iOS) mit demselben Konto anmelden.
+
+- **Mit Anki-Desktop + Add-on AnkiConnect** (Code `2055492159`) und AnkiWeb-Login: `lern anki sync`.
+  1. Er holt zuerst den Handy-Fortschritt von AnkiWeb.
+  2. Dann liest er die Statistik aus, also welche Karten du oft vergisst. Das fließt in Lernstand und Empfehlungen ein.
+  3. Danach importiert er nur geänderte oder fehlende Karten.
+  4. Zum Schluss lädt er alles für das Handy hoch.
+
+  Schlägt der erste Sync fehl, bricht er ab, bevor sich etwas ändert. Beim Sessionstart und am Sitzungsende läuft der Abgleich automatisch (`--still`: ist Anki zu, wird er übersprungen).
+- **Ohne Anki-Desktop:** `lern anki export` erzeugt `ausgabe/<kurs>.apkg`. Die Datei über **Datei → Importieren** einlesen, das geht auch direkt am Handy. Ein erneuter Import aktualisiert die Karten, und dein Lernfortschritt bleibt erhalten. So kommt aber keine Statistik zurück ins Repo.
+- Beide Wege nutzen dieselben Karten-GUIDs, daher entstehen keine Duplikate.
 
 ## Aufbau
 
 - `AGENTS.md`: Tutor-Regeln für Claude und Codex. `CLAUDE.md` importiert diese Datei.
-- `.agents/skills/`: Skills für beide Agenten. `.claude/skills` ist eine Junction darauf.
-- `.claude/settings.json` und `.codex/hooks.json`: Sie spielen beim Sessionstart den Lernstand ein (`lern brief --hook`).
+- `.agents/skills/`: Skills für beide Agenten. `.claude/skills` ist ein Link darauf (Windows: Junction, sonst Symlink; legt das Setup an).
+- `.claude/settings.json` und `.codex/hooks.json`: Sie spielen beim Sessionstart den Lernstand ein (`lern brief --hook`) und richten auf einem neuen Rechner vorher automatisch die `.venv` ein.
+- `setup.sh` / `setup.ps1` → `einrichten.py`: plattformübergreifendes Setup. `lern` / `lern.cmd`: Launcher, die die passende `.venv` finden.
 - `STAND.md`: Lernstand als Datei, für Umgebungen ohne Hooks (z. B. Claude Cowork oder ChatGPT Work).
 - `profil/lernprofil.md`: kursübergreifendes Lernprofil.
 - `kurse/<kurs>/`: siehe Abschnitt 5 in `AGENTS.md`. Originalmaterial (`material/`, `inbox/`) und `text/` sind von Git ausgeschlossen.
-- `src/lern/` + `tests/`: das Python-Tool. Tests laufen mit `.venv\Scripts\python -m pytest`.
+- `src/lern/` + `tests/`: das Python-Tool. Tests: `sh setup.sh --tests` bzw. `setup.ps1 -Tests`.

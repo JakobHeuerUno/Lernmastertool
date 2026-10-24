@@ -99,6 +99,12 @@ def brief(repo: Repo, kurs_id: str | None = None, heute: date | None = None) -> 
     stats = kurs.anki_stats()
     vergessen = sorted(((k, v) for k, v in stats.items() if int(v.get("lapses", 0)) >= 3),
                        key=lambda kv: -int(kv[1]["lapses"]))[:5]
+    from lern.anki import lade_sync_zustand
+    sync = lade_sync_zustand(kurs).get("letzter_abgleich")
+    if sync:
+        tage = (heute - date.fromisoformat(sync[:10])).days
+        zeilen += ["", f"**Anki:** letzter Abgleich {date.fromisoformat(sync[:10]):%d.%m.} (vor {tage} Tagen) – "
+                       "bei Anki-Bezug Skill `anki`; Abgleich: `lern anki sync --still`"]
     if vergessen:
         zeilen += ["", "## Anki: oft vergessene Karten"] + [f"- {k} ({v['lapses']}× vergessen)" for k, v in vergessen]
 

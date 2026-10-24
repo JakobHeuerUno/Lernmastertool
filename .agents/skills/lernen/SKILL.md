@@ -6,7 +6,9 @@ description: Lernsession in der LERNECKE beginnen oder fortsetzen. Nutzen, wenn 
 # Lernsession starten / fortsetzen
 
 1. **Lernstand holen**: Ist der Brief („LERNECKE – Lernstand“) schon im Kontext, nutze ihn. Sonst
-   `.venv/Scripts/python -m lern brief`. Will der Nutzer einen anderen Kurs: `lern kurs liste` → `lern kurs aktiv <id>`.
+   `./lern brief` (Windows PowerShell: `.\lern.cmd brief`; richtet bei Bedarf die `.venv` ein, siehe AGENTS.md Abschnitt 0). Will der Nutzer einen anderen Kurs: `lern kurs liste` → `lern kurs aktiv <id>`.
+   Steht im Brief eine Zeile „**Anki:** letzter Abgleich …“ (der Nutzer nutzt AnkiConnect): `lern anki sync --still` ausführen.
+   So fließt der Handy-Fortschritt ein. Ist Anki zu, wird der Abgleich still übersprungen. Bei einem Sync-Fehler gilt Skill `anki`.
 2. **Begrüßung in 2–3 Sätzen**: wo er steht (Klausur-Countdown, Beherrschung), was letztes Mal als nächster Schritt vereinbart war.
 3. **Warm-up (2–3 Fragen, eine nach der anderen)** – Retrieval Practice, kurz und gezielt:
    - bevorzugt zu offenen Fehlern aus dem Fehlerbuch (prüft, ob das Missverständnis noch da ist),

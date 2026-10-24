@@ -3,3 +3,5 @@
 *.ps1 text eol=crlf
 *.pdf binary
 *.png binary
+lern text eol=lf
+*.sh text eol=lf

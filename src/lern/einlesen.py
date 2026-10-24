@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import shutil
+import unicodedata
 from datetime import date
 from pathlib import Path
 
@@ -54,7 +55,8 @@ def einsortieren(kurs: Kurs, dateien: list[str], typ: str, vertrauen: str | None
 
 
 def _rel(kurs: Kurs, pfad: Path) -> str:
-    return pfad.relative_to(kurs.pfad).as_posix()
+    # NFC: macOS liefert Dateinamen mit Umlauten teils zerlegt (NFD) -> sonst doppelte Einträge in material.yaml
+    return unicodedata.normalize("NFC", pfad.relative_to(kurs.pfad).as_posix())
 
 
 def _lade_index(kurs: Kurs) -> dict[str, dict]:

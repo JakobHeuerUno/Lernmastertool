@@ -82,8 +82,11 @@ def _parser() -> argparse.ArgumentParser:
     ka.add_parser("liste")
     an = sub.add_parser("anki", help="Anki-Export/-Sync").add_subparsers(dest="aktion", required=True)
     an.add_parser("export", help=".apkg nach ausgabe/ schreiben")
-    an.add_parser("push", help="per AnkiConnect direkt in Anki")
-    an.add_parser("pull", help="Statistik (lapses) per AnkiConnect holen")
+    an.add_parser("push", help="per AnkiConnect direkt in Anki (ohne AnkiWeb-Sync)")
+    an.add_parser("pull", help="Statistik (lapses) per AnkiConnect holen (ohne AnkiWeb-Sync)")
+    asy = an.add_parser("sync", help="Standard mit AnkiConnect: AnkiWeb holen → Statistik → Karten → AnkiWeb hochladen")
+    asy.add_argument("--still", action="store_true", help="nicht als Fehler werten, wenn Anki geschlossen ist")
+    asy.add_argument("--ohne-push", action="store_true", help="nur synchronisieren und Statistik holen")
 
     sub.add_parser("dashboard", help="ausgabe/dashboard.html erzeugen")
     sub.add_parser("pruefen", help="Kursdaten auf Konsistenz prüfen")
@@ -197,8 +200,16 @@ def _ausfuehren(args) -> int:  # noqa: C901 – flacher Dispatcher
             ziel, n = anki.exportiere_apkg(kurs)
             print(f"{n} Karten → {ziel}\nIn Anki: Datei → Importieren (bestehende Karten werden aktualisiert, Lernhistorie bleibt).")
         elif args.aktion == "push":
-            r = anki.push(kurs)
-            print(f"Anki: {r['neu']} neu, {r['aktualisiert']} aktualisiert")
+            print(f"{anki.push(kurs)} Karten in Anki importiert. Für das Handy danach synchronisieren (besser: `lern anki sync`).")
+        elif args.aktion == "sync":
+            try:
+                print("\n".join(anki.synchronisiere(kurs, mit_push=not args.ohne_push)))
+            except anki.AnkiNichtErreichbar as e:
+                if not args.still:
+                    raise
+                print("Anki nicht erreichbar (Anki-Desktop geschlossen?) – Abgleich übersprungen.")
+                return 0
+            schreibe_stand(repo)
         else:
             print(f"Statistik für {anki.pull(kurs)} Karten gespeichert (lernstand/anki-stats.json)")
             schreibe_stand(repo)

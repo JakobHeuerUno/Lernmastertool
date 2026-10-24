@@ -1,0 +1,38 @@
+#!/bin/sh
+# Launcher für das Lerntool – macOS, Linux und Git Bash unter Windows.
+#   ./lern <befehl>   (oder: sh lern <befehl>)
+# Fehlt die .venv oder passt sie nicht zu diesem Rechner/OS, wird sie zuerst automatisch eingerichtet.
+WURZEL=$(cd "$(dirname "$0")" && pwd)
+export LERN_ROOT="${LERN_ROOT:-$WURZEL}"
+
+finde_venv_python() {
+    for p in "$WURZEL/.venv/bin/python" "$WURZEL/.venv/Scripts/python.exe"; do
+        if [ -x "$p" ] && "$p" -c 'import lern, yaml' >/dev/null 2>&1; then
+            echo "$p"; return 0
+        fi
+    done
+    return 1
+}
+
+HOOK=0
+[ "${1:-}" = "brief" ] && [ "${2:-}" = "--hook" ] && HOOK=1
+
+PY=$(finde_venv_python)
+if [ -z "$PY" ]; then
+    echo "LERNECKE: Python-Umgebung fehlt oder passt nicht zu diesem Rechner – richte sie ein (einmalig, ca. 1 Minute) ..." >&2
+    # Ausgabe des Setups nach stderr: im Hook-Modus muss stdout reines JSON bleiben
+    sh "$WURZEL/setup.sh" --auto 1>&2
+    PY=$(finde_venv_python)
+fi
+
+if [ -z "$PY" ]; then
+    MELDUNG="LERNECKE ist auf diesem Rechner noch nicht eingerichtet und die automatische Einrichtung ist fehlgeschlagen (meist fehlt Python >= 3.11). Bitte zuerst einrichten: macOS/Linux im Repo-Ordner 'sh setup.sh' ausfuehren, Windows in PowerShell 'powershell -ExecutionPolicy Bypass -File setup.ps1'. Die Fehlermeldung des Setups zeigt, was fehlt. Danach Session neu starten. Bis dahin STAND.md lesen."
+    if [ "$HOOK" = 1 ]; then
+        printf '{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "%s"}}\n' "$MELDUNG"
+        exit 0
+    fi
+    echo "$MELDUNG" >&2
+    exit 1
+fi
+
+exec "$PY" -m lern "$@"

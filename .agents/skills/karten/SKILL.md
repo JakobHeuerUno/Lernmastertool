@@ -21,9 +21,10 @@ Gute Karten (Minimum-Information-Prinzip):
 - Nach dem Schreiben: `lern pruefen`.
 
 ## Nach Anki bringen
-- Standard: `lern anki export` → `ausgabe/<kurs>.apkg`. Dem Nutzer sagen: In Anki **Datei → Importieren**; erneuter Import aktualisiert geänderte Karten, Lernfortschritt bleibt. (Auch AnkiDroid/AnkiMobile können .apkg importieren.)
-- Wenn Anki-Desktop mit Add-on **AnkiConnect** (Code 2055492159) läuft: `lern anki push` (direkt einfügen/aktualisieren) und `lern anki pull` (holt, wie oft Karten vergessen wurden → fließt in Mastery und Brief).
-  Pro Kurs bei **einem** Weg bleiben (Export *oder* Push), sonst entstehen zwei Notiztypen.
+- Mit Anki-Desktop + AnkiConnect (Standard, wenn eingerichtet): `lern anki sync`. Das holt den Handy-Fortschritt, die Statistik und die geänderten Karten und lädt danach hoch.
+  Details, Einrichtung und Sync-Probleme stehen im Skill `anki`.
+- Ohne Anki-Desktop: `lern anki export` → `ausgabe/<kurs>.apkg`. In Anki **Datei → Importieren**. Ein erneuter Import aktualisiert die Karten, der Lernfortschritt bleibt erhalten. AnkiDroid und AnkiMobile können die Datei auch direkt importieren.
+  Beide Wege nutzen dieselben Karten-GUIDs und lassen sich kombinieren, ohne dass Duplikate entstehen.
 - Oft vergessene Karten (Brief: „Anki: oft vergessene Karten“) → Thema im Chat neu erklären oder Karte umformulieren/aufteilen.
 
 ## Abfrage im Chat (nur auf Wunsch)
