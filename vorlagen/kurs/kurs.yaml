@@ -1,0 +1,14 @@
+id: ""
+name: ""
+kuerzel: ""          # Präfix für Karten-IDs, z. B. wsu → wsu-0001
+semester: ""
+uni: ""
+dozent: ""
+klausur:
+  datum: null        # JJJJ-MM-TT
+  dauer_min: null
+  hilfsmittel: ""    # z. B. "Skript gedruckt, Formelsammlung, nicht-programmierbarer Taschenrechner" – bestimmt die Lernstrategie
+  format: ""         # z. B. "4 Rechenaufgaben, 120 Punkte"
+notation: {}         # Symbole wie im Kurs, z. B. alpha: "Wärmeübergangskoeffizient α (nicht h)"
+einstellungen:
+  auffrischen_nach_tagen: 21

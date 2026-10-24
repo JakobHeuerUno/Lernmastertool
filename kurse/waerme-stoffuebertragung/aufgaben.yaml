@@ -1,0 +1,4 @@
+# Aufgabenkatalog. id z. B. ue03-a2 (Übung 3, Aufgabe 2), ak2023-a1 (Altklausur 2023, Aufgabe 1)
+# Felder: id, titel, quelle ("material/uebungen/Uebung03.pdf S. 2"), loesung (Pfad + Seite oder null),
+#         loesung_vertrauen (offiziell|inoffiziell|keine), themen [ids], datei ("aufgaben/ue03-a2.md")
+aufgaben: []
