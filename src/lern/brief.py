@@ -106,7 +106,8 @@ def brief(repo: Repo, kurs_id: str | None = None, heute: date | None = None) -> 
         zeilen += ["", f"**Anki:** letzter Abgleich {date.fromisoformat(sync[:10]):%d.%m.} (vor {tage} Tagen) – "
                        "bei Anki-Bezug Skill `anki`; Abgleich: `lern anki sync --still`"]
     if vergessen:
-        zeilen += ["", "## Anki: oft vergessene Karten"] + [f"- {k} ({v['lapses']}× vergessen)" for k, v in vergessen]
+        zeilen += ["", "## Anki: oft vergessene Karten"] + [f"- {k}{' „' + v['kurz'] + '“ (' + v['stapel'] + ')' if v.get('stapel') else ''} ({v['lapses']}× vergessen)"
+                                                           for k, v in vergessen]
 
     profil = kurzprofil(repo)
     if profil:

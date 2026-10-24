@@ -71,4 +71,23 @@ def pruefe_kurs(kurs: Kurs) -> list[str]:
             p(f"{k.datei.name}:{k.zeile} ({k.id}): {prob}")
         if k.thema and bekannt and k.thema not in bekannt:
             p(f"{k.datei.name}:{k.zeile} ({k.id}): unbekanntes Thema '{k.thema}'")
+
+    from lern.anki_fremd import _lade_spiegel, lade_register
+    try:
+        register = lade_register(kurs)
+    except Exception as e:
+        return probleme + [f"[{kurs.id}] anki-fremd.yaml nicht lesbar: {e}"]
+    for st in register["stapel"]:
+        if st.get("thema") and bekannt and st["thema"] not in bekannt:
+            p(f"anki-fremd.yaml: Stapel „{st['name']}“ → unbekanntes Thema '{st['thema']}'")
+        try:
+            notizen = _lade_spiegel(kurs.pfad / st["datei"])
+        except Exception as e:
+            p(f"{st['datei']}: nicht lesbar ({e})")
+            continue
+        for nid, n in notizen.items():
+            if n.get("thema") and bekannt and n["thema"] not in bekannt:
+                p(f"{st['datei']}: Notiz {nid} → unbekanntes Thema '{n['thema']}'")
+            if not isinstance(n.get("felder"), dict):
+                p(f"{st['datei']}: Notiz {nid} → 'felder' fehlt oder ist kein Mapping")
     return probleme

@@ -1,6 +1,6 @@
 ---
 name: anki
-description: Anki einrichten, synchronisieren und Sync-Probleme lösen (Anki-Desktop, AnkiConnect, AnkiWeb, AnkiDroid/AnkiMobile am Handy). Nutzen, sobald der Nutzer Anki ausdrücklich erwähnt – "Anki", "Karten aufs Handy", "AnkiDroid", "synchronisieren", "Sync-Fehler", "was hab ich in Anki vergessen", "Anki-Statistik". Karten schreiben selbst → Skill `karten`.
+description: Anki einrichten, synchronisieren und Sync-Probleme lösen (Anki-Desktop, AnkiConnect, AnkiWeb, AnkiDroid/AnkiMobile am Handy). Nutzen, sobald der Nutzer Anki ausdrücklich erwähnt – "Anki", "Karten aufs Handy", "AnkiDroid", "synchronisieren", "Sync-Fehler", "was hab ich in Anki vergessen", "Anki-Statistik", "ich hab einen Stapel/Deck importiert", "Deck von Kommilitonen/StudyDrive", "überarbeite meinen Anki-Stapel". Karten schreiben selbst → Skill `karten`.
 ---
 
 # Anki-Abgleich (Desktop ⇄ AnkiWeb ⇄ Handy)
@@ -47,6 +47,37 @@ Schlägt Schritt 1 fehl, bricht der Befehl ab, **bevor** etwas verändert wurde.
    Fragt Anki dabei „Hochladen oder Herunterladen?“, siehe „Probleme“. Danach `lern anki sync`.
 8. Prüfen: Im Handy taucht der Stapel `Lernecke::<Kurs>::…` auf.
 
+## Fremde Stapel (z. B. von Kommilitonen, StudyDrive, AnkiWeb-Shared-Decks)
+
+Auslöser: Der Nutzer sagt, er habe einen Stapel importiert, oder `lern anki sync` meldet „NEUER STAPEL erkannt“.
+Erkannt werden neue, nicht leere Hauptstapel außerhalb von `Lernecke::`, die noch keinem Kurs zugeordnet sind (`lern anki fremd liste`).
+
+1. **Erst synchronisieren**, damit der Stapel vollständig auf dem Desktop ist: `lern anki sync`. Wurde er am Handy importiert, vorher das Handy synchronisieren lassen.
+2. **Nachfragen** (kurz): Zu welchem Kurs gehört der Stapel (ggf. `--kurs <id>`)? Woher stammt er? Soll er übernommen werden?
+   Gehört er nicht zur Lernecke: `lern anki fremd ignorieren "<Name>"`.
+3. **Übernehmen**: `lern anki fremd uebernehmen "<Name>" --quelle "StudyDrive …" [--thema <id>]`.
+   Das spiegelt alle Notizen nach `kurse/<kurs>/karten-fremd/<slug>.yaml`. Ab dann fließt die Statistik bei jedem Sync in den Lernstand ein.
+   Die Notizen bleiben in ihrem Stapel, ihrem Notiztyp und ihrer Lernhistorie.
+4. **Angebot an den Nutzer** (er wählt):
+   a) **nur Statistik**: fertig.
+   b) **Themen zuordnen**: in der YAML pro Notiz `thema:` aus `themen.yaml` setzen. Erst dann zählen oft vergessene Karten in die Mastery des Themas.
+      Bei großen Stapeln in Blöcken von ca. 30 Notizen arbeiten und zwischendurch `lern pruefen`.
+   c) **Qualitätscheck und Überarbeitung**: Fremde Karten gelten als **inoffiziell**. Gegen Skript und Folien prüfen (`text/`, Seitenangaben) und Folgendes korrigieren:
+      - fachliche Fehler und Notation (Kurs-Notation aus `kurs.yaml`),
+      - unklare Fragen.
+      Auffälliges in `notiz:` vermerken (z. B. „falsch laut Skript S. 42, korrigiert“) und dem Nutzer eine Liste der Änderungen zeigen.
+      Überladene Karten nicht in der YAML aufspalten. Stattdessen eigene Karten in `karten/*.md` schreiben (Skill `karten`) und dem Nutzer vorschlagen, die alte Karte in Anki auszusetzen.
+5. **Übertragen**: `lern anki sync`. Geänderte Felder gehen an dieselbe Anki-Notiz, die Lernhistorie bleibt, das Handy bekommt die Änderungen über AnkiWeb.
+
+Regeln für `karten-fremd/*.yaml`:
+- Nur Werte unter `felder` ändern sowie `thema` und `notiz` setzen. `id`, `modell` und Feldnamen nie ändern, keine Notizen hinzufügen. Neue Karten gehören nach `karten/*.md`.
+- Feldwerte sind Anki-HTML: Zeilenumbruch `<br>`, Formeln `\( … \)` bzw. `\[ … \]`. Vorhandene Bilder (`<img …>`) und Formatierung unverändert lassen.
+- Die Datei ist ein Spiegel. Der Sync vergleicht sie dreifach (Datei, Anki, letzter gemeinsamer Stand):
+  - Nur in Anki geändert: Die Datei wird nachgezogen.
+  - Nur in der Datei geändert: Die Änderung geht nach Anki.
+  - Beides geändert: **KONFLIKT**. Die Anki-Fassung gewinnt, die Fassung des Agenten steht unter `konflikt_agent`. Mit dem Nutzer klären, `konflikt_agent` danach entfernen.
+- In Anki gelöschte Notizen verschwinden beim nächsten Sync aus der Datei.
+
 ## Probleme
 
 - **„Anki nicht erreichbar“**: Anki-Desktop ist nicht offen, oder AnkiConnect fehlt bzw. ist deaktiviert. Anki starten und den Befehl wiederholen.
@@ -58,6 +89,8 @@ Schlägt Schritt 1 fehl, bricht der Befehl ab, **bevor** etwas verändert wurde.
   - Wurde nur am Desktop gelernt und das Handy ist leer oder veraltet → **„Hochladen“** wählen, danach am Handy „Herunterladen“.
   - Im Zweifel: vorher in Anki-Desktop über Datei → Exportieren → „Sammlungspaket (.colpkg)“ ein Backup anlegen.
 - **Duplikate**: Zu Duplikaten kommt es nur, wenn Karten außerhalb des Repos von Hand kopiert wurden. Lernecke-Karten tragen feste GUIDs. Export und Push sind kompatibel.
+- **Geänderter Kartentext kommt nach manuellem `.apkg`-Import nicht an**: Im Import-Dialog „Notizen aktualisieren“ auf „Immer“ stellen.
+  `lern anki sync` gleicht die Texte selbst an, dort ist das nicht nötig.
 - **Karte am Handy/Desktop bearbeitet**: Beim nächsten geänderten Import überschreibt das Repo den Text. Verbesserungen deshalb in `karten/*.md` machen (Skill `karten`).
 
 ## Regeln für den Agenten

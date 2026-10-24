@@ -112,7 +112,7 @@ def themen_stand(kurs: Kurs, heute: date | None = None, ereignisse: list[dict] |
 
     karten_themen = _karten_themen(kurs)
     for kid, st in kurs.anki_stats().items():
-        tid = karten_themen.get(kid)
+        tid = karten_themen.get(kid) or st.get("thema")  # fremde Stapel tragen ihr Thema selbst
         if tid and int(st.get("lapses", 0)) >= ANKI_LAPSES_SCHWACH:
             stand(tid).anki_schwach += 1
 

@@ -8,6 +8,8 @@
 ## Empfohlen als Nächstes
 1. Kurs einrichten: Material in inbox/ legen und Skill `kurs-einrichten` nutzen
 
+**Anki:** letzter Abgleich 24.10. (vor 0 Tagen) – bei Anki-Bezug Skill `anki`; Abgleich: `lern anki sync --still`
+
 ## Lernprofil (Kurzfassung)
 - Arbeitsweise: meist Uni-Aufgaben durcharbeiten und erklären lassen (Upload im Chat oder Ordner `inbox/`)
 - Tutor-Stil: geführt mit gestuften Hinweisen; bei „Lösung“ den vollen Weg zeigen

@@ -10,6 +10,7 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 
+from lern import anki_fremd
 from lern.daten import Kurs, LernFehler
 from lern.karten import Karte, lade_karten
 
@@ -133,6 +134,13 @@ def push(kurs: Kurs, rufe=ankiconnect) -> int:
     (kein Duplikat, egal welcher Weg; bestehende Karten behalten ihre Lernhistorie)."""
     ziel, n = exportiere_apkg(kurs)
     rufe("importPackage", path=str(ziel.resolve()))
+    # Der Import legt nur neue Notizen an, Textänderungen übernimmt er nicht (mit Anki 25 getestet) → Felder gezielt angleichen
+    notizen = rufe("findNotes", query=f'"tag:lernecke::{kurs.id}"') or []
+    in_anki = {(n_["fields"].get("ID") or {}).get("value"): n_ for n_ in (rufe("notesInfo", notes=notizen) or [])}
+    for k in _gueltige_karten(kurs):
+        notiz, soll = in_anki.get(k.id), _felder(k)
+        if notiz and any((notiz["fields"].get(f) or {}).get("value") != w for f, w in soll.items()):
+            rufe("updateNoteFields", note={"id": notiz["noteId"], "fields": soll})
     zustand = lade_sync_zustand(kurs)
     zustand.update(karten_hash=karten_hash(kurs), letzter_push=_jetzt())
     _speichere_sync_zustand(kurs, zustand)
@@ -153,11 +161,13 @@ def pull(kurs: Kurs, rufe=ankiconnect) -> int:
                 "reps": alt["reps"] + int(info.get("reps", 0)),
                 "interval": max(alt["interval"], int(info.get("interval", 0))),
             }
+    eigene = len(stats)
+    stats.update(anki_fremd.statistik(kurs, rufe))  # übernommene fremde Stapel (Schlüssel n<Notiz-ID>)
     datei = kurs.lernstand / "anki-stats.json"
     datei.parent.mkdir(parents=True, exist_ok=True)
     datei.write_text(json.dumps({"stand": datetime.now().replace(microsecond=0).isoformat(), "karten": stats},
                                 ensure_ascii=False, indent=1), encoding="utf-8")
-    return len(stats)
+    return eigene
 
 
 # ---------------------------------------------------------------- Sync-Workflow
@@ -200,7 +210,8 @@ def _ankiweb_sync(rufe) -> bool:
 def synchronisiere(kurs: Kurs, rufe=None, mit_push: bool = True) -> list[str]:
     """Sicherer Abgleich in fester Reihenfolge:
     1. AnkiWeb → Desktop (Handy-Wiederholungen holen, bevor irgendetwas geändert wird)
-    2. Statistik ziehen  3. geänderte Karten importieren  4. Desktop → AnkiWeb (fürs Handy)."""
+    2. Statistik ziehen  3. geänderte Karten importieren  4. fremde Stapel abgleichen und neue erkennen
+    5. Desktop → AnkiWeb (fürs Handy)."""
     rufe = rufe or ankiconnect
     try:
         rufe("version")
@@ -215,6 +226,7 @@ def synchronisiere(kurs: Kurs, rufe=None, mit_push: bool = True) -> list[str]:
     zustand = lade_sync_zustand(kurs)
     h = karten_hash(kurs)
     fehlen = len(_gueltige_karten(kurs)) - in_anki  # z. B. nach „Herunterladen“ bei vollständiger Synchronisation
+    geaendert = False
     if not mit_push:
         protokoll.append("Push übersprungen (--ohne-push)")
     elif h is None:
@@ -223,9 +235,16 @@ def synchronisiere(kurs: Kurs, rufe=None, mit_push: bool = True) -> list[str]:
         protokoll.append("Karten unverändert – kein Push nötig")
     else:
         protokoll.append(f"{push(kurs, rufe)} Karten importiert (neu/aktualisiert)")
-        if web:
-            _ankiweb_sync(rufe)
-            protokoll.append("Desktop → AnkiWeb hochgeladen (Handy jetzt synchronisieren)")
+        geaendert = True
+    fremd = anki_fremd.abgleich(kurs, rufe) if mit_push else []
+    protokoll += fremd
+    geaendert = geaendert or anki_fremd.hat_aenderungen(fremd)
+    for st in anki_fremd.erkenne(kurs, rufe):
+        protokoll.append(f"NEUER STAPEL erkannt: „{st['name']}“ ({st['notizen']} Notizen) → "
+                         f'`lern anki fremd uebernehmen "{st["name"]}"` oder `lern anki fremd ignorieren "{st["name"]}"`')
+    if geaendert and web:
+        _ankiweb_sync(rufe)
+        protokoll.append("Desktop → AnkiWeb hochgeladen (Handy jetzt synchronisieren)")
     zustand = lade_sync_zustand(kurs)
     zustand["letzter_abgleich"] = _jetzt()
     if web:

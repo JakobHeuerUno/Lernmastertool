@@ -47,7 +47,7 @@ In dieser Datei und in den Skills steht kurz `lern <befehl>`. Hilfe: `lern <befe
 | Fehler später korrekt gemeistert | `fehler behoben F-007` |
 | Überblick / Empfehlung | `status`, `weiter`, `aufgaben` |
 | Material | `inbox`, `einsortieren <datei> --typ skript\|folien\|uebungen\|loesungen\|altklausuren\|studydrive\|sonstiges`, `einlesen`, `seite <pdf> <nr>` |
-| Karten / Anki | `karten naechste-id`; mit Anki-Desktop + AnkiConnect: `anki sync [--still]` (holen → Statistik → Karten → hochladen, Details: Skill `anki`); sonst `anki export` |
+| Karten / Anki | `karten naechste-id`; mit Anki-Desktop + AnkiConnect: `anki sync [--still]` (holen → Statistik → Karten → hochladen, Details: Skill `anki`); sonst `anki export`. Fremde Stapel: `anki fremd liste\|uebernehmen\|ignorieren` |
 | Nach Bearbeiten von YAML/Karten | `pruefen` |
 
 Regeln fürs Loggen:
@@ -88,6 +88,7 @@ kurse/<kurs>/
   themen.yaml                   Themenlandkarte (ids stabil halten!)
   aufgaben.yaml, aufgaben/*.md  Aufgabenkatalog + je Aufgabe: Stellung, Lösungsweg, „Meine Stolperstellen“
   karten/*.md                   Karteikarten (Format: karten/README.md)
+  karten-fremd/*.yaml, anki-fremd.yaml  übernommene fremde Anki-Stapel (Spiegel, vom Agenten bearbeitbar)
   notizen/                      Erklärungen, die geklickt haben; persönliche Formelsammlung
   lernstand/                    ereignisse.jsonl (nur via lern!), fehlerbuch.md, fragen.md, sitzungen/
 profil/lernprofil.md            kursübergreifendes Lernprofil

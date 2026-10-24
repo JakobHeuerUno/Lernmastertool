@@ -206,14 +206,14 @@ def test_ankiconnect_sync(kurs, tmp_path):
     anki_ = FakeAnki()
     anki.synchronisiere(kurs, anki_)
     # Reihenfolge: erst holen, dann Statistik, dann importieren, dann hochladen
-    assert anki_.aufrufe == ["version", "sync", "findCards", "cardsInfo", "importPackage", "sync"]
+    assert anki_.aufrufe == ["version", "sync", "findCards", "cardsInfo", "importPackage", "findNotes", "notesInfo", "deckNames", "sync"]
     schreibe(kurs, v("2026-11-01", "selbst"), v("2026-11-09", "selbst"))
     s = themen_stand(kurs, HEUTE)["a"]
     assert s.roh_stufe == 4 and s.stufe == 3 and s.anki_schwach == 1
 
     anki_.aufrufe.clear()  # Karten unverändert → kein Import, kein zweiter Sync
     anki.synchronisiere(kurs, anki_)
-    assert anki_.aufrufe == ["version", "sync", "findCards", "cardsInfo"]
+    assert anki_.aufrufe == ["version", "sync", "findCards", "cardsInfo", "deckNames"]
     assert "Anki:" in brief(kurs.repo, heute=HEUTE)
 
     leer = FakeAnki()  # Karten fehlen in Anki (z. B. nach vollständigem Download) → trotz gleichem Hash importieren
@@ -292,3 +292,78 @@ def test_einrichten_erkennt_os_und_venv_pfad():
     assert mod.venv_python("windows").as_posix().endswith(".venv/Scripts/python.exe")
     assert mod.venv_python("macos").as_posix().endswith(".venv/bin/python")
     assert "brew" in mod.python_hinweis("macos")
+
+
+# ------------------------------------------------------------------ Fremde Anki-Stapel
+
+class FremdAnki:
+    """Mini-Anki mit einem fremden Stapel 'Kommilitone WSÜ' (2 Notizen) und dem leeren Standardstapel."""
+
+    def __init__(self):
+        self.notizen = {
+            101: {"modelName": "Basic", "fields": {"Front": "Was ist Nu?", "Back": "αL/λ"}},
+            102: {"modelName": "Basic", "fields": {"Front": "Bi-Zahl?", "Back": "falsch"}},
+        }
+        self.updates = []
+
+    def __call__(self, aktion, **p):
+        if aktion == "deckNames":
+            return ["Standard", "Kommilitone WSÜ", "Kommilitone WSÜ::Kap 2", "Lernecke::Demo"]
+        if aktion == "findNotes":
+            return list(self.notizen) if "Kommilitone" in p["query"] else []
+        if aktion == "notesInfo":
+            return [{"noteId": i, "modelName": n["modelName"],
+                     "fields": {f: {"value": v, "order": j} for j, (f, v) in enumerate(n["fields"].items())}}
+                    for i, n in self.notizen.items() if i in p["notes"]]
+        if aktion == "findCards":
+            return [1101, 1102] if "Kommilitone" in p["query"] else []
+        if aktion == "cardsInfo":
+            return [{"note": 101, "lapses": 5, "reps": 9, "interval": 2,
+                     "fields": {"Front": {"value": "Was ist <b>Nu</b>?", "order": 0}}},
+                    {"note": 102, "lapses": 0, "reps": 1, "interval": 1, "fields": {}}]
+        if aktion == "updateNoteFields":
+            self.updates.append(p["note"])
+            self.notizen[p["note"]["id"]]["fields"].update(p["note"]["fields"])
+        return None
+
+
+def test_fremder_stapel(kurs):
+    from lern import anki_fremd
+    from lern.daten import lade_yaml, speichere_yaml
+    fake = FremdAnki()
+    assert anki_fremd.erkenne(kurs, fake) == [{"name": "Kommilitone WSÜ", "notizen": 2}]
+
+    anki_fremd.uebernehmen(kurs, "Kommilitone WSÜ", fake, thema="a", quelle="StudyDrive")
+    assert anki_fremd.erkenne(kurs, fake) == []
+    pfad = kurs.pfad / "karten-fremd" / "kommilitone-wsue.yaml"
+    daten = lade_yaml(pfad)
+    assert [n["id"] for n in daten["notizen"]] == [101, 102]
+
+    # Agent korrigiert Notiz 102 und ordnet sie Thema b zu → wird nach Anki geschrieben
+    daten["notizen"][1]["felder"]["Back"] = "Bi = αL/λ_Festkörper"
+    daten["notizen"][1]["thema"] = "b"
+    speichere_yaml(pfad, daten)
+    # gleichzeitig ändert der Nutzer Notiz 101 in Anki → Datei wird nachgezogen
+    fake.notizen[101]["fields"]["Back"] = "Nu = αL/λ_Fluid"
+    protokoll = anki_fremd.abgleich(kurs, fake)
+    assert fake.updates == [{"id": 102, "fields": {"Front": "Bi-Zahl?", "Back": "Bi = αL/λ_Festkörper"}}]
+    assert "1 aus Anki aktualisiert" in protokoll[0] and "1 nach Anki geschrieben" in protokoll[0]
+    assert lade_yaml(pfad)["notizen"][0]["felder"]["Back"] == "Nu = αL/λ_Fluid"
+
+    # beide Seiten geändert → Konflikt: Anki gewinnt, Agenten-Fassung bleibt erhalten
+    daten = lade_yaml(pfad)
+    daten["notizen"][0]["felder"]["Back"] = "Agent"
+    speichere_yaml(pfad, daten)
+    fake.notizen[101]["fields"]["Back"] = "Nutzer"
+    assert any("KONFLIKT" in z for z in anki_fremd.abgleich(kurs, fake))
+    n101 = lade_yaml(pfad)["notizen"][0]
+    assert n101["felder"]["Back"] == "Nutzer" and n101["konflikt_agent"]["Back"] == "Agent"
+
+    # Statistik: Thema aus Stapel-Standard bzw. Notiz, fließt in die Mastery
+    stats = anki_fremd.statistik(kurs, fake)
+    assert stats["n101"]["thema"] == "a" and stats["n102"]["thema"] == "b" and stats["n101"]["kurz"] == "Was ist Nu ?"
+    assert pruefe_kurs(kurs) == []
+
+    anki_fremd.ignorieren(kurs, "Standard")
+    with pytest.raises(LernFehler):
+        anki_fremd.uebernehmen(kurs, "Kommilitone WSÜ", fake)

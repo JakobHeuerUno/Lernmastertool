@@ -87,6 +87,15 @@ def _parser() -> argparse.ArgumentParser:
     asy = an.add_parser("sync", help="Standard mit AnkiConnect: AnkiWeb holen → Statistik → Karten → AnkiWeb hochladen")
     asy.add_argument("--still", action="store_true", help="nicht als Fehler werten, wenn Anki geschlossen ist")
     asy.add_argument("--ohne-push", action="store_true", help="nur synchronisieren und Statistik holen")
+    af = an.add_parser("fremd", help="fremde Stapel (z. B. von Kommilitonen) erkennen/übernehmen").add_subparsers(
+        dest="fremd_aktion", required=True)
+    af.add_parser("liste", help="übernommene und neu erkannte Stapel anzeigen")
+    afu = af.add_parser("uebernehmen", help="Stapel dem Kurs zuordnen und nach karten-fremd/ spiegeln")
+    afu.add_argument("name", help="Name des Hauptstapels in Anki")
+    afu.add_argument("--thema", help="Standard-Thema für alle Notizen (einzeln in der YAML überschreibbar)")
+    afu.add_argument("--quelle", default="", help="Herkunft, z. B. StudyDrive, Kommilitone")
+    afu.add_argument("--vertrauen", default="inoffiziell", choices=["inoffiziell", "offiziell"])
+    af.add_parser("ignorieren", help="Stapel nicht mehr als neu melden").add_argument("name")
 
     sub.add_parser("dashboard", help="ausgabe/dashboard.html erzeugen")
     sub.add_parser("pruefen", help="Kursdaten auf Konsistenz prüfen")
@@ -210,6 +219,20 @@ def _ausfuehren(args) -> int:  # noqa: C901 – flacher Dispatcher
                 print("Anki nicht erreichbar (Anki-Desktop geschlossen?) – Abgleich übersprungen.")
                 return 0
             schreibe_stand(repo)
+        elif args.aktion == "fremd":
+            from lern import anki_fremd
+            if args.fremd_aktion == "ignorieren":
+                anki_fremd.ignorieren(kurs, args.name)
+                print(f"„{args.name}“ wird nicht mehr gemeldet (anki-fremd.yaml)")
+            elif args.fremd_aktion == "uebernehmen":
+                print("\n".join(anki_fremd.uebernehmen(kurs, args.name, anki.ankiconnect, args.thema, args.quelle,
+                                                       args.vertrauen)))
+                print("Statistik dieses Stapels fließt ab jetzt bei `lern anki sync` in den Lernstand ein.")
+            else:
+                for st in anki_fremd.lade_register(kurs)["stapel"]:
+                    print(f"übernommen: „{st['name']}“ → {st['datei']} (Thema: {st.get('thema') or '–'}, {st.get('quelle') or 'Quelle ?'})")
+                for st in anki_fremd.erkenne(kurs, anki.ankiconnect):
+                    print(f"NEU: „{st['name']}“ ({st['notizen']} Notizen)")
         else:
             print(f"Statistik für {anki.pull(kurs)} Karten gespeichert (lernstand/anki-stats.json)")
             schreibe_stand(repo)

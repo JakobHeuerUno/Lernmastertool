@@ -81,6 +81,9 @@ Einrichtung in Kurzform:
   4. Zum Schluss lädt er alles für das Handy hoch.
 
   Schlägt der erste Sync fehl, bricht er ab, bevor sich etwas ändert. Beim Sessionstart und am Sitzungsende läuft der Abgleich automatisch (`--still`: ist Anki zu, wird er übersprungen).
+- **Fremde Stapel** (z. B. von Kommilitonen oder StudyDrive): Importiere den Stapel einfach in Anki. `lern anki sync` erkennt ihn und fragt nach.
+  Mit `lern anki fremd uebernehmen "<Name>"` wird er dem Kurs zugeordnet. Seine Statistik fließt dann in den Lernstand ein, und der Agent kann die Karten auf Wunsch einem Thema zuordnen, gegen das Skript prüfen und korrigieren (`karten-fremd/*.yaml`).
+  Die Änderungen gehen an dieselben Anki-Notizen, die Lernhistorie bleibt erhalten.
 - **Ohne Anki-Desktop:** `lern anki export` erzeugt `ausgabe/<kurs>.apkg`. Die Datei über **Datei → Importieren** einlesen, das geht auch direkt am Handy. Ein erneuter Import aktualisiert die Karten, und dein Lernfortschritt bleibt erhalten. So kommt aber keine Statistik zurück ins Repo.
 - Beide Wege nutzen dieselben Karten-GUIDs, daher entstehen keine Duplikate.
 
