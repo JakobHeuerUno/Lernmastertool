@@ -1,4 +1,0 @@
-# Themenlandkarte (Reihenfolge = Vorlesungsreihenfolge). Vom Skill kurs-einrichten erstellt, von dir bestätigt.
-# Felder: id (kebab-case, stabil!), titel, kapitel, voraussetzungen [ids], quellen ["skript S. 12-18", ...],
-#         lernziele [...], klausurrelevanz 1 (selten) | 2 (normal) | 3 (kommt fast immer)
-themen: []
