@@ -23,6 +23,22 @@ Jede Session weiß automatisch, wo du stehst, welche Fehler offen sind und welch
    - „Analysier die Altklausuren“ / „Simulier eine Klausur“ (Skill `klausur`)
    - „Schluss für heute“ → Sitzungsnotiz, Karten-Export, Dashboard, Commit (Skill `sitzung-ende`)
 
+## Mit Kommilitonen teilen / Einstieg in einen bestehenden Kurs
+
+Das Repo enthält kein Originalmaterial (Urheberrecht, Größe) – nur Struktur, Themen, Aufgabenkatalog und Wegweiser.
+
+```sh
+git clone https://github.com/JakobHeuerUno/Lernmastertool LERNECKE && cd LERNECKE
+git checkout kurs/waerme-stoffuebertragung        # geteiltes Kursgerüst, Lernstand 0 %
+git checkout -b <deinname>/waerme-stoffuebertragung   # dein persönlicher Branch für den Lernstand
+sh setup.sh                                        # Windows: powershell -ExecutionPolicy Bypass -File .\setup.ps1
+./lern abgleich "<Pfad zum Moodle-Export>"         # zeigt, was zugeordnet wird; danach mit --los ausführen
+```
+
+`lern abgleich` erkennt jede Datei an ihrer Prüfsumme (auch in `.imscc`-Archiven) und legt sie in genau den Pfad, auf den
+Themen und Aufgaben verweisen; danach werden die Texte erzeugt. Unbekannte Dateien (neues Material) meldet es – die sortiert der Agent ein.
+Updates holen: `git pull` auf `kurs/<id>`, dann im eigenen Branch `git merge kurs/<id>`. Branch-Regeln: `AGENTS.md` Abschnitt 6.
+
 ## Neuen Kurs anlegen
 
 Sag dem Agenten „Neuer Kurs: <Name>“ (Skill `kurs-einrichten`) oder manuell:
@@ -59,6 +75,8 @@ Das Sprachmodell **beurteilt** (Fehlerursachen, Missverständnisse), das Tool `l
 | `dashboard` | `ausgabe/dashboard.html` erzeugen (im Browser öffnen) |
 | `kurs neu\|aktiv\|liste` | Kurse verwalten |
 | `inbox`, `einsortieren`, `einlesen`, `seite` | Material aufnehmen, PDFs → Text, Seite als Bild |
+| `abgleich <ordner> [--los]` | eigenes Material per Prüfsumme in die Kursstruktur einordnen, neues Material erkennen |
+| `index` | `INDEX.md` (Wegweiser Thema → Quellen/Aufgaben) neu erzeugen |
 | `log versuch\|fehler\|frage\|sitzung`, `fehler behoben` | Lernereignisse (macht normalerweise der Agent) |
 | `karten naechste-id\|liste`, `anki export\|push\|pull` | Karteikarten und Anki |
 | `pruefen` | Konsistenzcheck aller Kursdaten |

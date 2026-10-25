@@ -25,6 +25,6 @@ description: Lernsession in der LERNECKE sauber abschließen – Sitzungsnotiz m
    Meldet der Befehl „nicht erreichbar“: Anki-Desktop öffnen lassen und den Befehl wiederholen. Alternativ `lern anki export` mit Import-Hinweis.
    Bei einem Sync-Fehler gilt Skill `anki`. Nach erfolgreichem Upload daran erinnern, am Handy zu synchronisieren.
 6. **Dashboard**: `lern dashboard` → Pfad nennen (`ausgabe/dashboard.html`).
-7. **Commit** des Lernstands (Repo-Wurzel) – nur auf dem Kurs-Branch `kurs/<id>` (`git branch --show-current` prüfen; auf `master` nichts vom Kurs committen):
+7. **Commit** des Lernstands (Repo-Wurzel) – nur auf dem persönlichen Branch `<name>/<id>` (`git branch --show-current` prüfen; nicht auf dem geteilten `kurs/<id>` oder `main`; gibt es noch keinen: `git checkout -b <name>/<id>`):
    `git add -A` und `git commit -m "Sitzung JJJJ-MM-TT: <Kurzbeschreibung>"`. (Originalmaterial ist per .gitignore ausgeschlossen.)
 8. **Verabschiedung**: 2–3 Sätze – Fortschritt heute, nächster Schritt, ggf. wann Nachrechnen fällig ist.

@@ -36,6 +36,9 @@ def _parser() -> argparse.ArgumentParser:
     es.add_argument("--vertrauen", choices=("offiziell", "inoffiziell"))
     ei = sub.add_parser("einlesen", help="material/ indexieren, PDFs → text/*.md")
     ei.add_argument("--neu", action="store_true", help="alles neu umwandeln")
+    ab = sub.add_parser("abgleich", help="Material per Prüfsumme in material/ und medien/ einordnen (z. B. Moodle-Export, .imscc)")
+    ab.add_argument("ordner", nargs="+", help="Ordner, Dateien oder Archive")
+    ab.add_argument("--los", action="store_true", help="wirklich kopieren (ohne: nur anzeigen)")
     se = sub.add_parser("seite", help="PDF-Seite als PNG rendern (für Formeln/Bilder)")
     se.add_argument("datei")
     se.add_argument("seite", type=int)
@@ -146,6 +149,11 @@ def _ausfuehren(args) -> int:  # noqa: C901 – flacher Dispatcher
         schreibe_stand(repo)
         return 0
 
+    if args.befehl == "brief":  # vor der Kurswahl: muss auch ohne Kurs (z. B. auf main) Hinweise geben
+        from lern.brief import brief
+        print(brief(repo, args.kurs))
+        return 0
+
     kurs = repo.kurs(args.kurs)
 
     if args.befehl == "inbox":
@@ -158,16 +166,28 @@ def _ausfuehren(args) -> int:  # noqa: C901 – flacher Dispatcher
             for z in einsortieren(kurs, args.dateien, args.typ, args.vertrauen):
                 print(f"→ {z.relative_to(kurs.pfad).as_posix()}")
         bericht = einlesen(kurs, getattr(args, "neu", False))
+        from lern.abgleich import medien_index
+        medien_index(kurs)
         for status, liste in bericht.items():
             if liste and status != "unveraendert":
                 print(f"{status}: " + ", ".join(liste))
         print(f"({len(bericht['unveraendert'])} unverändert) – Index: material.yaml, Text: text/")
+    elif args.befehl == "abgleich":
+        from lern.abgleich import abgleich
+        b = abgleich(kurs, args.ordner, args.los)
+        verb = "kopiert" if args.los else "würde kopiert (mit --los ausführen)"
+        print(f"{len(b.vorhanden)} schon vorhanden, {len(b.kopiert)} {verb}, {len(b.unbekannt)} unbekannt, {len(b.fehlen)} fehlen noch")
+        for titel, liste in (("Unbekannt (neu/geändert → mit dem Agenten einsortieren)", b.unbekannt), ("Fehlen noch", b.fehlen)):
+            if liste:
+                rest = f"\n  … +{len(liste) - 60}" if len(liste) > 60 else ""
+                print(f"\n{titel}:\n" + "\n".join(f"  {x}" for x in liste[:60]) + rest)
+        if args.los and b.kopiert:
+            from lern.einlesen import einlesen
+            einlesen(kurs)
+            print("\nText erzeugt (lern einlesen).")
     elif args.befehl == "seite":
         from lern.einlesen import seite_rendern
         print(seite_rendern(kurs, args.datei, args.seite, args.zoom))
-    elif args.befehl == "brief":
-        from lern.brief import brief
-        print(brief(repo, args.kurs))
     elif args.befehl == "status":
         _status(kurs)
     elif args.befehl == "weiter":
