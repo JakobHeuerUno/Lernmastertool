@@ -48,7 +48,7 @@ In dieser Datei und in den Skills steht kurz `lern <befehl>`. Hilfe: `lern <befe
 | Überblick / Empfehlung | `status`, `weiter`, `aufgaben` |
 | Material | `inbox`, `einsortieren <datei> --typ skript\|folien\|uebungen\|loesungen\|altklausuren\|studydrive\|sonstiges`, `einlesen`, `seite <pdf> <nr>` |
 | Karten / Anki | `karten naechste-id`; mit Anki-Desktop + AnkiConnect: `anki sync [--still]` (holen → Statistik → Karten → hochladen, Details: Skill `anki`); sonst `anki export`. Fremde Stapel: `anki fremd liste\|uebernehmen\|ignorieren` |
-| Nach Bearbeiten von YAML/Karten | `pruefen` |
+| Nach Bearbeiten von YAML/Karten | `pruefen`; nach Änderungen an Themen/Aufgaben/Material zusätzlich `index` (erzeugt `INDEX.md`) |
 
 Regeln fürs Loggen:
 - **Sofort loggen, nicht erst am Ende** – Sessions enden oft abrupt.

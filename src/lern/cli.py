@@ -99,6 +99,7 @@ def _parser() -> argparse.ArgumentParser:
 
     sub.add_parser("dashboard", help="ausgabe/dashboard.html erzeugen")
     sub.add_parser("pruefen", help="Kursdaten auf Konsistenz prüfen")
+    sub.add_parser("index", help="INDEX.md erzeugen (Wegweiser Thema → Quellen/Aufgaben)")
     return p
 
 
@@ -239,6 +240,9 @@ def _ausfuehren(args) -> int:  # noqa: C901 – flacher Dispatcher
     elif args.befehl == "dashboard":
         from lern.dashboard import erzeuge
         print(erzeuge(repo))
+    elif args.befehl == "index":
+        from lern.index import erzeuge_index
+        print(erzeuge_index(kurs).relative_to(repo.wurzel).as_posix())
     elif args.befehl == "pruefen":
         from lern.pruefen import pruefe_kurs
         probleme = [p for i in repo.kurs_ids() for p in pruefe_kurs(repo.kurs(i))]
