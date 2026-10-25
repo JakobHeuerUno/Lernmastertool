@@ -1,13 +1,13 @@
 id: waerme-stoffuebertragung
 name: Wärme- und Stoffübertragung
 kuerzel: wsu
-semester: WS 26/27 (Material-Basis WS 25/26)
+semester: WS 26/27
 uni: RWTH Aachen, Lehrstuhl WSA
-dozent: Wilko Rohlfs (seit WS 25/26; Folien teils noch mit R. Kneer)
+dozent: Prof. Wilko Rohlfs (VL Di 8:30 H02); VRÜ Dr. Anna Maßmeyer (Mi 16:30); SRÜ Faruk Al-Sibai (Di/Do 10:30 H04 ab 05.11.)
 klausur:
-  datum: null        # noch offen (vermutlich Februar 2027)
+  datum: 2027-02-10  # voraussichtlich (Einführungsvorlesung 13.10.2026)
   dauer_min: 120
-  hilfsmittel: "nur ausgedruckte offizielle Formelsammlung ohne eigene Anmerkungen + zugelassener Taschenrechner"
+  hilfsmittel: "nur ausgedruckte offizielle Formelsammlung (WS 26/27) ohne eigene Anmerkungen + zugelassener Taschenrechner"
   format: "4 Aufgaben, 60 Punkte, bestanden ab 30 (ohne Bonus); A1 = 3–4 unabhängige Kurzaufgaben, A2–A4 je ein Szenario"
 notation:
   alpha: "Wärmeübergangskoeffizient α"

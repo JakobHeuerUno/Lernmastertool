@@ -1111,6 +1111,14 @@ material:
   eingelesen: '2026-10-25'
   seiten: 91
   text: text/skript/SU_Stoffuebertragung.md
+- datei: material/skript/Skript_v1.1.1c.pdf
+  typ: skript
+  vertrauen: offiziell
+  themen: []
+  sha1: 551d0ef139acf27a95d199606bfd3fe2409acae1
+  eingelesen: '2026-10-25'
+  seiten: 377
+  text: text/skript/Skript_v1.1.1c.md
 - datei: material/skript/WL_Waermeleitung.pdf
   typ: skript
   vertrauen: offiziell
@@ -1134,6 +1142,13 @@ material:
   sha1: c878e0a4703df1c393640b34f552ed0ef6cec034
   eingelesen: '2026-10-25'
   text: ''
+- datei: material/sonstiges/allgemein/Bonuspunkte_Login_WS26.html
+  typ: sonstiges
+  vertrauen: offiziell
+  themen: []
+  sha1: 2a131b8ac65355f31a53c678fd4e901c7daf623c
+  eingelesen: '2026-10-25'
+  text: ''
 - datei: material/sonstiges/allgemein/Einfuehrungsvorlesung_WS25.pdf
   typ: sonstiges
   vertrauen: offiziell
@@ -1142,6 +1157,14 @@ material:
   eingelesen: '2026-10-25'
   seiten: 70
   text: text/sonstiges/allgemein/Einfuehrungsvorlesung_WS25.md
+- datei: material/sonstiges/allgemein/Einfuehrungsvorlesung_WS26.pdf
+  typ: sonstiges
+  vertrauen: offiziell
+  themen: []
+  sha1: 9a9fab838e67abd134cd26e1cf62614f42f8cba4
+  eingelesen: '2026-10-25'
+  seiten: 45
+  text: text/sonstiges/allgemein/Einfuehrungsvorlesung_WS26.md
 - datei: material/sonstiges/allgemein/HeatQuiz_Glossar_Dictionary_HQ.pdf
   typ: sonstiges
   vertrauen: offiziell
@@ -1165,11 +1188,33 @@ material:
   eingelesen: '2026-10-25'
   seiten: 2
   text: text/sonstiges/allgemein/Klausurinfos_2026-08.md
+- datei: material/sonstiges/allgemein/Skript_Fehlersuche_Annotation.html
+  typ: sonstiges
+  vertrauen: offiziell
+  themen: []
+  sha1: bde753ce3232466f9181c0e2fc48f74d11dafa62
+  eingelesen: '2026-10-25'
+  text: ''
 - datei: material/sonstiges/allgemein/wl_Fehler_L06.html
   typ: sonstiges
   vertrauen: offiziell
   themen: []
   sha1: 813af6d9cfc7ea038e43b1429637dcba37dbe7fb
+  eingelesen: '2026-10-25'
+  text: ''
+- datei: material/sonstiges/erklaerungen/VRU01_Groessenvergleich.pdf
+  typ: sonstiges
+  vertrauen: offiziell
+  themen: []
+  sha1: 1136e25f60c5b5c1465a10bbc5a752bd63c538a3
+  eingelesen: '2026-10-25'
+  seiten: 7
+  text: text/sonstiges/erklaerungen/VRU01_Groessenvergleich.md
+- datei: material/sonstiges/erklaerungen/VRU01_Warmwasserleitung_interaktiv.html
+  typ: sonstiges
+  vertrauen: offiziell
+  themen: []
+  sha1: f983bfb48a8a1e0fdb55da35126fd77525212817
   eingelesen: '2026-10-25'
   text: ''
 - datei: material/sonstiges/erklaerungen/VRU06_Kochrezept_Konvektion.pdf
@@ -1422,6 +1467,14 @@ material:
   eingelesen: '2026-10-25'
   seiten: 3
   text: text/sonstiges/formelsammlung/FS_Klausur_V25-26_Korrekturen.md
+- datei: material/sonstiges/formelsammlung/FS_WS26-27.pdf
+  typ: sonstiges
+  vertrauen: offiziell
+  themen: []
+  sha1: 1c3e8bae8fd730806c9d50ee14adb69c4e0f6d78
+  eingelesen: '2026-10-25'
+  seiten: 51
+  text: text/sonstiges/formelsammlung/FS_WS26-27.md
 - datei: material/sonstiges/formelsammlung/FS_alt_Deutsch_Korrigiert.pdf
   typ: sonstiges
   vertrauen: offiziell
@@ -1462,6 +1515,14 @@ material:
   eingelesen: '2026-10-25'
   seiten: 1
   text: text/sonstiges/lernpfade/Lernpfad_Waermeleitung.md
+- datei: material/sonstiges/lernpfade/Lernpfad_Waermeleitung_WS26.pdf
+  typ: sonstiges
+  vertrauen: offiziell
+  themen: []
+  sha1: 5d0d36dd0536220862dfcb8bb9c22fd43e0fd688
+  eingelesen: '2026-10-25'
+  seiten: 1
+  text: text/sonstiges/lernpfade/Lernpfad_Waermeleitung_WS26.md
 - datei: material/sonstiges/lernpfade/Terminuebersicht_Themen_Vorlesung_BonuspunkteNEU.pdf
   typ: sonstiges
   vertrauen: offiziell

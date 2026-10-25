@@ -7,10 +7,18 @@
 - Erklärungen am **Skript** orientieren (Kapitel-Bände `material/skript/*`), aber auf dem Niveau des Nutzers – Niveau dynamisch an Lernstand/Fehlerbuch/Lernprofil anpassen.
 - Folien/Videos der Lerneinheit (L-Nummer) als Ergänzung nennen, nicht als Pflicht.
 
-## Material (Stand WS 25/26; neues Semester kommt per Abgleich dazu)
+## Änderungen WS 26/27 (Abgleich am 25.10.2026, Moodle-Stand bis PV04)
+- **Folien L01–L17 (Wärmeleitung), Videos, VÜ01 sind byte-identisch** mit WS 25/26 → alte Unterlagen gelten weiter. Später folgende Einheiten beim Erscheinen wieder per Prüfsumme abgleichen.
+- **Skript neu als Gesamtband** `skript/Skript_v1.1.1c.pdf` (377 S., gleiche Gliederung wie die alten 4 Bände) → **Hauptquelle**, Seiten in themen.yaml. Übungsteil stark erweitert (S. 311–377: II.1–20, III.1–16, IV.1–9, V.1–10, **ohne Lösungen**; als `sk-*` in aufgaben.yaml). Alte Bände `skript/{WL,KV,ST,SU}_*.pdf` nur noch Referenz (beim Greppen `--glob '!**/skript/[WKS][LVTU]_*'`).
+- **Formelsammlung WS 26/27** `sonstiges/formelsammlung/FS_WS26-27.pdf` = V25/26 mit eingearbeiteten Korrekturen, **gleiche Seitenzahlen**: Betragsstriche bei Gr/Ar/Gr_s; D.11 jetzt Lewis-Zahl Le = Sc/Pr (Lewis-Gesetz g = α/c_p steht weiter in S.23, FS S. 42); Klammer bei Nu∞ = 3,66(η∞/ηW)^0,14; ṁ″ im Fickschen Gesetz; WÜ.5-Folgezeile „Lokale“ statt „Mittlere“ Nußelt-Zahl (nat. Konvektion, vertikale Platte, q̇″ = konst.); Heisler-Wärmeverlust-Diagramme mit vereinfachter Beschriftung (Q0 = mc(T0 − TU)).
+- Neu: Einführungsvorlesung WS26, Lernpfad Wärmeleitung WS26 (SÜ 01–03), VRU01-Zusatz „Größenvergleich“ (kritischer Radius bei Kupfer ≈ 124 m) und interaktives Modell Warmwasserleitung (HTML).
+- **Termine/Organisation:** Klausur voraussichtlich **Mi 10.02.2027**; Sprechstunde Mi 10:30 (Raum 315), ab 2027 Mi+Fr; vor der Klausur 01.–03., 05. und 09.02.2027.
+- **Bonuspunkte (HeatQuiz):** 75 % der Lernpfad-Fragen richtig → 1 Punkt je Lernpfad, max. 3 aus 4. Frist = Sonntag nach letzter VRÜ des Themas: **Wärmeleitung 22.11.2026**, Konvektion 13.12.2026, Stoffübertragung 17.01.2027, Strahlung 07.02.2027 (Moodle-Tabelle nennt bei den letzten beiden versehentlich 2026). Login mit Code/Matrikelnummer prüfen!
+
+## Material (Basis WS 25/26)
 - Neuer Dozent ab WS 25/26 → Inhalt vermutlich weitgehend gleich. Bei neuem Material: Skript/Formelsammlung **diffen**, Änderungen hier unter „Änderungen WS 26/27“ notieren.
-- **Formelsammlung** `sonstiges/formelsammlung/FS_Klausur_V25-26.pdf` = einziges Hilfsmittel → immer mit Seite zitieren und üben, die Formel *dort* zu finden. Korrekturen: `FS_Klausur_V25-26_Korrekturen.pdf` (Lewis-Zahl falsch dargestellt, fehlende Klammern/Betragsstriche, fehlender Punkt bei Massenstrom).
-- **Skript**: 4 Bände mit Übungsteil am Ende (`VII Übungsaufgaben`, Übung II.x/V.x mit ★-Schwierigkeit). `skript/en/Heat_Transfer_Course_Reader.pdf` = englisches Gesamtwerk, inhaltsgleich → nur bei Bedarf (beim Greppen ausschließen: `--glob '!**/en/**'`).
+- **Formelsammlung** `sonstiges/formelsammlung/FS_WS26-27.pdf` (früher `FS_Klausur_V25-26.pdf`) = einziges Hilfsmittel → immer mit Seite zitieren und üben, die Formel *dort* zu finden. Korrekturen: `FS_Klausur_V25-26_Korrekturen.pdf` (Lewis-Zahl falsch dargestellt, fehlende Klammern/Betragsstriche, fehlender Punkt bei Massenstrom).
+- **Skript (alt)**: 4 Bände mit Übungsteil am Ende (`VII Übungsaufgaben`, Übung II.x/V.x mit ★-Schwierigkeit). `skript/en/Heat_Transfer_Course_Reader.pdf` = englisches Gesamtwerk, inhaltsgleich → nur bei Bedarf (beim Greppen ausschließen: `--glob '!**/en/**'`).
 - **Altklausuren** 2017H–2025H (+ 2026F leer) mit **offiziellen** Lösungen inkl. Punkteverteilung pro Gleichung (`loesungen/altklausuren/<JJJJ><F|H>_ML.pdf`). F = Februar-, H = Juli/August-Termin. 2021F fand nicht statt.
 - **SRU** (Selbstrechenübung 01–11) und **VRU** (Vorrechenübung 01–14) = globale Nummerierung der Übungen. Viele davon sind ältere Klausuraufgaben (Herkunft in `aufgaben.yaml`).
 - VRU-Lösungen sind Präsentationen/Handschrift (oft **ohne Textebene** → `lern seite` und Bild ansehen). Videos dazu in `medien/vru/`.

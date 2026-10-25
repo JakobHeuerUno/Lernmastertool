@@ -1,5 +1,5 @@
 # Aufgabenkatalog. id: ak<jahr><f|h>-a<n>[teil bei A1] (Altklausur, F=Feb, H=Jul/Aug), sru<nr>-a<n> (Selbstrechenübung),
-#   vru<nr>-a<n> (Vorrechenübung). Teilaufgaben a), b) … beim Loggen als --teil.
+#   vru<nr>-a<n> (Vorrechenübung), sk-<kapitel><nr> (Übung im Skript WS 26/27, z. B. sk-ii07 = Übung II.7; ohne Lösung). Teilaufgaben a), b) … beim Loggen als --teil.
 # Felder: id, titel, quelle (Datei + Seite), loesung, loesung_vertrauen, themen [ids], punkte (Altklausur),
 #   herkunft (Übung = alte Klausuraufgabe / Skript-Übung), datei (aufgaben/<id>.md, erst beim Bearbeiten)
 aufgaben:
@@ -66,6 +66,7 @@ aufgaben:
   - su-diffusion-fick
   - wl-rippen
   punkte: 12
+  herkunft: auch Skript WS26 Übung V.10 (376)
 - id: ak2018f-a1a
   titel: Döner im Fahrtwind
   quelle: material/altklausuren/2018F.pdf S. 4
@@ -1053,7 +1054,7 @@ aufgaben:
   themen:
   - wl-mehrschichtige-wand
   - qualitative-verlaeufe
-  herkunft: Skript WL Übung II.1
+  herkunft: Skript WL Übung II.1; auch Skript WS26 Übung II.1 (311)
 - id: sru01-a2
   titel: T(x) qualitativ zeichnen
   quelle: material/uebungen/sru/SRU01/Uebung_1_2.pdf
@@ -1071,7 +1072,7 @@ aufgaben:
   themen:
   - wl-mehrschichtige-wand
   - wl-waermedurchgang
-  herkunft: Skript WL Übung II.2 (Arbeitsblatt vorhanden)
+  herkunft: Skript WL Übung II.2 (Arbeitsblatt vorhanden); auch Skript WS26 Übung II.2 (312)
 - id: sru01-a4
   titel: Eisschicht
   quelle: material/uebungen/sru/SRU01/Uebung_1_4.pdf
@@ -1079,7 +1080,7 @@ aufgaben:
   loesung_vertrauen: offiziell
   themen:
   - wl-waermedurchgang
-  herkunft: Skript WL Übung II.5 (Arbeitsblatt vorhanden)
+  herkunft: Skript WL Übung II.5 (Arbeitsblatt vorhanden); auch Skript WS26 Übung II.5 (315)
 - id: sru02-a1
   titel: Dreischichtiger Stab mit Heizkern
   quelle: material/uebungen/sru/SRU02/Uebung_2_1.pdf
@@ -1107,7 +1108,7 @@ aufgaben:
   themen:
   - wl-rippen
   - wl-rippenwirkungsgrad
-  herkunft: Skript WL Übung II.7 (Arbeitsblatt vorhanden)
+  herkunft: Skript WL Übung II.7 (Arbeitsblatt vorhanden); auch Skript WS26 Übung II.7 (317)
 - id: sru02-a4
   titel: Ebene Wand mit Wärmequelle
   quelle: material/uebungen/sru/SRU02/Uebung_2_4.pdf
@@ -1234,7 +1235,7 @@ aufgaben:
   themen:
   - st-einstrahlzahlen
   - st-strahlungsaustausch
-  herkunft: Übungsskript 1.10 (Text-ML + Bild-ML 2.Aufgabe_Kuppel_ML.pdf)
+  herkunft: Übungsskript 1.10 (Text-ML + Bild-ML 2.Aufgabe_Kuppel_ML.pdf); auch Skript WS26 Übung IV.5 (358)
 - id: sru08-a1
   titel: Quarzglasfenster im Ofen
   quelle: material/uebungen/sru/SRU08/Aufgabe_1.7.pdf
@@ -1251,7 +1252,7 @@ aufgaben:
   loesung_vertrauen: offiziell
   themen:
   - su-diffusion-fick
-  herkunft: Skript SU Übung V.1
+  herkunft: Skript SU Übung V.1; auch Skript WS26 Übung V.1 (364)
 - id: sru09-a2
   titel: Wasser im Boden bei Regen
   quelle: material/uebungen/sru/SRU09/Aufgabe2.pdf
@@ -1322,7 +1323,7 @@ aufgaben:
   themen:
   - wl-waermequellen
   - wl-zylinder-kugel
-  herkunft: Übungsskript 2.14 (Lösung nur als Bild)
+  herkunft: Übungsskript 2.14 (Lösung nur als Bild); auch Skript WS26 Übung II.18 (330)
 - id: vru03-a1
   titel: Beschlagene Heckscheibe
   quelle: material/uebungen/vru/VRU03/Heckscheibe.pdf
@@ -1331,7 +1332,7 @@ aufgaben:
   themen:
   - wl-rippen
   - wl-waermequellen
-  herkunft: 'Übungsskript 2.11 (FAQ: A2.11-*)'
+  herkunft: 'Übungsskript 2.11 (FAQ: A2.11-*); auch Skript WS26 Übung II.17 (328)'
 - id: vru04-a1
   titel: Kupferkugel im Luftstrom
   quelle: material/uebungen/vru/VRU04/Kupferkugel.pdf
@@ -1340,7 +1341,7 @@ aufgaben:
   themen:
   - wl-blockkapazitaet
   - wl-biot
-  herkunft: Übungsskript 2.17
+  herkunft: Übungsskript 2.17; auch Skript WS26 Übung II.19 (331)
 - id: vru05-a1
   titel: Gewalztes Blech im Ölbad
   quelle: material/uebungen/vru/VRU05/GewalztesBlech.pdf
@@ -1350,7 +1351,7 @@ aufgaben:
   - wl-heisler
   - wl-halbunendlich
   - wl-konvektion-advektion
-  herkunft: Übungsskript 2.23
+  herkunft: Übungsskript 2.23; auch Skript WS26 Übung II.20 (332)
 - id: vru06-a1
   titel: Wärmeübergang an beheizter Platte
   quelle: material/uebungen/vru/VRU06/Aufgabe_WaermeuebergangPlatte.pdf
@@ -1359,7 +1360,7 @@ aufgaben:
   themen:
   - kv-erzwungen-umstroemt
   - kv-grenzschicht-erzwungen
-  herkunft: Übungsskript 3.8
+  herkunft: Übungsskript 3.8; auch Skript WS26 Übung III.16 (352)
 - id: vru07-a1
   titel: Bleileitung
   quelle: material/uebungen/vru/VRU07/Bleirohr.pdf
@@ -1367,7 +1368,7 @@ aufgaben:
   loesung_vertrauen: offiziell
   themen:
   - kv-rohrstroemung
-  herkunft: Übungsskript 3.2
+  herkunft: Übungsskript 3.2; auch Skript WS26 Übung III.15 (350)
 - id: vru08-a1
   titel: Puffmais in der Mikrowelle
   quelle: material/uebungen/vru/VRU08/Puffmais.pdf
@@ -1394,7 +1395,7 @@ aufgaben:
   themen:
   - st-flaechenhelligkeit-bilanz
   - st-reale-koerper-kirchhoff
-  herkunft: Übungsskript 1.1
+  herkunft: Übungsskript 1.1; auch Skript WS26 Übung IV.9 (363)
 - id: vru09-a2
   titel: Beschichtung Solarkollektor
   quelle: material/uebungen/vru/VRU09/Aufgabe_Beschichtung.pdf
@@ -1412,7 +1413,7 @@ aufgaben:
   themen:
   - st-einstrahlzahlen
   - st-strahlungsaustausch
-  herkunft: Übungsskript 1.4
+  herkunft: Übungsskript 1.4; auch Skript WS26 Übung IV.7 (360)
 - id: vru10-a2
   titel: Freilandschwein unter Heizstrahler
   quelle: material/uebungen/vru/VRU10/Aufgabe_Freilandschwein.pdf
@@ -1508,3 +1509,323 @@ aufgaben:
   - st-einstrahlzahlen
   - st-strahlungsaustausch
   herkunft: Klausur 2016F A3
+- id: sk-ii03
+  titel: Wärmeleitungsgleichung mit λ(x)
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 313
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-fourier-erhaltung
+  - qualitative-verlaeufe
+- id: sk-ii04
+  titel: Fensterdämmung
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 314
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-waermedurchgang
+  - wl-mehrschichtige-wand
+- id: sk-ii06
+  titel: Warmwasserrohr
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 316
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-zylinder-kugel
+  - wl-waermedurchgang
+  herkunft: vgl. vru01-a1
+- id: sk-ii08
+  titel: Neues Rippenmaterial
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 318
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-rippen
+  herkunft: vgl. vru14-a3 (Klausur 2011H A1c)
+- id: sk-ii09
+  titel: Rohrbefestigung
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 319
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-rippen
+  - wl-zylinder-kugel
+- id: sk-ii10
+  titel: Widerstandsdraht
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 321
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-waermequellen
+  - wl-zylinder-kugel
+- id: sk-ii11
+  titel: Mehrschichtige Wände mit Quelle
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 322
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-waermequellen
+  - wl-mehrschichtige-wand
+  - qualitative-verlaeufe
+- id: sk-ii12
+  titel: Kupferstab
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 323
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-rippen
+  - wl-waermequellen
+- id: sk-ii13
+  titel: Abkühlung eines Kupferstabs
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 324
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-blockkapazitaet
+  - wl-biot
+- id: sk-ii14
+  titel: Die Temperaturverzögerung
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 325
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-blockkapazitaet
+- id: sk-ii15
+  titel: Fliesenverlegung
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 326
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-halbunendlich
+- id: sk-ii16
+  titel: Erwärmen und Abschrecken einer Kugel
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 327
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-heisler
+  - wl-blockkapazitaet
+- id: sk-iii01
+  titel: Gehender Mensch
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 334
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-grundlagen
+  - wl-waermedurchgang
+- id: sk-iii02
+  titel: Dicke feste Platte
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 335
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-grundlagen
+- id: sk-iii03
+  titel: Rohrströmung
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 336
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-rohrstroemung
+- id: sk-iii04
+  titel: Poröse Wand
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 337
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-konvektion-advektion
+  - kv-grundlagen
+- id: sk-iii05
+  titel: Stoffbehälter
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 338
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-natuerlich-umstroemt
+  - wl-waermequellen
+- id: sk-iii06
+  titel: Fahrender Zug
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 339
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-erzwungen-umstroemt
+  - st-flaechenhelligkeit-bilanz
+- id: sk-iii07
+  titel: Querströmung um Balken
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 340
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-erzwungen-umstroemt
+  - kv-grenzschicht-erzwungen
+- id: sk-iii08
+  titel: Erwärmung eines Zylinders
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 341
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-erzwungen-umstroemt
+  - wl-blockkapazitaet
+- id: sk-iii09
+  titel: Rohrströmung mit konstanter Wärmestromdichte
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 342
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-rohrstroemung
+  - qualitative-verlaeufe
+  herkunft: vgl. sru05-a2
+- id: sk-iii10
+  titel: Isoliertes Rohr
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 343
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-rohrstroemung
+  - wl-waermedurchgang
+- id: sk-iii11
+  titel: Erwärmung eines Rohres
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 344
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-rohrstroemung
+- id: sk-iii12
+  titel: Strömung durch ein Gitter
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 345
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-rohrstroemung
+  - wl-waermequellen
+  herkunft: ≈ sru06-a2 (Klausur 2013H A2)
+- id: sk-iii13
+  titel: Horizontale und vertikale Wand
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 347
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-natuerlich-umstroemt
+- id: sk-iii14
+  titel: PV-T-Kollektor
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 348
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-natuerlich-umstroemt
+  - kv-rohrstroemung
+- id: sk-iv01
+  titel: Unendliches Rohrsegment
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 354
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - st-einstrahlzahlen
+- id: sk-iv02
+  titel: Solarturmkraftwerk
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 355
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  - st-schwarzkoerper
+- id: sk-iv03
+  titel: Halbkugelförmige Kuppel
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 356
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  - st-strahlungsaustausch
+- id: sk-iv04
+  titel: Glühbirne
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 357
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - st-strahlungsaustausch
+  - st-reale-koerper-kirchhoff
+  herkunft: vgl. Übungsskript 1.3 (FAQ)
+- id: sk-iv06
+  titel: Poké bowl
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 359
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - st-strahlungsaustausch
+  - wl-blockkapazitaet
+- id: sk-iv08
+  titel: Erdatmosphäre
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 361
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - st-reale-koerper-kirchhoff
+  - st-flaechenhelligkeit-bilanz
+- id: sk-v02
+  titel: Nasses Handtuch
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 365
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - su-stoffuebergang-advektiv
+- id: sk-v03
+  titel: Metallband im Ofen
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 366
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - su-diffusion-fick
+  - su-stoffuebergang-advektiv
+  herkunft: ≈ vru12-a1 (Klausur 2013H A4)
+- id: sk-v04
+  titel: Whiskyfass
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 368
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - su-diffusion-fick
+  - su-stoffuebergang-advektiv
+- id: sk-v05
+  titel: Kaffee brühen
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 370
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - su-diffusion-fick
+  - su-stoffuebergang-advektiv
+  herkunft: vgl. ak2023f-a3
+- id: sk-v06
+  titel: Rohrbruch (Mehrschichtwand)
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 372
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - su-diffusion-fick
+  - su-phasengleichgewicht
+  - qualitative-verlaeufe
+- id: sk-v07
+  titel: Nasser Schwamm
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 373
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - su-phasengleichgewicht
+  - su-analogie-instationaer
+- id: sk-v08
+  titel: Verdampfender Tropfen
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 374
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - su-stefanstrom
+  - su-stoffuebergang-advektiv
+- id: sk-v09
+  titel: Therme
+  quelle: material/skript/Skript_v1.1.1c.pdf S. 375
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - su-stoffuebergang-advektiv
+  - kv-natuerlich-umstroemt

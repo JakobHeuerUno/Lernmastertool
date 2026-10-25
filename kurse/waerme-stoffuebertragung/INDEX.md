@@ -10,70 +10,81 @@
 ## 1 Wärmeleitung
 
 ### Wärmeübertragungsmechanismen, Systeme und Bilanzen (`wl-grundlagen-bilanzen`) ★★
-- Quellen: skript WL S. 10-25 · folien wl/L01 · FS S. 1-2 (Kennzahlen)
+- Quellen: skript S. 20-35 · folien wl/L01 · FS S. 1-2 (Kennzahlen)
 - Aufgaben: –
 
 ### Fouriersches Gesetz und Energieerhaltungsgleichung (`wl-fourier-erhaltung`) ★★★
-- Quellen: skript WL S. 27-35 · folien wl/L01-L02 · FS S. 3
+- Quellen: skript S. 37-46 · folien wl/L01-L02 · FS S. 3
+- SK (1): sk-ii03
 - AK (1): ak2023h-a1d
 
 ### Mehrschichtige ebene Wand, Wärmewiderstände (`wl-mehrschichtige-wand`) ★★★
-- Quellen: skript WL S. 36-42 · folien wl/L03 · FS S. 3-4
+- Quellen: skript S. 47-53 · folien wl/L03 · FS S. 3-4
+- SK (2): sk-ii04, sk-ii11
 - SRU (3): sru01-a1, sru01-a2, sru01-a3
 - AK (11): ak2018f-a1d, ak2019f-a1c, ak2019h-a1d, ak2020h-a1b, ak2021h-a1b, ak2023f-a4, ak2024f-a1a, ak2024f-a1c, ak2024h-a1c, ak2025f-a1a, ak2026f-a1a
 
 ### Wärmeleitung in Zylinder- und Kugelkoordinaten (Rohrwand, Kugelschale) (`wl-zylinder-kugel`) ★★
-- Quellen: skript WL S. 43-46 · folien wl/L04 · FS S. 3-4 (WL.8)
+- Quellen: skript S. 54-57 · folien wl/L04 · FS S. 3-4 (WL.8)
+- SK (3): sk-ii06, sk-ii09, sk-ii10
 - SRU (1): sru02-a1
 - VRU (3): vru01-a1, vru02-a1, vru08-a2
 - AK (7): ak2017h-a1b, ak2018h-a1c, ak2018h-a4, ak2021h-a2, ak2025f-a1d, ak2025h-a2, ak2026f-a1b
 
 ### Konvektive Randbedingung und advektiver Enthalpietransport (`wl-konvektion-advektion`) ★
-- Quellen: skript WL S. 47-48 · folien wl/L05 · FS S. 16
+- Quellen: skript S. 58-59 · folien wl/L05 · FS S. 16
+- SK (1): sk-iii04
 - VRU (1): vru05-a1
 - AK (2): ak2018h-a1c, ak2026f-a3
 
 ### Wärmedurchgang durch Wand und Rohr mit Konvektion (k-Wert) (`wl-waermedurchgang`) ★★★
-- Quellen: skript WL S. 49-56 · folien wl/L06-L08 · FS S. 4
+- Quellen: skript S. 60-67 · folien wl/L06-L08 · FS S. 4
+- SK (4): sk-ii04, sk-ii06, sk-iii01, sk-iii10
 - SRU (4): sru01-a3, sru01-a4, sru03-a2, sru05-a4
 - VRU (1): vru01-a1
 - AK (11): ak2018f-a1c, ak2018h-a2, ak2019f-a1c, ak2019f-a2, ak2021h-a2, ak2022h-a1a, ak2022h-a1b, ak2023f-a1a, ak2023f-a1b, ak2023f-a4, ak2025h-a3
 
 ### Stationäre 1D-Wärmeleitung mit Wärmequellen (`wl-waermequellen`) ★★
-- Quellen: skript WL S. 57-61 · folien wl/L09 · FS S. 3
+- Quellen: skript S. 68-72 · folien wl/L09 · FS S. 3
+- SK (5): sk-ii10, sk-ii11, sk-ii12, sk-iii05, sk-iii12
 - SRU (4): sru02-a1, sru02-a4, sru06-a1, sru06-a2
 - VRU (2): vru02-a1, vru03-a1
 - AK (7): ak2018h-a4, ak2019f-a3, ak2020f-a2, ak2022f-a4, ak2024f-a1c, ak2025f-a2, ak2026f-a1a
 
 ### Rippen – Rippen-DGL, Lösung und Randbedingungen (`wl-rippen`) ★★★
-- Quellen: skript WL S. 62-66 · skript WL S. 69-74 · folien wl/L10 · folien wl/L12 · FS S. 5
+- Quellen: skript S. 73-77 + 80-85 · folien wl/L10 · folien wl/L12 · FS S. 5
+- SK (3): sk-ii08, sk-ii09, sk-ii12
 - SRU (2): sru02-a2, sru02-a3
 - VRU (2): vru03-a1, vru14-a3
 - AK (13): ak2017h-a4, ak2018f-a4, ak2019f-a1b, ak2019f-a3, ak2020f-a3, ak2020h-a1d, ak2022f-a4, ak2022h-a1a, ak2022h-a1c, ak2023h-a3, ak2024h-a1d, ak2025h-a2, ak2026f-a2
 
 ### Biot-Zahl (`wl-biot`) ★★
-- Quellen: skript WL S. 67-68 · folien wl/L11 · FS S. 1-2
+- Quellen: skript S. 78-79 · folien wl/L11 · FS S. 1-2
+- SK (1): sk-ii13
 - VRU (1): vru04-a1
 - AK (3): ak2017h-a1b, ak2018f-a4, ak2026f-a3
 
 ### Rippenwirkungsgrad (`wl-rippenwirkungsgrad`) ★
-- Quellen: skript WL S. 75-76 · folien wl/L13 · FS S. 5
+- Quellen: skript S. 86-87 · folien wl/L13 · FS S. 5
 - SRU (1): sru02-a3
 - AK (2): ak2019f-a1b, ak2020f-a3
 
 ### Instationäre Wärmeleitung – Blockkapazitätsmodell (`wl-blockkapazitaet`) ★★
-- Quellen: skript WL S. 77-84 · folien wl/L14-L15 · FS S. 6
+- Quellen: skript S. 88-95 · folien wl/L14-L15 · FS S. 6
+- SK (5): sk-ii13, sk-ii14, sk-ii16, sk-iii08, sk-iv06
 - SRU (1): sru03-a2
 - VRU (2): vru04-a1, vru08-a1
 - AK (8): ak2017h-a1c, ak2018f-a1a, ak2018h-a2, ak2020f-a1d, ak2020h-a2, ak2020h-a4, ak2021h-a3, ak2026f-a2
 
 ### Halbunendlicher Körper (auch periodische Randbedingung) (`wl-halbunendlich`) ★★
-- Quellen: skript WL S. 85-92 · folien wl/L16a-L16b · FS S. 6 · FS S. 47 (erf)
+- Quellen: skript S. 96-103 · folien wl/L16a-L16b · FS S. 6 · FS S. 47 (erf)
+- SK (1): sk-ii15
 - VRU (1): vru05-a1
 - AK (3): ak2020h-a4, ak2023f-a1d, ak2025f-a1c
 
 ### Dimensionslose Kennzahlen und Heisler-Diagramme (`wl-heisler`) ★★
-- Quellen: skript WL S. 93-100 · folien wl/L17 · FS S. 7-15 (Platte 7-9 · Zylinder 10-12 · Kugel 13-15)
+- Quellen: skript S. 104-112 · folien wl/L17 · FS S. 7-15 (Platte 7-9 · Zylinder 10-12 · Kugel 13-15)
+- SK (1): sk-ii16
 - SRU (1): sru03-a1
 - VRU (1): vru05-a1
 - AK (8): ak2017h-a3, ak2019h-a1a, ak2020h-a4, ak2021h-a1c, ak2022h-a1d, ak2023h-a1b, ak2024f-a1b, ak2024h-a1a
@@ -82,79 +93,89 @@
 
 ### Qualitative Verläufe zeichnen (T(x), T(r), T(t), ξ(x)) nach Klausurregeln (`qualitative-verlaeufe`) ★★★
 - Quellen: sonstiges/allgemein/Klausurinfos_2026-08.pdf S. 2 · sonstiges/faq/Einfuehrung-03-Waermeleitung-Temperaturprofile.pdf
+- SK (4): sk-ii03, sk-ii11, sk-iii09, sk-v06
 - SRU (12): sru01-a1, sru01-a2, sru02-a1, sru02-a2, sru02-a4, sru04-a1, sru04-a2, sru05-a1, sru05-a2, sru10-a1, sru10-a2, sru11-a1
 - AK (25): ak2017h-a1b, ak2017h-a3, ak2018f-a1d, ak2018f-a4, ak2018h-a2, ak2018h-a4, ak2019f-a2, ak2019h-a1d, ak2020h-a1a, ak2021h-a1b, ak2022f-a1c, ak2022f-a4, ak2022h-a1c, ak2022h-a2, ak2023h-a1a, ak2023h-a1d, ak2024f-a1a, ak2024h-a1c, ak2025f-a2, ak2025h-a1a, ak2025h-a1b, ak2025h-a2, ak2026f-a1a, ak2026f-a2, ak2026f-a3
 
 ## 2 Konvektion
 
 ### Einführung Konvektion – α, Nußelt-Zahl, Erhaltungsgleichungen (`kv-grundlagen`) ★★
-- Quellen: skript KV S. 12-31 · folien kv/L01 · FS S. 16 · FS S. 1-2
-- Aufgaben: –
+- Quellen: skript S. 113-132 · folien kv/L01 · FS S. 16 · FS S. 1-2
+- SK (3): sk-iii01, sk-iii02, sk-iii04
 
 ### Grenzschicht bei erzwungener Konvektion (`kv-grenzschicht-erzwungen`) ★
-- Quellen: skript KV S. 32-46 · folien kv/L02 · FS S. 17
+- Quellen: skript S. 133-147 · folien kv/L02 · FS S. 17
+- SK (1): sk-iii07
 - SRU (1): sru04-a2
 - VRU (1): vru06-a1
 - AK (1): ak2019h-a2
 
 ### Grenzschicht bei natürlicher Konvektion (`kv-grenzschicht-natuerlich`) ★
-- Quellen: skript KV S. 47-52 · folien kv/L03
+- Quellen: skript S. 148-153 · folien kv/L03
 - SRU (1): sru04-a1
 
 ### Turbulente Strömung und Ähnlichkeitstheorie (`kv-turbulenz-aehnlichkeit`) ★
-- Quellen: skript KV S. 53-63 · folien kv/L04-L05 · FS S. 1-2
+- Quellen: skript S. 154-164 · folien kv/L04-L05 · FS S. 1-2
 - Aufgaben: –
 
 ### Erzwungene Konvektion umströmter Körper (Platte, Zylinder, Kugel, Rohrbündel) (`kv-erzwungen-umstroemt`) ★★
-- Quellen: skript KV S. 64-75 · folien kv/L06 · FS S. 19-24
+- Quellen: skript S. 165-176 · folien kv/L06 · FS S. 19-24
+- SK (3): sk-iii06, sk-iii07, sk-iii08
 - SRU (1): sru04-a3
 - VRU (1): vru06-a1
 - AK (6): ak2018f-a1a, ak2018f-a2, ak2019h-a2, ak2024h-a1b, ak2025h-a1d, ak2026f-a3
 
 ### Erzwungene Konvektion durchströmter Körper (Rohrströmung, ΔT_log) (`kv-rohrstroemung`) ★★★
-- Quellen: skript KV S. 76-90 · folien kv/L07 · FS S. 18 · FS S. 25-26 · sonstiges/erklaerungen/VRU06_Kochrezept_Konvektion.pdf · sonstiges/erklaerungen/VRU07_*
+- Quellen: skript S. 177-191 · folien kv/L07 · FS S. 18 · FS S. 25-26 · sonstiges/erklaerungen/VRU06_Kochrezept_Konvektion.pdf · sonstiges/erklaerungen/VRU07_*
+- SK (6): sk-iii03, sk-iii09, sk-iii10, sk-iii11, sk-iii12, sk-iii14
 - SRU (7): sru04-a1, sru05-a1, sru05-a2, sru05-a3, sru05-a4, sru06-a1, sru06-a2
 - VRU (4): vru07-a1, vru08-a2, vru13-a1, vru13-a2
 - AK (13): ak2017h-a2, ak2018f-a2, ak2019f-a2, ak2020f-a2, ak2020h-a1c, ak2022f-a2, ak2022h-a2, ak2023f-a1c, ak2023h-a1c, ak2023h-a2, ak2024f-a3, ak2024h-a3, ak2025h-a1a
 
 ### Natürliche Konvektion umströmter Körper (`kv-natuerlich-umstroemt`) ★★
-- Quellen: skript KV S. 91-98 · folien kv/L08 · FS S. 27-29
+- Quellen: skript S. 192-199 · folien kv/L08 · FS S. 27-29
+- SK (4): sk-iii05, sk-iii13, sk-iii14, sk-v09
 - SRU (1): sru04-a4
 - VRU (2): vru08-a1, vru14-a1
 - AK (4): ak2018h-a1a, ak2020f-a1d, ak2020h-a2, ak2020h-a3
 
 ### Natürliche Konvektion in geschlossenen Räumen (Spalte) (`kv-natuerlich-geschlossen`) ★
-- Quellen: skript KV S. 99-104 · folien kv/L09 · FS S. 30-31
+- Quellen: skript S. 200-205 · folien kv/L09 · FS S. 30-31
 - AK (1): ak2020h-a1b
 
 ## 3 Strahlung
 
 ### Schwarzkörperstrahlung (Planck, Wien, Stefan-Boltzmann, Bandanteile) (`st-schwarzkoerper`) ★★
-- Quellen: skript ST S. 10-19 · folien st/L01 · FS S. 32-33
+- Quellen: skript S. 207-216 · folien st/L01 · FS S. 32-33
+- SK (1): sk-iv02
 - SRU (1): sru08-a1
 - VRU (1): vru09-a2
 - AK (5): ak2019h-a1b, ak2024f-a1d, ak2025h-a4, ak2026f-a1c, ak2026f-a4
 
 ### Strahlung realer Körper und Kirchhoffsches Gesetz (`st-reale-koerper-kirchhoff`) ★★
-- Quellen: skript ST S. 20-29 · folien st/L02-L03 · FS S. 33-34
+- Quellen: skript S. 217-226 · folien st/L02-L03 · FS S. 33-34
+- SK (2): sk-iv04, sk-iv08
 - SRU (1): sru08-a1
 - VRU (3): vru09-a1, vru09-a2, vru11-a1
 - AK (7): ak2018h-a1d, ak2018h-a3, ak2019h-a1b, ak2022h-a3, ak2024f-a1d, ak2025h-a4, ak2026f-a1c
 
 ### Einstrahlzahlen und Rechenregeln (`st-einstrahlzahlen`) ★★★
-- Quellen: skript ST S. 30-39 · folien st/L04-L05 · FS S. 35-37 · sonstiges/faq/Einfuehrung-02-Einstrahlzahlen.pdf
+- Quellen: skript S. 227-236 · folien st/L04-L05 · FS S. 35-37 · sonstiges/faq/Einfuehrung-02-Einstrahlzahlen.pdf
+- SK (1): sk-iv01
 - SRU (1): sru07-a2
 - VRU (3): vru10-a1, vru10-a2, vru14-a4
 - AK (15): ak2017h-a1a, ak2018f-a3, ak2018h-a3, ak2019f-a1a, ak2019h-a3, ak2020f-a1a, ak2021h-a1a, ak2022f-a1a, ak2022f-a3, ak2023f-a2, ak2023h-a4, ak2024f-a2, ak2024h-a2, ak2025f-a3, ak2026f-a4
 
 ### Flächenhelligkeiten und Strahlungsenergiebilanzen (`st-flaechenhelligkeit-bilanz`) ★★★
-- Quellen: skript ST S. 40-46 · folien st/L06-L07 · FS S. 38
+- Quellen: skript S. 237-243 · folien st/L06-L07 · FS S. 38
+- SK (4): sk-iii06, sk-iv02, sk-iv03, sk-iv08
 - SRU (1): sru07-a1
 - VRU (2): vru09-a1, vru14-a2
 - AK (10): ak2017h-a1c, ak2017h-a1d, ak2018h-a3, ak2020h-a3, ak2022f-a1b, ak2022h-a1b, ak2023f-a1a, ak2024h-a1b, ak2025h-a1d, ak2026f-a4
 
 ### Strahlungsaustausch – Platten, Schutzschirm, umschlossene Körper, Dreikörperproblem (`st-strahlungsaustausch`) ★★★
-- Quellen: skript ST S. 47-58 · folien st/L08-L12 · FS S. 38 · sonstiges/faq/Strahlung-Linearisierung.pdf
+- Quellen: skript S. 244-254 · folien st/L08-L12 · FS S. 38 · sonstiges/faq/Strahlung-Linearisierung.pdf
+- SK (3): sk-iv03, sk-iv04, sk-iv06
 - SRU (1): sru07-a2
 - VRU (7): vru10-a1, vru10-a2, vru11-a1, vru11-a2, vru11-a3, vru14-a1, vru14-a4
 - AK (16): ak2017h-a2, ak2018f-a3, ak2018h-a1d, ak2019f-a1a, ak2019h-a3, ak2020f-a1b, ak2021h-a3, ak2022f-a3, ak2022h-a3, ak2023f-a2, ak2023h-a4, ak2024f-a2, ak2024h-a2, ak2025f-a1b, ak2025f-a3, ak2025h-a3
@@ -162,34 +183,39 @@
 ## 4 Stoffübertragung
 
 ### Grundgrößen der Stoffübertragung (Massen-/Stoffmengenanteile, Konzentrationen) (`su-grundgroessen`) ★★
-- Quellen: skript SU S. 10-16 · folien su/L01 · FS S. 39-40
+- Quellen: skript S. 255-261 · folien su/L01 · FS S. 39-40
 - Aufgaben: –
 
 ### Diffusion – Ficksches Gesetz und Erhaltungsgleichung (`su-diffusion-fick`) ★★★
-- Quellen: skript SU S. 17-26 · folien su/L01-L02 · FS S. 41
+- Quellen: skript S. 262-272 · folien su/L01-L02 · FS S. 41
+- SK (4): sk-v03, sk-v04, sk-v05, sk-v06
 - SRU (4): sru09-a1, sru09-a2, sru11-a1, sru11-a2
 - VRU (1): vru12-a1
 - AK (13): ak2017h-a4, ak2019f-a1d, ak2019f-a4, ak2019h-a4, ak2020f-a1c, ak2021h-a4, ak2022f-a1c, ak2022h-a4, ak2023f-a3, ak2024f-a4, ak2024h-a4, ak2025h-a1b, ak2026f-a1d
 
 ### Analogie Wärme ↔ Stoff, instationäre Diffusion (halbunendlich, Heisler) (`su-analogie-instationaer`) ★★
-- Quellen: skript SU S. 27-29 · folien su/L02-L03 · FS S. 42 · sonstiges/faq/Analogie.pdf
+- Quellen: skript S. 273-275 · folien su/L02-L03 · FS S. 42 · sonstiges/faq/Analogie.pdf
+- SK (1): sk-v07
 - SRU (1): sru09-a2
 - VRU (1): vru12-a1
 - AK (9): ak2018f-a1b, ak2018h-a1b, ak2019f-a4, ak2019h-a1c, ak2020h-a1a, ak2022f-a1d, ak2024f-a4, ak2024h-a4, ak2025h-a1c
 
-### Phasengleichgewicht und Konzentrationssprünge an Phasengrenzen (`su-phasengleichgewicht`) ★★
-- Quellen: skript SU S. 39-45 · folien su/L04 · FS S. 42
-- SRU (2): sru10-a1, sru10-a2
-- AK (7): ak2018h-a1b, ak2019h-a4, ak2020f-a1c, ak2021h-a4, ak2022f-a1c, ak2023h-a1a, ak2026f-a1d
-
 ### Advektiver Stofftransport und Stoffübergang (g, Sh, Sc, Le) (`su-stoffuebergang-advektiv`) ★★★
-- Quellen: skript SU S. 30-38 · folien su/L05 · FS S. 41-42
+- Quellen: skript S. 276-284 · folien su/L05 · FS S. 41-42
+- SK (6): sk-v02, sk-v03, sk-v04, sk-v05, sk-v08, sk-v09
 - SRU (2): sru10-a3, sru11-a2
 - VRU (2): vru13-a1, vru13-a2
 - AK (7): ak2017h-a4, ak2019f-a1d, ak2020f-a4, ak2022f-a1b, ak2022h-a4, ak2023f-a3, ak2025f-a4
 
+### Phasengleichgewicht und Konzentrationssprünge an Phasengrenzen (`su-phasengleichgewicht`) ★★
+- Quellen: skript S. 285-291 · folien su/L04 · FS S. 42
+- SK (2): sk-v06, sk-v07
+- SRU (2): sru10-a1, sru10-a2
+- AK (7): ak2018h-a1b, ak2019h-a4, ak2020f-a1c, ak2021h-a4, ak2022f-a1c, ak2023h-a1a, ak2026f-a1d
+
 ### Stefanstrom – Verdunstung an Oberflächen (See, Tropfen) (`su-stefanstrom`) ★
-- Quellen: skript SU S. 46-53 · folien su/L06-L08
+- Quellen: skript S. 292-299 · folien su/L06-L08
+- SK (1): sk-v08
 - AK (1): ak2020f-a4
 
 ## Material (Ordner · Dateien · Seiten)
@@ -225,13 +251,13 @@
 - `material/loesungen/vru/VRU12/` · 1 · 5
 - `material/loesungen/vru/VRU13/` · 2 · 16
 - `material/loesungen/vru/VRU14/` · 2 · 46
-- `material/skript/` · 4 · 600
+- `material/skript/` · 5 · 977
 - `material/skript/en/` · 1 · 374
-- `material/sonstiges/allgemein/` · 6 · 76
-- `material/sonstiges/erklaerungen/` · 4 · 7
+- `material/sonstiges/allgemein/` · 9 · 121
+- `material/sonstiges/erklaerungen/` · 6 · 14
 - `material/sonstiges/faq/` · 26 · 55
-- `material/sonstiges/formelsammlung/` · 3 · 104
-- `material/sonstiges/lernpfade/` · 5 · 6
+- `material/sonstiges/formelsammlung/` · 4 · 155
+- `material/sonstiges/lernpfade/` · 6 · 7
 - `material/uebungen/sru/SRU01/` · 4 · 4
 - `material/uebungen/sru/SRU02/` · 4 · 8
 - `material/uebungen/sru/SRU03/` · 2 · 3

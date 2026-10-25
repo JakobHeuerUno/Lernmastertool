@@ -1,14 +1,14 @@
-# Themenlandkarte (Reihenfolge = Vorlesungsreihenfolge WS 25/26). Vom Skill kurs-einrichten erstellt, von dir bestätigt.
+# Themenlandkarte (Reihenfolge = Reihenfolge Skript WS 26/27). Vom Skill kurs-einrichten erstellt, von dir bestätigt.
 # Felder: id (kebab-case, stabil!), titel, kapitel, voraussetzungen [ids], quellen ["skript S. 12-18", ...],
 #         lernziele [...], klausurrelevanz 1 (selten) | 2 (normal) | 3 (kommt fast immer)
-# Quellen: skript <Band> S. = PDF-Seite in material/skript/<Band>_*.pdf; folien <kap>/Lxx = material/folien/<kap>/Lxx_*.pdf;
-#          FS S. = GEDRUCKTE Seite der Formelsammlung V25/26 (PDF-Seite = gedruckt + 4). Klausurrelevanz aus Klausur-Radar (17 Klausuren).
+# Quellen: skript S. = PDF-Seite in material/skript/Skript_v1.1.1c.pdf (WS 26/27; alte Einzelbände WS 25/26 nur Referenz); folien <kap>/Lxx = material/folien/<kap>/Lxx_*.pdf;
+#          FS S. = GEDRUCKTE Seite der Formelsammlung WS 26/27 (= V25/26 + Korrekturen, gleiche Seiten) (PDF-Seite = gedruckt + 4). Klausurrelevanz aus Klausur-Radar (17 Klausuren).
 themen:
 - id: wl-grundlagen-bilanzen
   titel: Wärmeübertragungsmechanismen, Systeme und Bilanzen
   kapitel: 1 Wärmeleitung
   voraussetzungen: []
-  quellen: [skript WL S. 10-25, folien wl/L01, FS S. 1-2 (Kennzahlen)]
+  quellen: [skript S. 20-35, folien wl/L01, FS S. 1-2 (Kennzahlen)]
   lernziele:
   - kann Leitung, Konvektion und Strahlung unterscheiden und je ein Grundgesetz nennen
   - kann ein Kontrollvolumen wählen und eine Energiebilanz (Speicher = ein − aus + Quelle) aufstellen
@@ -18,7 +18,7 @@ themen:
   titel: Fouriersches Gesetz und Energieerhaltungsgleichung
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-grundlagen-bilanzen]
-  quellen: [skript WL S. 27-35, folien wl/L01-L02, FS S. 3]
+  quellen: [skript S. 37-46, folien wl/L01-L02, FS S. 3]
   lernziele:
   - kann q̇″ = −λ ∂T/∂x physikalisch deuten (Vorzeichen, Gradient)
   - kann die DGL per infinitesimaler Bilanz an einem Element herleiten (Grundlage fast aller Herleitungsaufgaben)
@@ -28,7 +28,7 @@ themen:
   titel: Mehrschichtige ebene Wand, Wärmewiderstände
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-fourier-erhaltung]
-  quellen: [skript WL S. 36-42, folien wl/L03, FS S. 3-4]
+  quellen: [skript S. 47-53, folien wl/L03, FS S. 3-4]
   lernziele:
   - kann Wärmeleitwiderstände in Reihe schalten und Q̇ sowie Zwischentemperaturen berechnen
   - kann den Temperaturverlauf T(x) qualitativ zeichnen (Steigung ∝ 1/λ, konstanter Wärmestrom)
@@ -37,7 +37,7 @@ themen:
   titel: Wärmeleitung in Zylinder- und Kugelkoordinaten (Rohrwand, Kugelschale)
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-mehrschichtige-wand]
-  quellen: [skript WL S. 43-46, folien wl/L04, FS S. 3-4 (WL.8)]
+  quellen: [skript S. 54-57, folien wl/L04, FS S. 3-4 (WL.8)]
   lernziele:
   - kann den logarithmischen T(r)-Verlauf herleiten und den Widerstand einer Zylinderschicht angeben
   - kann mehrschichtige Rohrwände/Kugelschalen berechnen und T(r) qualitativ zeichnen
@@ -46,7 +46,7 @@ themen:
   titel: Konvektive Randbedingung und advektiver Enthalpietransport
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-fourier-erhaltung]
-  quellen: [skript WL S. 47-48, folien wl/L05, FS S. 16]
+  quellen: [skript S. 58-59, folien wl/L05, FS S. 16]
   lernziele:
   - kann Q̇ = α A (T_W − T_U) als Randbedingung einsetzen (Gradientensprung an der Wand)
   - kann den Enthalpiestrom ṁ c_p T in Bilanzen bewegter Körper/Fluide berücksichtigen
@@ -55,7 +55,7 @@ themen:
   titel: Wärmedurchgang durch Wand und Rohr mit Konvektion (k-Wert)
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-mehrschichtige-wand, wl-zylinder-kugel, wl-konvektion-advektion]
-  quellen: [skript WL S. 49-56, folien wl/L06-L08, FS S. 4]
+  quellen: [skript S. 60-67, folien wl/L06-L08, FS S. 4]
   lernziele:
   - kann Gesamtwiderstand inkl. konvektiver Widerstände aufstellen und k bzw. kA bestimmen
   - kann abschätzen, welcher Widerstand dominiert (Fenster-/Heizungsrohr-Beispiel)
@@ -65,7 +65,7 @@ themen:
   titel: Stationäre 1D-Wärmeleitung mit Wärmequellen
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-fourier-erhaltung]
-  quellen: [skript WL S. 57-61, folien wl/L09, FS S. 3]
+  quellen: [skript S. 68-72, folien wl/L09, FS S. 3]
   lernziele:
   - kann die DGL mit Φ̇‴ lösen (parabelförmiges T-Profil) und Randbedingungen einsetzen
   - kann Lage und Wert von T_max bestimmen und das Profil korrekt zeichnen (horizontale Tangente)
@@ -74,7 +74,7 @@ themen:
   titel: Rippen – Rippen-DGL, Lösung und Randbedingungen
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-fourier-erhaltung, wl-konvektion-advektion]
-  quellen: [skript WL S. 62-66, skript WL S. 69-74, folien wl/L10, folien wl/L12, FS S. 5]
+  quellen: [skript S. 73-77 + 80-85, folien wl/L10, folien wl/L12, FS S. 5]
   lernziele:
   - kann die Rippen-DGL θ″ − m²θ = 0 per Bilanz herleiten und m bestimmen (auch für ungewöhnliche Geometrien)
   - kann die passende Lösung (unendlich lang, adiabater Kopf, konvektiver Kopf) wählen und Q̇ am Fuß berechnen
@@ -84,7 +84,7 @@ themen:
   titel: Biot-Zahl
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-waermedurchgang]
-  quellen: [skript WL S. 67-68, folien wl/L11, FS S. 1-2]
+  quellen: [skript S. 78-79, folien wl/L11, FS S. 1-2]
   lernziele:
   - kann Bi = αL/λ als Verhältnis von Leit- zu Übergangswiderstand deuten und die char. Länge wählen
   - kann begründen, wann 1D-Rippe bzw. homogene Körpertemperatur zulässig ist (Bi ≪ 1)
@@ -93,7 +93,7 @@ themen:
   titel: Rippenwirkungsgrad
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-rippen]
-  quellen: [skript WL S. 75-76, folien wl/L13, FS S. 5]
+  quellen: [skript S. 86-87, folien wl/L13, FS S. 5]
   lernziele:
   - kann η_R definieren und den Wärmestrom berippter Flächen (Rippen + freie Grundfläche) berechnen
   klausurrelevanz: 1
@@ -101,7 +101,7 @@ themen:
   titel: Instationäre Wärmeleitung – Blockkapazitätsmodell
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-biot]
-  quellen: [skript WL S. 77-84, folien wl/L14-L15, FS S. 6]
+  quellen: [skript S. 88-95, folien wl/L14-L15, FS S. 6]
   lernziele:
   - kann die instationäre Bilanz eines Körpers mit homogener Temperatur aufstellen und lösen (exp-Verlauf, Zeitkonstante)
   - kann die Gültigkeit über Bi prüfen und den zeitlichen Verlauf T(t) zeichnen
@@ -110,7 +110,7 @@ themen:
   titel: Halbunendlicher Körper (auch periodische Randbedingung)
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-blockkapazitaet]
-  quellen: [skript WL S. 85-92, folien wl/L16a-L16b, FS S. 6, FS S. 47 (erf)]
+  quellen: [skript S. 96-103, folien wl/L16a-L16b, FS S. 6, FS S. 47 (erf)]
   lernziele:
   - kann erkennen, wann ein Körper als halbunendlich gilt (Störung hat Rand noch nicht erreicht)
   - kann Temperatur/Wärmestrom mit erf-Lösung berechnen (inkl. Kontakttemperatur zweier Körper)
@@ -119,7 +119,7 @@ themen:
   titel: Dimensionslose Kennzahlen und Heisler-Diagramme
   kapitel: 1 Wärmeleitung
   voraussetzungen: [wl-blockkapazitaet, wl-halbunendlich]
-  quellen: [skript WL S. 93-100, folien wl/L17, FS S. 7-15 (Platte 7-9, Zylinder 10-12, Kugel 13-15)]
+  quellen: [skript S. 104-112, folien wl/L17, FS S. 7-15 (Platte 7-9, Zylinder 10-12, Kugel 13-15)]
   lernziele:
   - kann Bi und Fo bilden und das richtige Heisler-Diagramm (Platte/Zylinder/Kugel, Mitte/Ort/Wärme) wählen
   - kann Zeiten, Temperaturen und abgegebene Wärme ablesen und Ablesungen kennzeichnen
@@ -138,7 +138,7 @@ themen:
   titel: Einführung Konvektion – α, Nußelt-Zahl, Erhaltungsgleichungen
   kapitel: 2 Konvektion
   voraussetzungen: [wl-konvektion-advektion]
-  quellen: [skript KV S. 12-31, folien kv/L01, FS S. 16, FS S. 1-2]
+  quellen: [skript S. 113-132, folien kv/L01, FS S. 16, FS S. 1-2]
   lernziele:
   - kann α über den Wandgradienten im Fluid definieren und Nu deuten
   - kann erzwungene/natürliche, innere/äußere, laminare/turbulente Konvektion klassifizieren (Re, Gr)
@@ -147,7 +147,7 @@ themen:
   titel: Grenzschicht bei erzwungener Konvektion
   kapitel: 2 Konvektion
   voraussetzungen: [kv-grundlagen]
-  quellen: [skript KV S. 32-46, folien kv/L02, FS S. 17]
+  quellen: [skript S. 133-147, folien kv/L02, FS S. 17]
   lernziele:
   - kann Geschwindigkeits- und Temperaturgrenzschicht skizzieren und über Pr ins Verhältnis setzen
   - kann δ(x) und lokales α(x) für die laminare Platte abschätzen
@@ -156,7 +156,7 @@ themen:
   titel: Grenzschicht bei natürlicher Konvektion
   kapitel: 2 Konvektion
   voraussetzungen: [kv-grenzschicht-erzwungen]
-  quellen: [skript KV S. 47-52, folien kv/L03]
+  quellen: [skript S. 148-153, folien kv/L03]
   lernziele:
   - kann Auftrieb als Antrieb erklären und Strömungs-/Temperaturprofile an beheizten Flächen skizzieren
   klausurrelevanz: 1
@@ -164,7 +164,7 @@ themen:
   titel: Turbulente Strömung und Ähnlichkeitstheorie
   kapitel: 2 Konvektion
   voraussetzungen: [kv-grundlagen]
-  quellen: [skript KV S. 53-63, folien kv/L04-L05, FS S. 1-2]
+  quellen: [skript S. 154-164, folien kv/L04-L05, FS S. 1-2]
   lernziele:
   - kann Umschlag laminar/turbulent über Re bzw. Gr·Pr beurteilen
   - kann Nu = f(Re, Pr) bzw. f(Gr, Pr) als Ergebnis der Dimensionsanalyse begründen
@@ -173,7 +173,7 @@ themen:
   titel: Erzwungene Konvektion umströmter Körper (Platte, Zylinder, Kugel, Rohrbündel)
   kapitel: 2 Konvektion
   voraussetzungen: [kv-grenzschicht-erzwungen, kv-turbulenz-aehnlichkeit]
-  quellen: [skript KV S. 64-75, folien kv/L06, FS S. 19-24]
+  quellen: [skript S. 165-176, folien kv/L06, FS S. 19-24]
   lernziele:
   - kann die passende WÜK auswählen, Gültigkeitsbereich prüfen und Stoffwerte bei der richtigen Bezugstemperatur nehmen
   - kann lokales und mittleres α unterscheiden und Q̇ berechnen
@@ -182,7 +182,7 @@ themen:
   titel: Erzwungene Konvektion durchströmter Körper (Rohrströmung, ΔT_log)
   kapitel: 2 Konvektion
   voraussetzungen: [kv-erzwungen-umstroemt, wl-waermedurchgang]
-  quellen: [skript KV S. 76-90, folien kv/L07, FS S. 18, FS S. 25-26, sonstiges/erklaerungen/VRU06_Kochrezept_Konvektion.pdf, sonstiges/erklaerungen/VRU07_*]
+  quellen: [skript S. 177-191, folien kv/L07, FS S. 18, FS S. 25-26, sonstiges/erklaerungen/VRU06_Kochrezept_Konvektion.pdf, sonstiges/erklaerungen/VRU07_*]
   lernziele:
   - kann die Energiebilanz am Rohrelement aufstellen und T_fl(x) für T_W = konst. (exponentiell) bzw. q̇″ = konst. (linear) herleiten
   - kann ΔT_log anwenden, Einlauf/voll ausgebildet unterscheiden und die richtige WÜK wählen
@@ -192,7 +192,7 @@ themen:
   titel: Natürliche Konvektion umströmter Körper
   kapitel: 2 Konvektion
   voraussetzungen: [kv-grenzschicht-natuerlich, kv-turbulenz-aehnlichkeit]
-  quellen: [skript KV S. 91-98, folien kv/L08, FS S. 27-29]
+  quellen: [skript S. 192-199, folien kv/L08, FS S. 27-29]
   lernziele:
   - kann Gr/Ra bilden und die WÜK für senkrechte/waagerechte Platte und Zylinder auswählen
   - kann Orientierungseinflüsse begründen (z. B. Bierdose stehend vs. liegend)
@@ -201,7 +201,7 @@ themen:
   titel: Natürliche Konvektion in geschlossenen Räumen (Spalte)
   kapitel: 2 Konvektion
   voraussetzungen: [kv-natuerlich-umstroemt]
-  quellen: [skript KV S. 99-104, folien kv/L09, FS S. 30-31]
+  quellen: [skript S. 200-205, folien kv/L09, FS S. 30-31]
   lernziele:
   - kann für Spalte (z. B. Luftschicht in Wand/Fenster) Gr_s bilden und die WÜK anwenden
   klausurrelevanz: 1
@@ -209,7 +209,7 @@ themen:
   titel: Schwarzkörperstrahlung (Planck, Wien, Stefan-Boltzmann, Bandanteile)
   kapitel: 3 Strahlung
   voraussetzungen: [wl-grundlagen-bilanzen]
-  quellen: [skript ST S. 10-19, folien st/L01, FS S. 32-33]
+  quellen: [skript S. 207-216, folien st/L01, FS S. 32-33]
   lernziele:
   - kann q̇″ = σT⁴ anwenden und Bandanteile F_0→λ aus der Tabelle bestimmen
   - kann spektrale Verteilungen qualitativ zeichnen (Maximum nach Wien)
@@ -218,7 +218,7 @@ themen:
   titel: Strahlung realer Körper und Kirchhoffsches Gesetz
   kapitel: 3 Strahlung
   voraussetzungen: [st-schwarzkoerper]
-  quellen: [skript ST S. 20-29, folien st/L02-L03, FS S. 33-34]
+  quellen: [skript S. 217-226, folien st/L02-L03, FS S. 33-34]
   lernziele:
   - kann α + ρ + τ = 1 und Kirchhoff (ε_λ = α_λ) anwenden; grauer Strahler vs. selektiv
   - kann Gesamtabsorptions-/Emissionsgrade aus spektralen Verläufen bestimmen
@@ -227,7 +227,7 @@ themen:
   titel: Einstrahlzahlen und Rechenregeln
   kapitel: 3 Strahlung
   voraussetzungen: [st-reale-koerper-kirchhoff]
-  quellen: [skript ST S. 30-39, folien st/L04-L05, FS S. 35-37, sonstiges/faq/Einfuehrung-02-Einstrahlzahlen.pdf]
+  quellen: [skript S. 227-236, folien st/L04-L05, FS S. 35-37, sonstiges/faq/Einfuehrung-02-Einstrahlzahlen.pdf]
   lernziele:
   - kann Summenregel, Reziprozität und Symmetrie nutzen, um alle Φ_ij einer Anordnung zu bestimmen
   - kann Diagramme der Formelsammlung ablesen und Sonderfälle (ebene/konvexe Fläche Φ_ii = 0, Umschließung) erkennen
@@ -236,7 +236,7 @@ themen:
   titel: Flächenhelligkeiten und Strahlungsenergiebilanzen
   kapitel: 3 Strahlung
   voraussetzungen: [st-einstrahlzahlen]
-  quellen: [skript ST S. 40-46, folien st/L06-L07, FS S. 38]
+  quellen: [skript S. 237-243, folien st/L06-L07, FS S. 38]
   lernziele:
   - kann die Flächenhelligkeit (emittiert + reflektiert + transmittiert) jeder Fläche aufstellen
   - kann Energiebilanzen je Fläche (inkl. Konvektion/Leitung, adiabate Flächen) formulieren und das Gleichungssystem lösen
@@ -245,7 +245,7 @@ themen:
   titel: Strahlungsaustausch – Platten, Schutzschirm, umschlossene Körper, Dreikörperproblem
   kapitel: 3 Strahlung
   voraussetzungen: [st-flaechenhelligkeit-bilanz]
-  quellen: [skript ST S. 47-58, folien st/L08-L12, FS S. 38, sonstiges/faq/Strahlung-Linearisierung.pdf]
+  quellen: [skript S. 244-254, folien st/L08-L12, FS S. 38, sonstiges/faq/Strahlung-Linearisierung.pdf]
   lernziele:
   - kann Standardfälle (zwei Platten, Schirm, umschlossene Körper) herleiten und anwenden
   - kann das Kochrezept (L12) auf Mehrkörperprobleme anwenden, auch kombiniert mit Konvektion
@@ -255,7 +255,7 @@ themen:
   titel: Grundgrößen der Stoffübertragung (Massen-/Stoffmengenanteile, Konzentrationen)
   kapitel: 4 Stoffübertragung
   voraussetzungen: [wl-grundlagen-bilanzen]
-  quellen: [skript SU S. 10-16, folien su/L01, FS S. 39-40]
+  quellen: [skript S. 255-261, folien su/L01, FS S. 39-40]
   lernziele:
   - kann zwischen ρ_i, ξ_i, C_i, ψ_i umrechnen und ideales Gasgesetz für Partialdrücke anwenden
   klausurrelevanz: 2
@@ -263,7 +263,7 @@ themen:
   titel: Diffusion – Ficksches Gesetz und Erhaltungsgleichung
   kapitel: 4 Stoffübertragung
   voraussetzungen: [su-grundgroessen, wl-fourier-erhaltung]
-  quellen: [skript SU S. 17-26, folien su/L01-L02, FS S. 41]
+  quellen: [skript S. 262-272, folien su/L01-L02, FS S. 41]
   lernziele:
   - kann die Diffusionsgleichung per Massenbilanz herleiten (auch mit Quellen/Senken, Zylinder/Kugel)
   - kann stationäre Profile in Mehrschichtsystemen berechnen und zeichnen
@@ -272,34 +272,34 @@ themen:
   titel: Analogie Wärme ↔ Stoff, instationäre Diffusion (halbunendlich, Heisler)
   kapitel: 4 Stoffübertragung
   voraussetzungen: [su-diffusion-fick, wl-heisler, wl-halbunendlich]
-  quellen: [skript SU S. 27-29, folien su/L02-L03, FS S. 42, sonstiges/faq/Analogie.pdf]
+  quellen: [skript S. 273-275, folien su/L02-L03, FS S. 42, sonstiges/faq/Analogie.pdf]
   lernziele:
   - kann Größen übersetzen (T ↔ ξ, a ↔ D, α ↔ g, Bi ↔ Bi_Stoff, Fo ↔ Fo_Stoff) und Wärmelösungen auf Stoffprobleme übertragen
   - kann Heisler-Diagramme/erf-Lösung für Trocknung, Einweichen, Eindiffundieren nutzen
-  klausurrelevanz: 2
-- id: su-phasengleichgewicht
-  titel: Phasengleichgewicht und Konzentrationssprünge an Phasengrenzen
-  kapitel: 4 Stoffübertragung
-  voraussetzungen: [su-diffusion-fick]
-  quellen: [skript SU S. 39-45, folien su/L04, FS S. 42]
-  lernziele:
-  - kann Henry-Koeffizient/Verteilungskoeffizient anwenden und Konzentrationssprünge an Grenzflächen begründen
-  - kann c(x)/ξ(x) über Phasengrenzen hinweg korrekt zeichnen
   klausurrelevanz: 2
 - id: su-stoffuebergang-advektiv
   titel: Advektiver Stofftransport und Stoffübergang (g, Sh, Sc, Le)
   kapitel: 4 Stoffübertragung
   voraussetzungen: [su-diffusion-fick, kv-erzwungen-umstroemt, kv-rohrstroemung]
-  quellen: [skript SU S. 30-38, folien su/L05, FS S. 41-42]
+  quellen: [skript S. 276-284, folien su/L05, FS S. 41-42]
   lernziele:
   - kann den Stoffübergangskoeffizienten g über die Analogie der Übergangsgesetze (Nu → Sh, Pr → Sc) bestimmen
   - kann das Lewis-Gesetz g = α/c_p anwenden (Le ≈ 1) und Stoffbilanzen mit Übergang aufstellen
   klausurrelevanz: 3
+- id: su-phasengleichgewicht
+  titel: Phasengleichgewicht und Konzentrationssprünge an Phasengrenzen
+  kapitel: 4 Stoffübertragung
+  voraussetzungen: [su-diffusion-fick]
+  quellen: [skript S. 285-291, folien su/L04, FS S. 42]
+  lernziele:
+  - kann Henry-Koeffizient/Verteilungskoeffizient anwenden und Konzentrationssprünge an Grenzflächen begründen
+  - kann c(x)/ξ(x) über Phasengrenzen hinweg korrekt zeichnen
+  klausurrelevanz: 2
 - id: su-stefanstrom
   titel: Stefanstrom – Verdunstung an Oberflächen (See, Tropfen)
   kapitel: 4 Stoffübertragung
   voraussetzungen: [su-stoffuebergang-advektiv, su-phasengleichgewicht]
-  quellen: [skript SU S. 46-53, folien su/L06-L08]
+  quellen: [skript S. 292-299, folien su/L06-L08]
   lernziele:
   - kann einseitige Diffusion mit Stefanstrom herleiten und von reiner Diffusion abgrenzen
   - kann Verdunstungsmassenströme (See, Tropfen) berechnen
