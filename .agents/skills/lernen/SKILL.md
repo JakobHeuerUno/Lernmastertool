@@ -10,7 +10,8 @@ description: Lernsession in der LERNECKE beginnen oder fortsetzen. Nutzen, wenn 
    Steht im Brief eine Zeile „**Anki:** letzter Abgleich …“ (der Nutzer nutzt AnkiConnect): `lern anki sync --still` ausführen.
    So fließt der Handy-Fortschritt ein. Ist Anki zu, wird der Abgleich still übersprungen. Bei einem Sync-Fehler gilt Skill `anki`.
    **Neuer Nutzer** (Brief zeigt kein Lernprofil, oder Hinweis „geteiltes Kursgerüst“): erst persönlichen Branch anlegen
-   (`git checkout -b <name>/<kurs-id>`, Namen erfragen), fehlt Material → `lern abgleich <Moodle-Export> --los`;
+   (`git checkout -b <name>/<kurs-id>`, Namen erfragen), meldet der Brief **Material fehlt** → `lern material holen` (Link steht in `lern.lokal.yaml`; sonst Nutzer nach Cloud-Link + Passwort fragen
+   und mit Einverständnis dort eintragen) bzw. eigenen Moodle-Export mit `lern abgleich <ordner> --los`;
    dann 3 kurze Fragen (Arbeitsweise, gewünschter Tutor-Stil, Karteikarten/Anki ja/nein) → Kurzprofil in `profil/lernprofil.md`.
 2. **Begrüßung in 2–3 Sätzen**: wo er steht (Klausur-Countdown, Beherrschung), was letztes Mal als nächster Schritt vereinbart war.
 3. **Warm-up (2–3 Fragen, eine nach der anderen)** – Retrieval Practice, kurz und gezielt:

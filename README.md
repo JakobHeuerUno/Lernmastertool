@@ -32,8 +32,21 @@ git clone https://github.com/JakobHeuerUno/Lernmastertool LERNECKE && cd LERNECK
 git checkout kurs/waerme-stoffuebertragung        # geteiltes Kursgerüst, Lernstand 0 %
 git checkout -b <deinname>/waerme-stoffuebertragung   # dein persönlicher Branch für den Lernstand
 sh setup.sh                                        # Windows: powershell -ExecutionPolicy Bypass -File .\setup.ps1
+./lern material holen "<Cloud-Link>" --passwort "<…>"   # Material vom Kursersteller (Sciebo/OneDrive/Drive)
+# oder eigenen Moodle-Export einordnen:
 ./lern abgleich "<Pfad zum Moodle-Export>"         # zeigt, was zugeordnet wird; danach mit --los ausführen
 ```
+
+Den Link kannst du in `lern.lokal.yaml` hinterlegen (git-ignoriert); dann holt eine neue Claude/Codex-Session das Material selbst:
+
+```yaml
+material:
+  waerme-stoffuebertragung:
+    links: ["https://rwth-aachen.sciebo.de/s/…"]
+    passwort: "…"
+```
+
+**Kursersteller:** `./lern material packen` erzeugt `ausgabe/<kurs>-material.zip` (+ `-medien.zip` mit Videos) zum Hochladen.
 
 `lern abgleich` erkennt jede Datei an ihrer Prüfsumme (auch in `.imscc`-Archiven) und legt sie in genau den Pfad, auf den
 Themen und Aufgaben verweisen; danach werden die Texte erzeugt. Unbekannte Dateien (neues Material) meldet es – die sortiert der Agent ein.
@@ -77,6 +90,7 @@ Das Sprachmodell **beurteilt** (Fehlerursachen, Missverständnisse), das Tool `l
 | `inbox`, `einsortieren`, `einlesen`, `seite` | Material aufnehmen, PDFs → Text, Seite als Bild |
 | `abgleich <ordner> [--los]` | eigenes Material per Prüfsumme in die Kursstruktur einordnen, neues Material erkennen |
 | `index` | `INDEX.md` (Wegweiser Thema → Quellen/Aufgaben) neu erzeugen |
+| `material packen` / `material holen [link] [--passwort]` | Originalmaterial als Zips für die Cloud packen / herunterladen und einordnen |
 | `log versuch\|fehler\|frage\|sitzung`, `fehler behoben` | Lernereignisse (macht normalerweise der Agent) |
 | `karten naechste-id\|liste`, `anki export\|push\|pull` | Karteikarten und Anki |
 | `pruefen` | Konsistenzcheck aller Kursdaten |
