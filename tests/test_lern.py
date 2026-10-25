@@ -141,6 +141,20 @@ def test_brief_branch_hinweise(repo, kurs):
     assert "git checkout kurs/demo" in brief(repo, heute=HEUTE)
 
 
+def test_index_listet_themen_aufgaben_und_bild_pdfs(repo, kurs):
+    from lern.daten import speichere_yaml
+    from lern.index import erzeuge_index
+    (kurs.pfad / "text").mkdir()
+    (kurs.pfad / "text" / "scan.md").write_text("<!-- quelle: x -->\n<!-- seite 1 -->\nab\n", encoding="utf-8")
+    speichere_yaml(kurs.pfad / "material.yaml", {"material": [
+        {"datei": "material/loesungen/scan.pdf", "seiten": 1, "text": "text/scan.md"}]})
+    (kurs.pfad / "medien" / "folien").mkdir(parents=True)
+    (kurs.pfad / "medien" / "folien" / "L01_Intro.mp4").write_bytes(b"")
+    text = erzeuge_index(kurs).read_text(encoding="utf-8")
+    assert "### Thema A (`a`) ★★★" in text and "UE (1): ue1-a1" in text
+    assert "material/loesungen/scan.pdf" in text and "L01_Intro" in text
+
+
 def test_hook_ohne_repo_ist_gueltiges_json():
     assert json.loads(hook_json(None))["hookSpecificOutput"]["additionalContext"]
 

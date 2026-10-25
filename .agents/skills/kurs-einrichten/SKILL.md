@@ -11,7 +11,7 @@ description: Neuen Kurs in der LERNECKE anlegen oder neues Kursmaterial aufnehme
 - Mit dem Nutzer `kurs.yaml` füllen: Semester, Uni, Dozent, **Klausur** (Datum JJJJ-MM-TT, Dauer, Hilfsmittel, Format). Unbekanntes leer lassen und später nachfragen.
 
 ## 2. Material einsortieren
-- Viele Dateien mit Ordnerstruktur (z. B. Moodle-Export): statt `lern einsortieren` (legt alles flach ab, Namenskollisionen) per Skript nach `material/<typ>/<unterordner>/` mit kurzen, einheitlichen Namen verschieben; Videos nach `medien/`. Danach `lern einlesen` und Wegweiser `INDEX.md` schreiben (Thema → Formelsammlung/Skript/Folien/Aufgaben, Liste nur-Bild-PDFs, Videos).
+- Viele Dateien mit Ordnerstruktur (z. B. Moodle-Export): statt `lern einsortieren` (legt alles flach ab, Namenskollisionen) per Skript nach `material/<typ>/<unterordner>/` mit kurzen, einheitlichen Namen verschieben; Videos nach `medien/`. Danach `lern einlesen`; den Wegweiser `INDEX.md` erzeugt `lern index` aus themen.yaml/aufgaben.yaml/material.yaml (nach jeder Änderung neu erzeugen).
 - Nutzer legt Dateien in `kurse/<id>/inbox/` (oder nennt einen Ordner). `lern inbox` listet sie.
 - Pro Datei Typ bestimmen (Dateiname/Inhalt ansehen; im Zweifel fragen):
   `folien` · `skript` · `uebungen` (Aufgabenblätter, Selbstrechenübungen) · `loesungen` · `altklausuren` · `studydrive` · `sonstiges`.
@@ -33,4 +33,4 @@ description: Neuen Kurs in der LERNECKE anlegen oder neues Kursmaterial aufnehme
 - `KURS.md`: Besonderheiten festhalten (Notation, Lösungsschema der Übung, Schwerpunkte des Profs, Qualität der Materialien). `kurs.yaml: notation` für Symbole (z. B. `alpha: "Wärmeübergangskoeffizient α"`).
 
 ## 6. Abschluss
-- `lern status` zeigen; `lern dashboard`; Git-Commit („Kurs <id> eingerichtet“ / „Material ergänzt“). Originale in `material/` sind per .gitignore ausgeschlossen – nur Index/Struktur werden versioniert.
+- `lern index` (INDEX.md neu), `lern status` zeigen; `lern dashboard`; Git-Commit („Kurs <id> eingerichtet“ / „Material ergänzt“). Originale in `material/` sind per .gitignore ausgeschlossen – nur Index/Struktur werden versioniert.
