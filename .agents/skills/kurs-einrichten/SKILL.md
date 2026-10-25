@@ -6,12 +6,13 @@ description: Neuen Kurs in der LERNECKE anlegen oder neues Kursmaterial aufnehme
 # Kurs einrichten / Material aufnehmen
 
 ## 1. Kurs anlegen (nur wenn neu)
-- **Zuerst eigener Branch** (AGENTS.md Abschnitt 6): von `master` aus `git checkout -b kurs/<id>`. Kursdateien nie auf `master` committen.
+- **Zuerst eigener Branch** (AGENTS.md Abschnitt 6): von `main` aus `git checkout -b kurs/<id>`. Kursdateien nie auf `main` committen; nach dem Einrichten persönlichen Branch `<name>/<id>` abzweigen.
 - `lern kurs neu <id> "<Name>" --kuerzel <3-4 Buchstaben>` (id: kebab-case ohne Umlaute, z. B. `technische-mechanik-2`), dann `lern kurs aktiv <id>`.
 - Mit dem Nutzer `kurs.yaml` füllen: Semester, Uni, Dozent, **Klausur** (Datum JJJJ-MM-TT, Dauer, Hilfsmittel, Format). Unbekanntes leer lassen und später nachfragen.
 
 ## 2. Material einsortieren
 - Viele Dateien mit Ordnerstruktur (z. B. Moodle-Export): statt `lern einsortieren` (legt alles flach ab, Namenskollisionen) per Skript nach `material/<typ>/<unterordner>/` mit kurzen, einheitlichen Namen verschieben; Videos nach `medien/`. Danach `lern einlesen`; den Wegweiser `INDEX.md` erzeugt `lern index` aus themen.yaml/aufgaben.yaml/material.yaml (nach jeder Änderung neu erzeugen).
+- Kurs-Branch existiert schon (geklont) und es fehlt nur das Originalmaterial: `lern abgleich <Moodle-Export-Ordner> --los` (per Prüfsumme, auch .imscc). Gemeldete unbekannte Dateien = neues Material → wie unten einsortieren.
 - Nutzer legt Dateien in `kurse/<id>/inbox/` (oder nennt einen Ordner). `lern inbox` listet sie.
 - Pro Datei Typ bestimmen (Dateiname/Inhalt ansehen; im Zweifel fragen):
   `folien` · `skript` · `uebungen` (Aufgabenblätter, Selbstrechenübungen) · `loesungen` · `altklausuren` · `studydrive` · `sonstiges`.

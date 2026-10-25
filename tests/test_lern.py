@@ -133,12 +133,43 @@ def test_brief_branch_hinweise(repo, kurs):
     git = repo.wurzel / ".git"
     (git / "refs" / "heads" / "kurs").mkdir(parents=True)
     (git / "refs" / "heads" / "kurs" / "demo").write_text("0" * 40, encoding="utf-8")
+    (git / "HEAD").write_text("ref: refs/heads/anna/demo\n", encoding="utf-8")
+    assert "Branch:**" not in brief(repo, heute=HEUTE)  # persönlicher Branch: kein Hinweis
     (git / "HEAD").write_text("ref: refs/heads/kurs/demo\n", encoding="utf-8")
-    assert "Achtung Branch" not in brief(repo, heute=HEUTE)
-    (git / "HEAD").write_text("ref: refs/heads/master\n", encoding="utf-8")
+    assert "Hinweis Branch" in brief(repo, heute=HEUTE)  # geteiltes Kursgerüst
+    (git / "HEAD").write_text("ref: refs/heads/main\n", encoding="utf-8")
     assert "Achtung Branch" in brief(repo, heute=HEUTE)
-    shutil.rmtree(kurs.pfad)  # master ohne Kurs: auf Kurs-Branches verweisen
+    shutil.rmtree(kurs.pfad)  # main ohne Kurs: auf Kurs-Branches verweisen
     assert "git checkout kurs/demo" in brief(repo, heute=HEUTE)
+
+
+def test_abgleich_ordnet_dateien_und_archive_per_pruefsumme_ein(repo, kurs, tmp_path):
+    import hashlib
+    import zipfile
+    from lern.abgleich import abgleich, medien_index
+    from lern.daten import speichere_yaml
+    sha = lambda b: hashlib.sha1(b).hexdigest()
+    speichere_yaml(kurs.pfad / "material.yaml", {"material": [
+        {"datei": "material/folien/L01.pdf", "sha1": sha(b"folie")},
+        {"datei": "material/altklausuren/2025H.pdf", "sha1": sha(b"klausur")}]})
+    (kurs.pfad / "medien").mkdir()
+    (kurs.pfad / "medien" / "L01.mp4").write_bytes(b"video")
+    medien_index(kurs)
+    (kurs.pfad / "medien" / "L01.mp4").unlink()
+    export = tmp_path / "export"
+    (export / "PV 01").mkdir(parents=True)
+    (export / "PV 01" / "Einführung.pdf").write_bytes(b"folie")
+    (export / "PV 01" / "Video.mp4").write_bytes(b"video")
+    (export / "neu.pdf").write_bytes(b"ganz neu")
+    with zipfile.ZipFile(export / "Klausuren.imscc", "w") as z:
+        z.writestr("x/2025_H.pdf", b"klausur")
+        z.writestr("imsmanifest.xml", b"<x/>")
+    b = abgleich(kurs, [str(export)])
+    assert not (kurs.pfad / "material/folien/L01.pdf").exists() and len(b.kopiert) == 3
+    b = abgleich(kurs, [str(export)], los=True)
+    assert (kurs.pfad / "material/altklausuren/2025H.pdf").read_bytes() == b"klausur"
+    assert (kurs.pfad / "medien/L01.mp4").read_bytes() == b"video"
+    assert b.unbekannt == [(export / "neu.pdf").as_posix()] and b.fehlen == []
 
 
 def test_index_listet_themen_aufgaben_und_bild_pdfs(repo, kurs):

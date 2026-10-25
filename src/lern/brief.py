@@ -49,23 +49,27 @@ def git_branch(repo: Repo) -> str | None:
 
 
 def kurs_branches(repo: Repo) -> list[str]:
-    """Lokale Kurs-Branches (kurs/<id>), auch gepackte Refs."""
+    """Kurs-Branches (kurs/<id>), lokal oder nur auf origin (frischer Klon), auch gepackte Refs."""
     git = repo.wurzel / ".git"
-    heads = git / "refs" / "heads"
-    namen = {p.relative_to(heads).as_posix() for p in (heads / "kurs").rglob("*") if p.is_file()}
+    namen = set()
+    for basis in (git / "refs" / "heads", git / "refs" / "remotes" / "origin"):
+        namen |= {p.relative_to(basis).as_posix() for p in (basis / "kurs").rglob("*") if p.is_file()}
     packed = git / "packed-refs"
     if packed.is_file():
-        namen |= set(re.findall(r"refs/heads/(kurs/\S+)", packed.read_text(encoding="utf-8")))
+        namen |= set(re.findall(r"refs/(?:heads|remotes/origin)/(kurs/\S+)", packed.read_text(encoding="utf-8")))
     return sorted(namen)
 
 
 def branch_hinweis(repo: Repo, kurs_id: str | None) -> list[str]:
-    """Warnt, wenn der ausgecheckte Branch nicht zum Kurs passt (master = nur Grundgerüst, kurs/<id> = Kurs)."""
+    """main = Grundgerüst, kurs/<id> = geteiltes Kursgerüst (Lernstand 0 %), <name>/<id> = persönlicher Lernstand."""
     branch = git_branch(repo)
-    if branch is None or kurs_id is None or branch == f"kurs/{kurs_id}":
+    if branch is None or kurs_id is None or (branch.endswith(f"/{kurs_id}") and not branch.startswith("kurs/")):
         return []
-    return [f"**Achtung Branch:** ausgecheckt ist `{branch}`, Kurs `{kurs_id}` gehört auf `kurs/{kurs_id}`. "
-            f"Lernstand nur dort committen (`git checkout kurs/{kurs_id}`); master nur für Tool/Skills.", ""]
+    if branch == f"kurs/{kurs_id}":
+        return [f"**Hinweis Branch:** `{branch}` ist das geteilte Kursgerüst. Eigenen Lernstand nicht hier committen, sondern auf "
+                f"einem persönlichen Branch: `git checkout -b <name>/{kurs_id}` (einmalig; Updates mit `git merge {branch}`).", ""]
+    return [f"**Achtung Branch:** ausgecheckt ist `{branch}`, Kurs `{kurs_id}` gehört auf `<name>/{kurs_id}` "
+            f"(persönlich) bzw. `kurs/{kurs_id}` (geteilt); `main` nur für Tool/Skills.", ""]
 
 
 def brief(repo: Repo, kurs_id: str | None = None, heute: date | None = None) -> str:
@@ -75,8 +79,9 @@ def brief(repo: Repo, kurs_id: str | None = None, heute: date | None = None) -> 
     if not ids:
         branches = kurs_branches(repo)
         if branches:
-            return "\n".join(zeilen + [f"Branch `{git_branch(repo)}` enthält keinen Kurs (master = nur Grundgerüst). "
-                                       "Zum Lernen Kurs-Branch auschecken:"] + [f"- `git checkout {b}`" for b in branches])
+            return "\n".join(zeilen + [f"Branch `{git_branch(repo)}` enthält keinen Kurs (main = nur Grundgerüst). "
+                                       "Zum Lernen Kurs-Branch auschecken und eigenen Branch anlegen:"]
+                             + [f"- `git checkout {b}` → `git checkout -b <name>/{b[5:]}`" for b in branches])
         return "\n".join(zeilen + ["Noch kein Kurs angelegt. Skill `kurs-einrichten` nutzen."])
     try:
         kurs = repo.kurs(kurs_id)

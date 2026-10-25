@@ -46,7 +46,7 @@ In dieser Datei und in den Skills steht kurz `lern <befehl>`. Hilfe: `lern <befe
 | Verständnisnachfrage des Nutzers | `log frage --thema <id> [--hilfreich "was geholfen hat"] "Frage in einem Satz"` |
 | Fehler später korrekt gemeistert | `fehler behoben F-007` |
 | Überblick / Empfehlung | `status`, `weiter`, `aufgaben` |
-| Material | `inbox`, `einsortieren <datei> --typ skript\|folien\|uebungen\|loesungen\|altklausuren\|studydrive\|sonstiges`, `einlesen`, `seite <pdf> <nr>` |
+| Material | `inbox`, `einsortieren <datei> --typ skript\|folien\|uebungen\|loesungen\|altklausuren\|studydrive\|sonstiges`, `einlesen`, `seite <pdf> <nr>`; eigenes/neues Material per Prüfsumme einordnen: `abgleich <ordner…> [--los]` (unbekannte Dateien = neu → einsortieren) |
 | Karten / Anki | `karten naechste-id`; mit Anki-Desktop + AnkiConnect: `anki sync [--still]` (holen → Statistik → Karten → hochladen, Details: Skill `anki`); sonst `anki export`. Fremde Stapel: `anki fremd liste\|uebernehmen\|ignorieren` |
 | Nach Bearbeiten von YAML/Karten | `pruefen`; nach Änderungen an Themen/Aufgaben/Material zusätzlich `index` (erzeugt `INDEX.md`) |
 
@@ -100,16 +100,22 @@ profil/lernprofil.md            kursübergreifendes Lernprofil
 - `ereignisse.jsonl` nie von Hand editieren.
 - Sitzungsende (Nutzer verabschiedet sich, „Schluss für heute“) → Skill `sitzung-ende` (inkl. Git-Commit des Lernstands).
 
-## 6. Git-Branches (ein Branch pro Kurs)
+## 6. Git-Branches (Grundgerüst → Kurs → Person)
 
-- `master` = nur Grundgerüst (lern-Tool, Skills, Vorlagen, Tests, Setup, diese Datei) – **keine Kursordner**.
-- `kurs/<id>` (z. B. `kurs/waerme-stoffuebertragung`) = Grundgerüst + `kurse/<id>/` + `lern.yaml` mit `aktiver_kurs: <id>`.
-  Alle Lernarbeit und Commits (Lernstand, Aufgaben, Karten, Notizen, Lernprofil) nur dort.
-- Änderungen an Tool/Skills/AGENTS.md: auf `master` committen, danach in jedem Kurs-Branch `git merge master`.
-  Nie einen Kurs-Branch in `master` mergen.
-- Neuer Kurs: von `master` aus `git checkout -b kurs/<id>`, dann Skill `kurs-einrichten`.
-- Originalmaterial (`inbox/`, `material/`, `text/`, `medien/`) ist ignoriert, bleibt beim Branch-Wechsel auf der Platte liegen.
-  Auf `master` sieht `lern` keinen Kurs (keine `kurs.yaml`); `lern brief` warnt, wenn Branch und aktiver Kurs nicht passen.
+| Branch | Inhalt | Wer committet |
+|---|---|---|
+| `main` | nur Grundgerüst (lern-Tool, Skills, Vorlagen, Tests, Setup, diese Datei) – **keine Kursordner** | Tool/Skill-Änderungen |
+| `kurs/<id>` (z. B. `kurs/waerme-stoffuebertragung`) | geteiltes Kursgerüst: kurs.yaml, KURS.md, INDEX.md, themen.yaml, aufgaben.yaml, material.yaml/medien.yaml, Radar – **Lernstand leer (0 %)**, neutrales Lernprofil | Kursinhalte, die für alle gelten (neues Material, Themen, Aufgabenkatalog) |
+| `<name>/<id>` (z. B. `jakob/waerme-stoffuebertragung`) | persönlich: Lernstand, Fehlerbuch, Sitzungen, Karten, `aufgaben/*.md` mit eigenen Stolperstellen, Notizen, Lernplan, Lernprofil | alle Lernarbeit (Skill `sitzung-ende`) |
+
+- Updates fließen nur abwärts: `main` → `kurs/<id>` → `<name>/<id>` (jeweils `git merge`). Nie aufwärts mergen.
+  Kursinhalte, die im persönlichen Branch entstehen und für alle taugen (z. B. Korrektur in aufgaben.yaml), per
+  `git cherry-pick` oder gezieltem `git checkout <name>/<id> -- <datei>` auf `kurs/<id>` übernehmen – nie Lernstand.
+- Einstieg für andere: Repo klonen → `git checkout kurs/<id>` → `git checkout -b <name>/<id>` → Setup → eigenes
+  Originalmaterial mit `lern abgleich <Moodle-Export-Ordner> --los` einordnen (per Prüfsumme in dieselben Pfade).
+- Neuer Kurs: von `main` aus `git checkout -b kurs/<id>`, dann Skill `kurs-einrichten`, danach `<name>/<id>` abzweigen.
+- Originalmaterial (`inbox/`, `material/`, `text/`, `medien/`) ist ignoriert (Urheberrecht, Größe), bleibt beim
+  Branch-Wechsel auf der Platte liegen. Auf `main` sieht `lern` keinen Kurs; `lern brief` meldet, wenn der Branch nicht passt.
 
 ## 7. Skills
 

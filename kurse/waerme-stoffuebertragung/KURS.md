@@ -2,7 +2,7 @@
 
 **Navigation: zuerst `INDEX.md` lesen** (Thema → Formelsammlung/Skript/Folien/Aufgaben). Erst danach gezielt in `text/` greppen.
 
-## Lernmodus (Wunsch des Nutzers)
+## Lernmodus (empfohlen; persönliche Abweichungen gehören ins Lernprofil)
 - Vorgehen **entlang der Vorlesungs-Themen** (Reihenfolge `themen.yaml`): pro Thema **erst verstehen** (Skill `thema`), **dann Aufgaben rechnen** (Skill `aufgabe`): SRU/VRU des Themas → passende Altklausur-Teilaufgaben.
 - Erklärungen am **Skript** orientieren (Kapitel-Bände `material/skript/*`), aber auf dem Niveau des Nutzers – Niveau dynamisch an Lernstand/Fehlerbuch/Lernprofil anpassen.
 - Folien/Videos der Lerneinheit (L-Nummer) als Ergänzung nennen, nicht als Pflicht.
