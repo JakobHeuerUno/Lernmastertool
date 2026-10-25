@@ -12,7 +12,7 @@ description: Neuen Kurs in der LERNECKE anlegen oder neues Kursmaterial aufnehme
 
 ## 2. Material einsortieren
 - Viele Dateien mit Ordnerstruktur (z. B. Moodle-Export): statt `lern einsortieren` (legt alles flach ab, Namenskollisionen) per Skript nach `material/<typ>/<unterordner>/` mit kurzen, einheitlichen Namen verschieben; Videos nach `medien/`. Danach `lern einlesen`; den Wegweiser `INDEX.md` erzeugt `lern index` aus themen.yaml/aufgaben.yaml/material.yaml (nach jeder Änderung neu erzeugen).
-- Kurs-Branch existiert schon (geklont) und es fehlt nur das Originalmaterial: `lern abgleich <Moodle-Export-Ordner> --los` (per Prüfsumme, auch .imscc). Gemeldete unbekannte Dateien = neues Material → wie unten einsortieren.
+- Kurs-Branch existiert schon (geklont) und es fehlt nur das Originalmaterial: `lern material holen [Cloud-Link]` oder `lern abgleich <Moodle-Export-Ordner> --los` (per Prüfsumme, auch .imscc). Gemeldete unbekannte Dateien = neues Material → wie unten einsortieren.
 - Nutzer legt Dateien in `kurse/<id>/inbox/` (oder nennt einen Ordner). `lern inbox` listet sie.
 - Pro Datei Typ bestimmen (Dateiname/Inhalt ansehen; im Zweifel fragen):
   `folien` · `skript` · `uebungen` (Aufgabenblätter, Selbstrechenübungen) · `loesungen` · `altklausuren` · `studydrive` · `sonstiges`.
@@ -34,4 +34,5 @@ description: Neuen Kurs in der LERNECKE anlegen oder neues Kursmaterial aufnehme
 - `KURS.md`: Besonderheiten festhalten (Notation, Lösungsschema der Übung, Schwerpunkte des Profs, Qualität der Materialien). `kurs.yaml: notation` für Symbole (z. B. `alpha: "Wärmeübergangskoeffizient α"`).
 
 ## 6. Abschluss
+- Material mit anderen teilen: `lern material packen` → Zips in `ausgabe/` hochladen (z. B. Sciebo, Freigabe mit Passwort); Link nur in `lern.lokal.yaml`.
 - `lern index` (INDEX.md neu), `lern status` zeigen; `lern dashboard`; Git-Commit („Kurs <id> eingerichtet“ / „Material ergänzt“). Originale in `material/` sind per .gitignore ausgeschlossen – nur Index/Struktur werden versioniert.

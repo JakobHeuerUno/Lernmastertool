@@ -15,3 +15,5 @@ kurse/*/text/
 kurse/*/medien/
 # Link auf .agents/skills (wird von einrichten.py erzeugt: Windows Junction, sonst Symlink)
 .claude/skills
+# Lokale Einstellungen (Material-Links/Passwörter) – nie committen
+lern.lokal.yaml

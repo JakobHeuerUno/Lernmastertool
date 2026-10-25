@@ -72,6 +72,17 @@ def branch_hinweis(repo: Repo, kurs_id: str | None) -> list[str]:
             f"(persönlich) bzw. `kurs/{kurs_id}` (geteilt); `main` nur für Tool/Skills.", ""]
 
 
+def material_hinweis(kurs: Kurs) -> list[str]:
+    """Frischer Klon: material.yaml kennt Dateien, die lokal fehlen (Originalmaterial ist nicht im Repo)."""
+    from lern.daten import lade_yaml
+    eintraege = (lade_yaml(kurs.pfad / "material.yaml", {}) or {}).get("material") or []
+    fehlen = sum(not (kurs.pfad / e["datei"]).is_file() for e in eintraege if e.get("datei"))
+    if not fehlen:
+        return []
+    return [f"**Material fehlt:** {fehlen} von {len(eintraege)} Dateien nicht vorhanden → `lern material holen` "
+            "(Link aus lern.lokal.yaml bzw. vom Kursersteller erfragen) oder `lern abgleich <Moodle-Export> --los`.", ""]
+
+
 def brief(repo: Repo, kurs_id: str | None = None, heute: date | None = None) -> str:
     heute = heute or date.today()
     zeilen = [f"# LERNECKE – Lernstand ({heute:%d.%m.%Y})", ""]
@@ -88,6 +99,7 @@ def brief(repo: Repo, kurs_id: str | None = None, heute: date | None = None) -> 
     except Exception as e:  # kein aktiver Kurs
         return "\n".join(zeilen + [str(e), "", "Kurse:"] + [f"- {i}" for i in ids])
     zeilen += branch_hinweis(repo, kurs.id)
+    zeilen += material_hinweis(kurs)
 
     f = fortschritt(kurs, heute)
     meta = kurs.meta

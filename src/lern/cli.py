@@ -39,6 +39,12 @@ def _parser() -> argparse.ArgumentParser:
     ab = sub.add_parser("abgleich", help="Material per Prüfsumme in material/ und medien/ einordnen (z. B. Moodle-Export, .imscc)")
     ab.add_argument("ordner", nargs="+", help="Ordner, Dateien oder Archive")
     ab.add_argument("--los", action="store_true", help="wirklich kopieren (ohne: nur anzeigen)")
+    ma = sub.add_parser("material", help="Originalmaterial über Cloud teilen").add_subparsers(dest="aktion", required=True)
+    mp = ma.add_parser("packen", help="ausgabe/<kurs>-material.zip und -medien.zip zum Hochladen erzeugen")
+    mp.add_argument("--ohne-medien", action="store_true", help="Videos weglassen")
+    mh = ma.add_parser("holen", help="Zips/Freigabe laden und per Prüfsumme einordnen (Links sonst aus lern.lokal.yaml)")
+    mh.add_argument("links", nargs="*", help="Sciebo/Nextcloud-, OneDrive-, Google-Drive- oder direkte Links, lokale Pfade")
+    mh.add_argument("--passwort", help="Passwort der Freigabe (Sciebo/Nextcloud)")
     se = sub.add_parser("seite", help="PDF-Seite als PNG rendern (für Formeln/Bilder)")
     se.add_argument("datei")
     se.add_argument("seite", type=int)
@@ -173,18 +179,18 @@ def _ausfuehren(args) -> int:  # noqa: C901 – flacher Dispatcher
                 print(f"{status}: " + ", ".join(liste))
         print(f"({len(bericht['unveraendert'])} unverändert) – Index: material.yaml, Text: text/")
     elif args.befehl == "abgleich":
-        from lern.abgleich import abgleich
-        b = abgleich(kurs, args.ordner, args.los)
-        verb = "kopiert" if args.los else "würde kopiert (mit --los ausführen)"
-        print(f"{len(b.vorhanden)} schon vorhanden, {len(b.kopiert)} {verb}, {len(b.unbekannt)} unbekannt, {len(b.fehlen)} fehlen noch")
-        for titel, liste in (("Unbekannt (neu/geändert → mit dem Agenten einsortieren)", b.unbekannt), ("Fehlen noch", b.fehlen)):
-            if liste:
-                rest = f"\n  … +{len(liste) - 60}" if len(liste) > 60 else ""
-                print(f"\n{titel}:\n" + "\n".join(f"  {x}" for x in liste[:60]) + rest)
-        if args.los and b.kopiert:
-            from lern.einlesen import einlesen
-            einlesen(kurs)
-            print("\nText erzeugt (lern einlesen).")
+        _abgleich_ausgeben(kurs, args.ordner, args.los)
+    elif args.befehl == "material":
+        from lern import material
+        if args.aktion == "packen":
+            for z in material.packen(kurs, not args.ohne_medien):
+                print(f"{z.relative_to(repo.wurzel).as_posix()}  ({z.stat().st_size / 2**20:.0f} MB)")
+            print("Hochladen (z. B. Sciebo-Ordner, Freigabe per Link + Passwort); Link NICHT ins Repo, sondern in "
+                  f"{material.LOKAL} oder direkt an Kommiliton:innen.")
+        else:
+            links, passwort = material.lokale_links(repo, kurs)
+            dateien = material.holen(repo, kurs, args.links or links, args.passwort or passwort)
+            _abgleich_ausgeben(kurs, [str(d) for d in dateien], True)
     elif args.befehl == "seite":
         from lern.einlesen import seite_rendern
         print(seite_rendern(kurs, args.datei, args.seite, args.zoom))
@@ -269,6 +275,21 @@ def _ausfuehren(args) -> int:  # noqa: C901 – flacher Dispatcher
         print("\n".join(probleme) if probleme else "Alles konsistent.")
         return 1 if probleme else 0
     return 0
+
+
+def _abgleich_ausgeben(kurs, quellen: list[str], los: bool) -> None:
+    from lern.abgleich import abgleich
+    b = abgleich(kurs, quellen, los)
+    verb = "kopiert" if los else "würde kopiert (mit --los ausführen)"
+    print(f"{len(b.vorhanden)} schon vorhanden, {len(b.kopiert)} {verb}, {len(b.unbekannt)} unbekannt, {len(b.fehlen)} fehlen noch")
+    for titel, liste in (("Unbekannt (neu/geändert → mit dem Agenten einsortieren)", b.unbekannt), ("Fehlen noch", b.fehlen)):
+        if liste:
+            rest = f"\n  … +{len(liste) - 60}" if len(liste) > 60 else ""
+            print(f"\n{titel}:\n" + "\n".join(f"  {x}" for x in liste[:60]) + rest)
+    if los and b.kopiert:
+        from lern.einlesen import einlesen
+        einlesen(kurs)
+        print("\nText erzeugt (lern einlesen).")
 
 
 def _status(kurs) -> None:

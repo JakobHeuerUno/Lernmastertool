@@ -46,7 +46,7 @@ In dieser Datei und in den Skills steht kurz `lern <befehl>`. Hilfe: `lern <befe
 | Verständnisnachfrage des Nutzers | `log frage --thema <id> [--hilfreich "was geholfen hat"] "Frage in einem Satz"` |
 | Fehler später korrekt gemeistert | `fehler behoben F-007` |
 | Überblick / Empfehlung | `status`, `weiter`, `aufgaben` |
-| Material | `inbox`, `einsortieren <datei> --typ skript\|folien\|uebungen\|loesungen\|altklausuren\|studydrive\|sonstiges`, `einlesen`, `seite <pdf> <nr>`; eigenes/neues Material per Prüfsumme einordnen: `abgleich <ordner…> [--los]` (unbekannte Dateien = neu → einsortieren) |
+| Material | `inbox`, `einsortieren <datei> --typ skript\|folien\|uebungen\|loesungen\|altklausuren\|studydrive\|sonstiges`, `einlesen`, `seite <pdf> <nr>`; eigenes/neues Material per Prüfsumme einordnen: `abgleich <ordner…> [--los]` (unbekannte Dateien = neu → einsortieren); über Cloud teilen: `material packen` (Zips nach `ausgabe/`), `material holen [link…] [--passwort …]` (lädt + gleicht ab; Links sonst aus `lern.lokal.yaml`) |
 | Karten / Anki | `karten naechste-id`; mit Anki-Desktop + AnkiConnect: `anki sync [--still]` (holen → Statistik → Karten → hochladen, Details: Skill `anki`); sonst `anki export`. Fremde Stapel: `anki fremd liste\|uebernehmen\|ignorieren` |
 | Nach Bearbeiten von YAML/Karten | `pruefen`; nach Änderungen an Themen/Aufgaben/Material zusätzlich `index` (erzeugt `INDEX.md`) |
 
@@ -112,7 +112,9 @@ profil/lernprofil.md            kursübergreifendes Lernprofil
   Kursinhalte, die im persönlichen Branch entstehen und für alle taugen (z. B. Korrektur in aufgaben.yaml), per
   `git cherry-pick` oder gezieltem `git checkout <name>/<id> -- <datei>` auf `kurs/<id>` übernehmen – nie Lernstand.
 - Einstieg für andere: Repo klonen → `git checkout kurs/<id>` → `git checkout -b <name>/<id>` → Setup → eigenes
-  Originalmaterial mit `lern abgleich <Moodle-Export-Ordner> --los` einordnen (per Prüfsumme in dieselben Pfade).
+  Originalmaterial holen: `lern material holen <Cloud-Link> [--passwort …]` oder eigenen Moodle-Export mit
+  `lern abgleich <ordner> --los` (beides per Prüfsumme in dieselben Pfade). Cloud-Links/Passwörter nur in `lern.lokal.yaml`
+  (git-ignoriert) – **nie in versionierte Dateien**, das Repo ist öffentlich und das Material urheberrechtlich geschützt.
 - Neuer Kurs: von `main` aus `git checkout -b kurs/<id>`, dann Skill `kurs-einrichten`, danach `<name>/<id>` abzweigen.
 - Originalmaterial (`inbox/`, `material/`, `text/`, `medien/`) ist ignoriert (Urheberrecht, Größe), bleibt beim
   Branch-Wechsel auf der Platte liegen. Auf `main` sieht `lern` keinen Kurs; `lern brief` meldet, wenn der Branch nicht passt.

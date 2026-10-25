@@ -426,3 +426,69 @@ def test_fremder_stapel(kurs):
     anki_fremd.ignorieren(kurs, "Standard")
     with pytest.raises(LernFehler):
         anki_fremd.uebernehmen(kurs, "Kommilitone WSÜ", fake)
+
+
+# ------------------------------------------------------------------ Material teilen (Cloud)
+
+def test_direkte_url_fuer_cloud_dienste():
+    from lern.material import direkte_url
+    assert direkte_url("https://rwth-aachen.sciebo.de/s/AbC123") == "https://rwth-aachen.sciebo.de/s/AbC123/download"
+    assert direkte_url("https://drive.google.com/file/d/1xY-z/view?usp=sharing").startswith(
+        "https://drive.usercontent.google.com/download?id=1xY-z")
+    assert direkte_url("https://1drv.ms/u/s!abc").startswith("https://api.onedrive.com/v1.0/shares/u!")
+    assert direkte_url("https://example.org/a.zip") == "https://example.org/a.zip"
+
+
+def test_material_packen_und_ueber_http_holen(repo, kurs, tmp_path):
+    import hashlib
+    import http.server
+    import threading
+    from functools import partial
+    from lern import material
+    from lern.abgleich import abgleich
+    from lern.daten import speichere_yaml
+    (kurs.pfad / "material" / "skript").mkdir(parents=True, exist_ok=True)
+    (kurs.pfad / "material" / "skript" / "S.pdf").write_bytes(b"skript")
+    speichere_yaml(kurs.pfad / "material.yaml", {"material": [
+        {"datei": "material/skript/S.pdf", "sha1": hashlib.sha1(b"skript").hexdigest()}]})
+    (zip_pfad,) = material.packen(kurs)
+    (kurs.pfad / "material" / "skript" / "S.pdf").unlink()
+    server_dir = tmp_path / "cloud"
+    server_dir.mkdir()
+    zip_pfad.rename(server_dir / zip_pfad.name)
+    handler = partial(http.server.SimpleHTTPRequestHandler, directory=str(server_dir))
+    handler.log_message = lambda *a: None
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    try:
+        url = f"http://127.0.0.1:{srv.server_port}/{zip_pfad.name}"
+        dateien = material.holen(repo, kurs, [url])
+        assert material.holen(repo, kurs, [url]) == dateien  # zweiter Aufruf: vorhanden, kein erneuter Download
+    finally:
+        srv.shutdown()
+    b = abgleich(kurs, [str(d) for d in dateien], los=True)
+    assert b.kopiert == ["material/skript/S.pdf"] and (kurs.pfad / "material/skript/S.pdf").read_bytes() == b"skript"
+
+
+def test_material_holen_sciebo_mit_passwort(repo, kurs, monkeypatch):
+    import io
+    from lern import material
+    propfind = (b'<?xml version="1.0"?><d:multistatus xmlns:d="DAV:">'
+                b'<d:response><d:href>/public.php/webdav/</d:href><d:propstat><d:prop><d:resourcetype><d:collection/>'
+                b'</d:resourcetype></d:prop></d:propstat></d:response>'
+                b'<d:response><d:href>/public.php/webdav/wsu-material.zip</d:href><d:propstat><d:prop><d:resourcetype/>'
+                b'</d:prop></d:propstat></d:response></d:multistatus>')
+    aufrufe = []
+
+    class Antwort(io.BytesIO):
+        headers = {"Content-Length": "3"}
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+
+    def oeffnen(url, auth=None, methode="GET", daten=None, kopf=None):
+        aufrufe.append((methode, url, auth))
+        return Antwort(propfind if methode == "PROPFIND" else b"zip")
+    monkeypatch.setattr(material, "_oeffnen", oeffnen)
+    (datei,) = material.holen(repo, kurs, ["https://rwth-aachen.sciebo.de/s/TOK"], "geheim")
+    assert datei.name == "wsu-material.zip" and datei.read_bytes() == b"zip"
+    assert aufrufe[-1] == ("GET", "https://rwth-aachen.sciebo.de/public.php/webdav/wsu-material.zip", ("TOK", "geheim"))
