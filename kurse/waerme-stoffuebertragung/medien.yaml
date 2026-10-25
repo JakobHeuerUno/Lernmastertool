@@ -1,22 +1,4 @@
 medien:
-- datei: medien/archiv/DE_Klausur_Leer.imscc
-  groesse: 50314414
-  sha1: bad8a4fed504ce6f7eeb76a8862a97d37f932f44
-- datei: medien/archiv/DE_Klausur_Loesung.imscc
-  groesse: 52557093
-  sha1: f735e2f4884699394674c808f48661764b211fb5
-- datei: medien/archiv/duplikate/FAQ/FAQs/data/attachment/20525/Hintergrund-Diagramme.pdf
-  groesse: 213615
-  sha1: a9943a50bf6a87d62921abd574366f35e59212eb
-- datei: medien/archiv/duplikate/FAQ/FAQs/data/attachment/20549/A2.11-Alternativ.pdf
-  groesse: 5071923
-  sha1: e8b0b87fef75f699ae5bfcfe5e6ef260fcc4c6db
-- datei: medien/archiv/duplikate/FAQ/FAQs/data/attachment/20550/A2.11-T-Bezug.pdf
-  groesse: 474572
-  sha1: 23b7f4742066f5610fd2d057a39bd8b51c2e084d
-- datei: medien/archiv/faq_styles.css
-  groesse: 2460
-  sha1: bb4695686c8f3a6704c7c9a606eac3b41982d5b6
 - datei: medien/faq/Grau_Adiabat_Stationaer-wie_schwarz.mp4
   groesse: 49980433
   sha1: 94b112aa34c07d917f7cd91ce7bea573c59fbe31
