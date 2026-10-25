@@ -1,4 +1,1510 @@
-# Aufgabenkatalog. id z. B. ue03-a2 (Übung 3, Aufgabe 2), ak2023-a1 (Altklausur 2023, Aufgabe 1)
-# Felder: id, titel, quelle ("material/uebungen/Uebung03.pdf S. 2"), loesung (Pfad + Seite oder null),
-#         loesung_vertrauen (offiziell|inoffiziell|keine), themen [ids], datei ("aufgaben/ue03-a2.md")
-aufgaben: []
+# Aufgabenkatalog. id: ak<jahr><f|h>-a<n>[teil bei A1] (Altklausur, F=Feb, H=Jul/Aug), sru<nr>-a<n> (Selbstrechenübung),
+#   vru<nr>-a<n> (Vorrechenübung). Teilaufgaben a), b) … beim Loggen als --teil.
+# Felder: id, titel, quelle (Datei + Seite), loesung, loesung_vertrauen, themen [ids], punkte (Altklausur),
+#   herkunft (Übung = alte Klausuraufgabe / Skript-Übung), datei (aufgaben/<id>.md, erst beim Bearbeiten)
+aufgaben:
+- id: ak2017h-a1a
+  titel: Einstrahlzahlen Glühbirne/Lampenschirm
+  quelle: material/altklausuren/2017H.pdf S. 4
+  loesung: material/loesungen/altklausuren/2017H_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  punkte: 3
+- id: ak2017h-a1b
+  titel: T(r) Kaminwand für Bi→0/1/∞
+  quelle: material/altklausuren/2017H.pdf S. 5
+  loesung: material/loesungen/altklausuren/2017H_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-biot
+  - wl-zylinder-kugel
+  - qualitative-verlaeufe
+  punkte: 3
+- id: ak2017h-a1c
+  titel: Würfel unter Heizstrahler mit Kühlung
+  quelle: material/altklausuren/2017H.pdf S. 6
+  loesung: material/loesungen/altklausuren/2017H_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-blockkapazitaet
+  - st-flaechenhelligkeit-bilanz
+  punkte: 4
+- id: ak2017h-a1d
+  titel: Schwarze Rinne unter grauer Folie
+  quelle: material/altklausuren/2017H.pdf S. 7
+  loesung: material/loesungen/altklausuren/2017H_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  punkte: 4
+- id: ak2017h-a2
+  titel: Bremsscheibe mit Kühlkanälen
+  quelle: material/altklausuren/2017H.pdf S. 8
+  loesung: material/loesungen/altklausuren/2017H_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - st-strahlungsaustausch
+  punkte: 11
+- id: ak2017h-a3
+  titel: Heißwurst abkühlen
+  quelle: material/altklausuren/2017H.pdf S. 12
+  loesung: material/loesungen/altklausuren/2017H_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-heisler
+  - qualitative-verlaeufe
+  punkte: 14
+- id: ak2017h-a4
+  titel: 'Kerze: Docht und Wachsverdunstung'
+  quelle: material/altklausuren/2017H.pdf S. 16
+  loesung: material/loesungen/altklausuren/2017H_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - su-stoffuebergang-advektiv
+  - su-diffusion-fick
+  - wl-rippen
+  punkte: 12
+- id: ak2018f-a1a
+  titel: Döner im Fahrtwind
+  quelle: material/altklausuren/2018F.pdf S. 4
+  loesung: material/loesungen/altklausuren/2018F_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-blockkapazitaet
+  - kv-erzwungen-umstroemt
+  punkte: 5
+- id: ak2018f-a1b
+  titel: Holzplatte trocknen
+  quelle: material/altklausuren/2018F.pdf S. 5
+  loesung: material/loesungen/altklausuren/2018F_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - su-analogie-instationaer
+  punkte: 3
+- id: ak2018f-a1c
+  titel: Eiswürfel in Luft vs. Wasser
+  quelle: material/altklausuren/2018F.pdf S. 6
+  loesung: material/loesungen/altklausuren/2018F_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermedurchgang
+  punkte: 3
+- id: ak2018f-a1d
+  titel: T(x) mehrschichtige Wand zeichnen
+  quelle: material/altklausuren/2018F.pdf S. 7
+  loesung: material/loesungen/altklausuren/2018F_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - qualitative-verlaeufe
+  punkte: 5
+- id: ak2018f-a2
+  titel: Beheizter Kanal mit Rohrbündel
+  quelle: material/altklausuren/2018F.pdf S. 8
+  loesung: material/loesungen/altklausuren/2018F_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-erzwungen-umstroemt
+  - kv-rohrstroemung
+  punkte: 14
+- id: ak2018f-a3
+  titel: Zylindrischer Ofen mit Strahlungsverlust
+  quelle: material/altklausuren/2018F.pdf S. 12
+  loesung: material/loesungen/altklausuren/2018F_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  - st-strahlungsaustausch
+  punkte: 12
+- id: ak2018f-a4
+  titel: Spitz zulaufende Kühlrippe
+  quelle: material/altklausuren/2018F.pdf S. 16
+  loesung: material/loesungen/altklausuren/2018F_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  - wl-biot
+  - qualitative-verlaeufe
+  punkte: 16
+- id: ak2018h-a1a
+  titel: Bierdose stehend oder liegend
+  quelle: material/altklausuren/2018H.pdf S. 4
+  loesung: material/loesungen/altklausuren/2018H_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-natuerlich-umstroemt
+  punkte: 3
+- id: ak2018h-a1b
+  titel: Holzkugel trocknet, Gleichgewicht
+  quelle: material/altklausuren/2018H.pdf S. 5
+  loesung: material/loesungen/altklausuren/2018H_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - su-phasengleichgewicht
+  - su-analogie-instationaer
+  punkte: 4
+- id: ak2018h-a1c
+  titel: Poröser Hohlzylinder radial durchströmt
+  quelle: material/altklausuren/2018H.pdf S. 6
+  loesung: material/loesungen/altklausuren/2018H_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-zylinder-kugel
+  - wl-konvektion-advektion
+  punkte: 4
+- id: ak2018h-a1d
+  titel: Kugelschalen mit Strahlungsfolie
+  quelle: material/altklausuren/2018H.pdf S. 7
+  loesung: material/loesungen/altklausuren/2018H_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - st-reale-koerper-kirchhoff
+  punkte: 5
+- id: ak2018h-a2
+  titel: Babybrei im Wasserbad erwärmen
+  quelle: material/altklausuren/2018H.pdf S. 8
+  loesung: material/loesungen/altklausuren/2018H_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-blockkapazitaet
+  - wl-waermedurchgang
+  - qualitative-verlaeufe
+  punkte: 12
+- id: ak2018h-a3
+  titel: Sonnenbad-Konstruktion mit Glas
+  quelle: material/altklausuren/2018H.pdf S. 12
+  loesung: material/loesungen/altklausuren/2018H_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  - st-flaechenhelligkeit-bilanz
+  - st-reale-koerper-kirchhoff
+  punkte: 14
+- id: ak2018h-a4
+  titel: Dreischichtiger Stab mit Heizkern
+  quelle: material/altklausuren/2018H.pdf S. 16
+  loesung: material/loesungen/altklausuren/2018H_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermequellen
+  - wl-zylinder-kugel
+  - qualitative-verlaeufe
+  punkte: 16
+- id: ak2019f-a1a
+  titel: Terrarium mit Strahlungsheizung
+  quelle: material/altklausuren/2019F.pdf S. 4
+  loesung: material/loesungen/altklausuren/2019F_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  - st-strahlungsaustausch
+  punkte: 4
+- id: ak2019f-a1b
+  titel: Bauteil mit n ebenen Rippen
+  quelle: material/altklausuren/2019F.pdf S. 5
+  loesung: material/loesungen/altklausuren/2019F_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  - wl-rippenwirkungsgrad
+  punkte: 4
+- id: ak2019f-a1c
+  titel: Eisschicht auf See wächst
+  quelle: material/altklausuren/2019F.pdf S. 6
+  loesung: material/loesungen/altklausuren/2019F_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - wl-waermedurchgang
+  punkte: 5
+- id: ak2019f-a1d
+  titel: Farbstoff durch Membran zwischen Rohren
+  quelle: material/altklausuren/2019F.pdf S. 7
+  loesung: material/loesungen/altklausuren/2019F_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - su-stoffuebergang-advektiv
+  punkte: 4
+- id: ak2019f-a2
+  titel: Rasenheizung mit poröser Schicht
+  quelle: material/altklausuren/2019F.pdf S. 10
+  loesung: material/loesungen/altklausuren/2019F_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - wl-waermedurchgang
+  - qualitative-verlaeufe
+  punkte: 11
+- id: ak2019f-a3
+  titel: Kühlschicht mit Quellterm Φ(T)
+  quelle: material/altklausuren/2019F.pdf S. 14
+  loesung: material/loesungen/altklausuren/2019F_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermequellen
+  - wl-rippen
+  punkte: 13
+- id: ak2019f-a4
+  titel: Schlangengift diffundiert in Haut
+  quelle: material/altklausuren/2019F.pdf S. 18
+  loesung: material/loesungen/altklausuren/2019F_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - su-analogie-instationaer
+  punkte: 16
+- id: ak2019h-a1a
+  titel: Pizzastein aufheizen
+  quelle: material/altklausuren/2019H.pdf S. 4
+  loesung: material/loesungen/altklausuren/2019H_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-heisler
+  punkte: 4
+- id: ak2019h-a1b
+  titel: Beschichtung Solarkollektor wählen
+  quelle: material/altklausuren/2019H.pdf S. 5
+  loesung: material/loesungen/altklausuren/2019H_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - st-reale-koerper-kirchhoff
+  - st-schwarzkoerper
+  punkte: 4
+- id: ak2019h-a1c
+  titel: 'Milchreis: DGL per Analogie'
+  quelle: material/altklausuren/2019H.pdf S. 6
+  loesung: material/loesungen/altklausuren/2019H_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - su-analogie-instationaer
+  punkte: 4
+- id: ak2019h-a1d
+  titel: Hauswand mit Phasenwechselschicht
+  quelle: material/altklausuren/2019H.pdf S. 7
+  loesung: material/loesungen/altklausuren/2019H_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - qualitative-verlaeufe
+  punkte: 6
+- id: ak2019h-a2
+  titel: Grenzschicht auf Busdach
+  quelle: material/altklausuren/2019H.pdf S. 8
+  loesung: material/loesungen/altklausuren/2019H_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-grenzschicht-erzwungen
+  - kv-erzwungen-umstroemt
+  punkte: 15
+- id: ak2019h-a3
+  titel: Ofen mit Strahlungsrückwand
+  quelle: material/altklausuren/2019H.pdf S. 12
+  loesung: material/loesungen/altklausuren/2019H_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - st-einstrahlzahlen
+  punkte: 13
+- id: ak2019h-a4
+  titel: Tankwand gegen Giftdiffusion
+  quelle: material/altklausuren/2019H.pdf S. 16
+  loesung: material/loesungen/altklausuren/2019H_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - su-phasengleichgewicht
+  punkte: 15
+- id: ak2020f-a1a
+  titel: Stahlblech über Grillrost
+  quelle: material/altklausuren/2020F.pdf S. 4
+  loesung: material/loesungen/altklausuren/2020F_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  punkte: 6
+- id: ak2020f-a1b
+  titel: Hohlraum umschließt Kugel
+  quelle: material/altklausuren/2020F.pdf S. 5
+  loesung: material/loesungen/altklausuren/2020F_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  punkte: 4
+- id: ak2020f-a1c
+  titel: Stab mit Stoffquelle und Isolierung
+  quelle: material/altklausuren/2020F.pdf S. 6
+  loesung: material/loesungen/altklausuren/2020F_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - su-phasengleichgewicht
+  punkte: 5
+- id: ak2020f-a1d
+  titel: Aluminiumrohling kühlt ab
+  quelle: material/altklausuren/2020F.pdf S. 7
+  loesung: material/loesungen/altklausuren/2020F_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-blockkapazitaet
+  - kv-natuerlich-umstroemt
+  punkte: 5
+- id: ak2020f-a2
+  titel: Rohr mit Reaktionszone
+  quelle: material/altklausuren/2020F.pdf S. 8
+  loesung: material/loesungen/altklausuren/2020F_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - wl-waermequellen
+  punkte: 19
+- id: ak2020f-a3
+  titel: Zwei Rippenalternativen vergleichen
+  quelle: material/altklausuren/2020F.pdf S. 12
+  loesung: material/loesungen/altklausuren/2020F_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  - wl-rippenwirkungsgrad
+  punkte: 13
+- id: ak2020f-a4
+  titel: Sublimierende Kugel in Luft
+  quelle: material/altklausuren/2020F.pdf S. 16
+  loesung: material/loesungen/altklausuren/2020F_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - su-stoffuebergang-advektiv
+  - su-stefanstrom
+  punkte: 13
+- id: ak2020h-a1a
+  titel: 'Sultanine in Korn: Kennzahl + Profil'
+  quelle: material/altklausuren/2020H.pdf S. 4
+  loesung: material/loesungen/altklausuren/2020H_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - su-analogie-instationaer
+  - qualitative-verlaeufe
+  punkte: 3
+- id: ak2020h-a1b
+  titel: Hauswand mit Luftspalt
+  quelle: material/altklausuren/2020H.pdf S. 5
+  loesung: material/loesungen/altklausuren/2020H_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - kv-natuerlich-geschlossen
+  punkte: 4
+- id: ak2020h-a1c
+  titel: Rohr mit konstanter Wandtemperatur
+  quelle: material/altklausuren/2020H.pdf S. 7
+  loesung: material/loesungen/altklausuren/2020H_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  punkte: 6
+- id: ak2020h-a1d
+  titel: Schaltkreis mit n Rippen
+  quelle: material/altklausuren/2020H.pdf S. 8
+  loesung: material/loesungen/altklausuren/2020H_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  punkte: 5
+- id: ak2020h-a2
+  titel: Tank in Halle (natürliche Konvektion)
+  quelle: material/altklausuren/2020H.pdf S. 10
+  loesung: material/loesungen/altklausuren/2020H_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-natuerlich-umstroemt
+  - wl-blockkapazitaet
+  punkte: 13
+- id: ak2020h-a3
+  titel: Solarkollektor an Hauswand
+  quelle: material/altklausuren/2020H.pdf S. 14
+  loesung: material/loesungen/altklausuren/2020H_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  - kv-natuerlich-umstroemt
+  punkte: 11
+- id: ak2020h-a4
+  titel: Steak in drei Garschritten
+  quelle: material/altklausuren/2020H.pdf S. 18
+  loesung: material/loesungen/altklausuren/2020H_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-halbunendlich
+  - wl-heisler
+  - wl-blockkapazitaet
+  punkte: 16
+- id: ak2021h-a1a
+  titel: Einstrahlzahlen Hohlprofil
+  quelle: material/altklausuren/2021H.pdf S. 4
+  loesung: material/loesungen/altklausuren/2021H_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  punkte: 3
+- id: ak2021h-a1b
+  titel: T(x) qualitativ zeichnen
+  quelle: material/altklausuren/2021H.pdf S. 5
+  loesung: material/loesungen/altklausuren/2021H_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - qualitative-verlaeufe
+  punkte: 4
+- id: ak2021h-a1c
+  titel: Kunststoffplatte aus Walze kühlen
+  quelle: material/altklausuren/2021H.pdf S. 6
+  loesung: material/loesungen/altklausuren/2021H_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-heisler
+  punkte: 4
+- id: ak2021h-a2
+  titel: Warmwasserleitung mit Teildämmung
+  quelle: material/altklausuren/2021H.pdf S. 8
+  loesung: material/loesungen/altklausuren/2021H_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-zylinder-kugel
+  - wl-waermedurchgang
+  punkte: 15
+- id: ak2021h-a3
+  titel: Halbkugelschale unter Sonnenstrahlung
+  quelle: material/altklausuren/2021H.pdf S. 12
+  loesung: material/loesungen/altklausuren/2021H_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - wl-blockkapazitaet
+  punkte: 13
+- id: ak2021h-a4
+  titel: Stab im Flüssigkeitsbad (Diffusion)
+  quelle: material/altklausuren/2021H.pdf S. 16
+  loesung: material/loesungen/altklausuren/2021H_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - su-phasengleichgewicht
+  punkte: 12
+- id: ak2022f-a1a
+  titel: Einstrahlzahl Hohlprofil Halbkreise
+  quelle: material/altklausuren/2022F.pdf S. 4
+  loesung: material/loesungen/altklausuren/2022F_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  punkte: 3
+- id: ak2022f-a1b
+  titel: 'Pool: Sonne, Strahlung, Verdunstung'
+  quelle: material/altklausuren/2022F.pdf S. 5
+  loesung: material/loesungen/altklausuren/2022F_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  - su-stoffuebergang-advektiv
+  punkte: 5
+- id: ak2022f-a1c
+  titel: c(x) mehrschichtiges System zeichnen
+  quelle: material/altklausuren/2022F.pdf S. 6
+  loesung: material/loesungen/altklausuren/2022F_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - su-phasengleichgewicht
+  - su-diffusion-fick
+  - qualitative-verlaeufe
+  punkte: 3
+- id: ak2022f-a1d
+  titel: Kichererbsen einweichen
+  quelle: material/altklausuren/2022F.pdf S. 7
+  loesung: material/loesungen/altklausuren/2022F_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - su-analogie-instationaer
+  punkte: 4
+- id: ak2022f-a2
+  titel: 'Föhn: Luft im Rohr erhitzen'
+  quelle: material/altklausuren/2022F.pdf S. 8
+  loesung: material/loesungen/altklausuren/2022F_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  punkte: 17
+- id: ak2022f-a3
+  titel: Raum mit Metallprobe (Strahlung)
+  quelle: material/altklausuren/2022F.pdf S. 12
+  loesung: material/loesungen/altklausuren/2022F_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  - st-strahlungsaustausch
+  punkte: 12
+- id: ak2022f-a4
+  titel: Heizstab mit zwei Bereichen
+  quelle: material/altklausuren/2022F.pdf S. 16
+  loesung: material/loesungen/altklausuren/2022F_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermequellen
+  - wl-rippen
+  - qualitative-verlaeufe
+  punkte: 14
+- id: ak2022h-a1a
+  titel: Platte mit Bolzen
+  quelle: material/altklausuren/2022H.pdf S. 4
+  loesung: material/loesungen/altklausuren/2022H_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  - wl-waermedurchgang
+  punkte: 4
+- id: ak2022h-a1b
+  titel: Bestrahlter Körper auf Platte
+  quelle: material/altklausuren/2022H.pdf S. 6
+  loesung: material/loesungen/altklausuren/2022H_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  - wl-waermedurchgang
+  punkte: 5
+- id: ak2022h-a1c
+  titel: T(x) Rippe mit zwei λ zeichnen
+  quelle: material/altklausuren/2022H.pdf S. 8
+  loesung: material/loesungen/altklausuren/2022H_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  - qualitative-verlaeufe
+  punkte: 3
+- id: ak2022h-a1d
+  titel: 'Heiße Kugel: abgegebene Wärme'
+  quelle: material/altklausuren/2022H.pdf S. 10
+  loesung: material/loesungen/altklausuren/2022H_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-heisler
+  punkte: 4
+- id: ak2022h-a2
+  titel: Rohr mit adiabatem Einlauf
+  quelle: material/altklausuren/2022H.pdf S. 12
+  loesung: material/loesungen/altklausuren/2022H_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - qualitative-verlaeufe
+  punkte: 10
+- id: ak2022h-a3
+  titel: Raum mit Glasdachfenster
+  quelle: material/altklausuren/2022H.pdf S. 18
+  loesung: material/loesungen/altklausuren/2022H_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - st-reale-koerper-kirchhoff
+  punkte: 18
+- id: ak2022h-a4
+  titel: Tunnel mit reaktiver Schicht
+  quelle: material/altklausuren/2022H.pdf S. 24
+  loesung: material/loesungen/altklausuren/2022H_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - su-stoffuebergang-advektiv
+  - su-diffusion-fick
+  punkte: 16
+- id: ak2023f-a1a
+  titel: Bestrahlte Praline
+  quelle: material/altklausuren/2023F.pdf S. 4
+  loesung: material/loesungen/altklausuren/2023F_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  - wl-waermedurchgang
+  punkte: 5
+- id: ak2023f-a1b
+  titel: Raum mit zwei Wandbauarten
+  quelle: material/altklausuren/2023F.pdf S. 6
+  loesung: material/loesungen/altklausuren/2023F_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermedurchgang
+  punkte: 3
+- id: ak2023f-a1c
+  titel: Rohr mit konstanter Wandtemperatur
+  quelle: material/altklausuren/2023F.pdf S. 8
+  loesung: material/loesungen/altklausuren/2023F_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  punkte: 5
+- id: ak2023f-a1d
+  titel: Hand auf heißer Herdplatte
+  quelle: material/altklausuren/2023F.pdf S. 10
+  loesung: material/loesungen/altklausuren/2023F_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-halbunendlich
+  punkte: 4
+- id: ak2023f-a2
+  titel: Eisfläche unter Hallendach
+  quelle: material/altklausuren/2023F.pdf S. 12
+  loesung: material/loesungen/altklausuren/2023F_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - st-einstrahlzahlen
+  punkte: 13
+- id: ak2023f-a3
+  titel: 'Kaffee: Koffein-Stofftransport'
+  quelle: material/altklausuren/2023F.pdf S. 18
+  loesung: material/loesungen/altklausuren/2023F_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - su-stoffuebergang-advektiv
+  - su-diffusion-fick
+  punkte: 16
+- id: ak2023f-a4
+  titel: 'Sparfuchs: Außenwände Reihenhaus'
+  quelle: material/altklausuren/2023F.pdf S. 24
+  loesung: material/loesungen/altklausuren/2023F_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermedurchgang
+  - wl-mehrschichtige-wand
+  punkte: 14
+- id: ak2023h-a1a
+  titel: c-Verlauf Fluid–Wand–Fluid
+  quelle: material/altklausuren/2023H.pdf S. 4
+  loesung: material/loesungen/altklausuren/2023H_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - su-phasengleichgewicht
+  - qualitative-verlaeufe
+  punkte: 3
+- id: ak2023h-a1b
+  titel: Kugel im Wasser abkühlen
+  quelle: material/altklausuren/2023H.pdf S. 6
+  loesung: material/loesungen/altklausuren/2023H_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-heisler
+  punkte: 5
+- id: ak2023h-a1c
+  titel: Rohr mit Wandtemperatur und Massenstrom
+  quelle: material/altklausuren/2023H.pdf S. 8
+  loesung: material/loesungen/altklausuren/2023H_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  punkte: 3
+- id: ak2023h-a1d
+  titel: 'Stab: T(x) in Bereichen ergänzen'
+  quelle: material/altklausuren/2023H.pdf S. 10
+  loesung: material/loesungen/altklausuren/2023H_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-fourier-erhaltung
+  - qualitative-verlaeufe
+  punkte: 4
+- id: ak2023h-a2
+  titel: Wasser im außen beheizten Rohr
+  quelle: material/altklausuren/2023H.pdf S. 14
+  loesung: material/loesungen/altklausuren/2023H_ML.pdf S. 10
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  punkte: 16
+- id: ak2023h-a3
+  titel: Rohrförmige Rippe
+  quelle: material/altklausuren/2023H.pdf S. 20
+  loesung: material/loesungen/altklausuren/2023H_ML.pdf S. 14
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  punkte: 14
+- id: ak2023h-a4
+  titel: Röntgenröhre (Strahlung)
+  quelle: material/altklausuren/2023H.pdf S. 26
+  loesung: material/loesungen/altklausuren/2023H_ML.pdf S. 18
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - st-einstrahlzahlen
+  punkte: 15
+- id: ak2024f-a1a
+  titel: Mehrschichtwand mit Heizfolie
+  quelle: material/altklausuren/2024F.pdf S. 4
+  loesung: material/loesungen/altklausuren/2024F_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - qualitative-verlaeufe
+  punkte: 4
+- id: ak2024f-a1b
+  titel: Keks abkühlen
+  quelle: material/altklausuren/2024F.pdf S. 6
+  loesung: material/loesungen/altklausuren/2024F_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-heisler
+  punkte: 4
+- id: ak2024f-a1c
+  titel: Reaktive Flüssigkeit zwischen Wänden
+  quelle: material/altklausuren/2024F.pdf S. 8
+  loesung: material/loesungen/altklausuren/2024F_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermequellen
+  - wl-mehrschichtige-wand
+  punkte: 4
+- id: ak2024f-a1d
+  titel: UV-Schädigung der Haut
+  quelle: material/altklausuren/2024F.pdf S. 10
+  loesung: material/loesungen/altklausuren/2024F_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - st-schwarzkoerper
+  - st-reale-koerper-kirchhoff
+  punkte: 2
+- id: ak2024f-a2
+  titel: Raclettegerät
+  quelle: material/altklausuren/2024F.pdf S. 12
+  loesung: material/loesungen/altklausuren/2024F_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - st-einstrahlzahlen
+  punkte: 15
+- id: ak2024f-a3
+  titel: Rohr mit unbekannter Wärmestromdichte
+  quelle: material/altklausuren/2024F.pdf S. 18
+  loesung: material/loesungen/altklausuren/2024F_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  punkte: 14
+- id: ak2024f-a4
+  titel: Wasser im Boden bei Regen
+  quelle: material/altklausuren/2024F.pdf S. 24
+  loesung: material/loesungen/altklausuren/2024F_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - su-analogie-instationaer
+  punkte: 15
+- id: ak2024h-a1a
+  titel: Kugel kühlt ab
+  quelle: material/altklausuren/2024H.pdf S. 4
+  loesung: material/loesungen/altklausuren/2024H_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-heisler
+  punkte: 3
+- id: ak2024h-a1b
+  titel: Rotierender bestrahlter Zylinder
+  quelle: material/altklausuren/2024H.pdf S. 6
+  loesung: material/loesungen/altklausuren/2024H_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  - kv-erzwungen-umstroemt
+  punkte: 5
+- id: ak2024h-a1c
+  titel: Wand mit Heizfolie
+  quelle: material/altklausuren/2024H.pdf S. 8
+  loesung: material/loesungen/altklausuren/2024H_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - qualitative-verlaeufe
+  punkte: 4
+- id: ak2024h-a1d
+  titel: Heizplatte auf zylindrischer Stütze
+  quelle: material/altklausuren/2024H.pdf S. 10
+  loesung: material/loesungen/altklausuren/2024H_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  punkte: 4
+- id: ak2024h-a2
+  titel: Strahler mit Reflektor und Glas
+  quelle: material/altklausuren/2024H.pdf S. 12
+  loesung: material/loesungen/altklausuren/2024H_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - st-einstrahlzahlen
+  punkte: 15
+- id: ak2024h-a3
+  titel: 'Rohr: Erwärmung und Verdampfung'
+  quelle: material/altklausuren/2024H.pdf S. 18
+  loesung: material/loesungen/altklausuren/2024H_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  punkte: 18
+- id: ak2024h-a4
+  titel: Blei diffundiert ins Erdreich
+  quelle: material/altklausuren/2024H.pdf S. 24
+  loesung: material/loesungen/altklausuren/2024H_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - su-analogie-instationaer
+  - su-diffusion-fick
+  punkte: 11
+- id: ak2025f-a1a
+  titel: Backsteinwand mit Dämmung und Heizung
+  quelle: material/altklausuren/2025F.pdf S. 4
+  loesung: material/loesungen/altklausuren/2025F_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  punkte: 5
+- id: ak2025f-a1b
+  titel: Perforierte Folie zwischen Platten
+  quelle: material/altklausuren/2025F.pdf S. 6
+  loesung: material/loesungen/altklausuren/2025F_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  punkte: 4
+- id: ak2025f-a1c
+  titel: Wasserleitung im Erdreich
+  quelle: material/altklausuren/2025F.pdf S. 8
+  loesung: material/loesungen/altklausuren/2025F_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-halbunendlich
+  punkte: 5
+- id: ak2025f-a1d
+  titel: Iglu-Wand (Kugelschale)
+  quelle: material/altklausuren/2025F.pdf S. 10
+  loesung: material/loesungen/altklausuren/2025F_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-zylinder-kugel
+  punkte: 4
+- id: ak2025f-a2
+  titel: Ebene Wand mit Wärmequelle
+  quelle: material/altklausuren/2025F.pdf S. 12
+  loesung: material/loesungen/altklausuren/2025F_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermequellen
+  - qualitative-verlaeufe
+  punkte: 15
+- id: ak2025f-a3
+  titel: Tinte trocknen mit Strahler
+  quelle: material/altklausuren/2025F.pdf S. 18
+  loesung: material/loesungen/altklausuren/2025F_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  - st-strahlungsaustausch
+  punkte: 13
+- id: ak2025f-a4
+  titel: Wäschetrockner
+  quelle: material/altklausuren/2025F.pdf S. 24
+  loesung: material/loesungen/altklausuren/2025F_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - su-stoffuebergang-advektiv
+  punkte: 14
+- id: ak2025h-a1a
+  titel: Rohr mit Wärmestromdichte q(x)
+  quelle: material/altklausuren/2025H.pdf S. 4
+  loesung: material/loesungen/altklausuren/2025H_ML.pdf S. 4
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - qualitative-verlaeufe
+  punkte: 4
+- id: ak2025h-a1b
+  titel: Dreischichtwand mit Diffusion und Senken
+  quelle: material/altklausuren/2025H.pdf S. 6
+  loesung: material/loesungen/altklausuren/2025H_ML.pdf S. 5
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - qualitative-verlaeufe
+  punkte: 4
+- id: ak2025h-a1c
+  titel: Gurke in Essig
+  quelle: material/altklausuren/2025H.pdf S. 8
+  loesung: material/loesungen/altklausuren/2025H_ML.pdf S. 6
+  loesung_vertrauen: offiziell
+  themen:
+  - su-analogie-instationaer
+  punkte: 4
+- id: ak2025h-a1d
+  titel: Bestrahlter Glas-Hohlzylinder
+  quelle: material/altklausuren/2025H.pdf S. 10
+  loesung: material/loesungen/altklausuren/2025H_ML.pdf S. 7
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  - kv-erzwungen-umstroemt
+  punkte: 4
+- id: ak2025h-a2
+  titel: Zylinderkern mit Mantel
+  quelle: material/altklausuren/2025H.pdf S. 12
+  loesung: material/loesungen/altklausuren/2025H_ML.pdf S. 8
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  - wl-zylinder-kugel
+  - qualitative-verlaeufe
+  punkte: 13
+- id: ak2025h-a3
+  titel: Raum mit Fußbodenheizung
+  quelle: material/altklausuren/2025H.pdf S. 20
+  loesung: material/loesungen/altklausuren/2025H_ML.pdf S. 12
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - wl-waermedurchgang
+  punkte: 15
+- id: ak2025h-a4
+  titel: Sonnenstrahlung an Erdoberfläche
+  quelle: material/altklausuren/2025H.pdf S. 26
+  loesung: material/loesungen/altklausuren/2025H_ML.pdf S. 16
+  loesung_vertrauen: offiziell
+  themen:
+  - st-reale-koerper-kirchhoff
+  - st-schwarzkoerper
+  punkte: 16
+- id: ak2026f-a1a
+  titel: Dreischichtwand mit Quelle
+  quelle: material/altklausuren/2026F.pdf S. 4
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-mehrschichtige-wand
+  - wl-waermequellen
+  - qualitative-verlaeufe
+  punkte: 5
+- id: ak2026f-a1b
+  titel: Thermischer Speicher zwischen Rohren
+  quelle: material/altklausuren/2026F.pdf S. 6
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-zylinder-kugel
+  punkte: 3
+- id: ak2026f-a1c
+  titel: Fenstermaterial nach Reflexionsgrad
+  quelle: material/altklausuren/2026F.pdf S. 8
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - st-reale-koerper-kirchhoff
+  - st-schwarzkoerper
+  punkte: 4
+- id: ak2026f-a1d
+  titel: Dreischichtiger Handschuh gegen Aceton
+  quelle: material/altklausuren/2026F.pdf S. 10
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - su-diffusion-fick
+  - su-phasengleichgewicht
+  punkte: 4
+- id: ak2026f-a2
+  titel: Platte mit Rippen aufheizen
+  quelle: material/altklausuren/2026F.pdf S. 12
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - wl-rippen
+  - wl-blockkapazitaet
+  - qualitative-verlaeufe
+  punkte: 15
+- id: ak2026f-a3
+  titel: Folienextrusion mit Kühlung
+  quelle: material/altklausuren/2026F.pdf S. 18
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - kv-erzwungen-umstroemt
+  - wl-biot
+  - wl-konvektion-advektion
+  - qualitative-verlaeufe
+  punkte: 15
+- id: ak2026f-a4
+  titel: Zwei Metallgefäße im Vakuum
+  quelle: material/altklausuren/2026F.pdf S. 24
+  loesung: null
+  loesung_vertrauen: keine
+  themen:
+  - st-einstrahlzahlen
+  - st-flaechenhelligkeit-bilanz
+  - st-schwarzkoerper
+  punkte: 14
+- id: sru01-a1
+  titel: Temperaturprofile ebene Wände
+  quelle: material/uebungen/sru/SRU01/Uebung_1_1.pdf
+  loesung: material/loesungen/sru/SRU01/Uebung_1_1_lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - qualitative-verlaeufe
+  herkunft: Skript WL Übung II.1
+- id: sru01-a2
+  titel: T(x) qualitativ zeichnen
+  quelle: material/uebungen/sru/SRU01/Uebung_1_2.pdf
+  loesung: material/loesungen/sru/SRU01/Uebung_1_2_lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - qualitative-verlaeufe
+  herkunft: ak2021h-a1b
+- id: sru01-a3
+  titel: Zwiebelschalenprinzip
+  quelle: material/uebungen/sru/SRU01/Uebung_1_3.pdf
+  loesung: material/loesungen/sru/SRU01/Uebung_1_3_lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-mehrschichtige-wand
+  - wl-waermedurchgang
+  herkunft: Skript WL Übung II.2 (Arbeitsblatt vorhanden)
+- id: sru01-a4
+  titel: Eisschicht
+  quelle: material/uebungen/sru/SRU01/Uebung_1_4.pdf
+  loesung: material/loesungen/sru/SRU01/Uebung_1_4_lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermedurchgang
+  herkunft: Skript WL Übung II.5 (Arbeitsblatt vorhanden)
+- id: sru02-a1
+  titel: Dreischichtiger Stab mit Heizkern
+  quelle: material/uebungen/sru/SRU02/Uebung_2_1.pdf
+  loesung: material/loesungen/sru/SRU02/Uebung_2_1_lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermequellen
+  - wl-zylinder-kugel
+  - qualitative-verlaeufe
+  herkunft: ak2018h-a4
+- id: sru02-a2
+  titel: T(x) Rippe mit zwei λ
+  quelle: material/uebungen/sru/SRU02/Uebung_2_2.pdf
+  loesung: material/loesungen/sru/SRU02/Uebung_2_2_lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  - qualitative-verlaeufe
+  herkunft: ak2022h-a1c
+- id: sru02-a3
+  titel: Stiftrippe an Gasturbinenschaufel
+  quelle: material/uebungen/sru/SRU02/Uebung_2_3.pdf
+  loesung: material/loesungen/sru/SRU02/Uebung_2_3_lsg_KOMPLETT.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  - wl-rippenwirkungsgrad
+  herkunft: Skript WL Übung II.7 (Arbeitsblatt vorhanden)
+- id: sru02-a4
+  titel: Ebene Wand mit Wärmequelle
+  quelle: material/uebungen/sru/SRU02/Uebung_2_4.pdf
+  loesung: material/loesungen/sru/SRU02/Uebung_2_4_lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermequellen
+  - qualitative-verlaeufe
+  herkunft: ak2025f-a2
+- id: sru03-a1
+  titel: Kunststoffplatte aus Walze kühlen
+  quelle: material/uebungen/sru/SRU03/Uebung_3_1.pdf
+  loesung: material/loesungen/sru/SRU03/Uebung_3_1_lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-heisler
+  herkunft: ak2021h-a1c
+- id: sru03-a2
+  titel: Kaffeebecher des Assistenten
+  quelle: material/uebungen/sru/SRU03/Uebung_3_2.pdf
+  loesung: material/loesungen/sru/SRU03/Uebung_3_2_lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-blockkapazitaet
+  - wl-waermedurchgang
+  herkunft: Klausur 2010H A3
+- id: sru04-a1
+  titel: 'Skizzen: Stromlinien und Profile'
+  quelle: material/uebungen/sru/SRU04/1.Aufgabe_Skizze_Konv_AS.pdf
+  loesung: material/loesungen/sru/SRU04/1.Aufgabe_Skizze_Konv_LSG.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-grenzschicht-natuerlich
+  - kv-rohrstroemung
+  - qualitative-verlaeufe
+- id: sru04-a2
+  titel: Skizze Temperaturgrenzschicht
+  quelle: material/uebungen/sru/SRU04/2.Aufgabe_Skizze_Temperaturgrenzschicht_AS.pdf
+  loesung: material/loesungen/sru/SRU04/2.Aufgabe_Skizze_Temperaturgrenzschicht_LSG.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-grenzschicht-erzwungen
+  - qualitative-verlaeufe
+- id: sru04-a3
+  titel: 'Quaderstab: mittlerer Wärmeübergang'
+  quelle: material/uebungen/sru/SRU04/3.Aufgabe_2013F_WSUE_1b_AS.pdf
+  loesung: material/loesungen/sru/SRU04/3.Aufgabe_2013F_WSUE_1b_LSG.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-erzwungen-umstroemt
+  herkunft: Klausur 2013F A1b
+- id: sru04-a4
+  titel: Bierdose stehend oder liegend
+  quelle: material/uebungen/sru/SRU04/4.Aufgabe_2018H_A1a_Konvektion_AS.pdf
+  loesung: material/loesungen/sru/SRU04/4.Aufgabe_2018H_A1a_Konvektion_LSG.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-natuerlich-umstroemt
+  herkunft: ak2018h-a1a
+- id: sru05-a1
+  titel: Rohr mit konstanter Wandtemperatur
+  quelle: material/uebungen/sru/SRU05/Aufgabe1.pdf
+  loesung: material/loesungen/sru/SRU05/Aufgabe1_Lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - qualitative-verlaeufe
+- id: sru05-a2
+  titel: Rohr mit konstanter Wärmestromdichte
+  quelle: material/uebungen/sru/SRU05/Aufgabe2.pdf
+  loesung: material/loesungen/sru/SRU05/Aufgabe2_Lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - qualitative-verlaeufe
+- id: sru05-a3
+  titel: Laminare Rohrströmung, voll ausgebildet
+  quelle: material/uebungen/sru/SRU05/Aufgabe3.pdf
+  loesung: material/loesungen/sru/SRU05/Aufgabe3_Lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  herkunft: Klausur 2014H A1c
+- id: sru05-a4
+  titel: Wasser im Rohr, Wärmedurchgang
+  quelle: material/uebungen/sru/SRU05/Aufgabe4.pdf
+  loesung: material/loesungen/sru/SRU05/Aufgabe4_Lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - wl-waermedurchgang
+  herkunft: Klausur 2015H A3 (Aufgabe nur als Bild)
+- id: sru06-a1
+  titel: Rohr mit Reaktionszone
+  quelle: material/uebungen/sru/SRU06/Aufgabe1_.pdf
+  loesung: material/loesungen/sru/SRU06/Aufgabe1_Lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - wl-waermequellen
+  herkunft: ak2020f-a2
+- id: sru06-a2
+  titel: Rohr mit Drahtgitter, adiabater Abschnitt
+  quelle: material/uebungen/sru/SRU06/Aufgabe2.pdf
+  loesung: material/loesungen/sru/SRU06/Aufgabe2_Lsg.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  - wl-waermequellen
+  herkunft: Klausur 2013H A2
+- id: sru07-a1
+  titel: Flächenhelligkeiten und Energiebilanzen
+  quelle: material/uebungen/sru/SRU07/1.Aufgabe_Flaechenhelligkeiten.pdf
+  loesung: material/loesungen/sru/SRU07/1.Aufgabe_Flaechenhelligkeiten_ML.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  herkunft: Übungsskript 1.2 (ML nur als Bild)
+- id: sru07-a2
+  titel: Kuppel
+  quelle: material/uebungen/sru/SRU07/2.Aufgabe_Kuppel.pdf
+  loesung: material/loesungen/sru/SRU07/Aufgabe2_Loesung.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  - st-strahlungsaustausch
+  herkunft: Übungsskript 1.10 (Text-ML + Bild-ML 2.Aufgabe_Kuppel_ML.pdf)
+- id: sru08-a1
+  titel: Quarzglasfenster im Ofen
+  quelle: material/uebungen/sru/SRU08/Aufgabe_1.7.pdf
+  loesung: material/loesungen/sru/SRU08/Aufgabe_1.7_Quarzglasfenster_im_Ofen.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-reale-koerper-kirchhoff
+  - st-schwarzkoerper
+  herkunft: Übungsskript 1.7
+- id: sru09-a1
+  titel: Nasses Holz
+  quelle: material/uebungen/sru/SRU09/Aufgabe1.pdf
+  loesung: material/loesungen/sru/SRU09/Aufgabe1_ML.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  herkunft: Skript SU Übung V.1
+- id: sru09-a2
+  titel: Wasser im Boden bei Regen
+  quelle: material/uebungen/sru/SRU09/Aufgabe2.pdf
+  loesung: material/loesungen/sru/SRU09/Aufgabe2_ML.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - su-analogie-instationaer
+  herkunft: ak2024f-a4
+- id: sru10-a1
+  titel: c(x) mehrschichtiges System
+  quelle: material/uebungen/sru/SRU10/Aufgabe1.pdf
+  loesung: material/loesungen/sru/SRU10/Aufgabe1_ML.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-phasengleichgewicht
+  - qualitative-verlaeufe
+  herkunft: ak2022f-a1c
+- id: sru10-a2
+  titel: c-Verlauf Fluid–Wand–Fluid
+  quelle: material/uebungen/sru/SRU10/Aufgabe_2.pdf
+  loesung: material/loesungen/sru/SRU10/Aufgabe_2_ML.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-phasengleichgewicht
+  - qualitative-verlaeufe
+  herkunft: ak2023h-a1a (nur als Bild)
+- id: sru10-a3
+  titel: Wäschetrockner
+  quelle: material/uebungen/sru/SRU10/Aufgabe3.pdf
+  loesung: material/loesungen/sru/SRU10/Aufgabe3_ML.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-stoffuebergang-advektiv
+  herkunft: ak2025f-a4
+- id: sru11-a1
+  titel: Konzentrationsprofil mit D und D'
+  quelle: material/uebungen/sru/SRU11/Aufgabe_1.pdf
+  loesung: material/loesungen/sru/SRU11/Aufgabe_1_ML.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - qualitative-verlaeufe
+  herkunft: nur als Bild
+- id: sru11-a2
+  titel: 'Kaffee: Koffein-Stofftransport'
+  quelle: material/uebungen/sru/SRU11/Aufgabe_2.pdf
+  loesung: material/loesungen/sru/SRU11/Aufgabe_2_ML.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-stoffuebergang-advektiv
+  - su-diffusion-fick
+  herkunft: ak2023f-a3 (nur als Bild)
+- id: vru01-a1
+  titel: Warmwasserleitung
+  quelle: material/uebungen/vru/VRU01/Warmwasserleitung.pdf
+  loesung: material/loesungen/vru/VRU01/VUe01_Neu2025.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-zylinder-kugel
+  - wl-waermedurchgang
+  herkunft: Übungsskript 2.9
+- id: vru02-a1
+  titel: Brennelement Hochtemperaturreaktor
+  quelle: material/uebungen/vru/VRU02/Brennelement.pdf
+  loesung: material/loesungen/vru/VRU02/VRUe02.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-waermequellen
+  - wl-zylinder-kugel
+  herkunft: Übungsskript 2.14 (Lösung nur als Bild)
+- id: vru03-a1
+  titel: Beschlagene Heckscheibe
+  quelle: material/uebungen/vru/VRU03/Heckscheibe.pdf
+  loesung: material/loesungen/vru/VRU03/VRUe03_Aufgabe_2_11_2025.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  - wl-waermequellen
+  herkunft: 'Übungsskript 2.11 (FAQ: A2.11-*)'
+- id: vru04-a1
+  titel: Kupferkugel im Luftstrom
+  quelle: material/uebungen/vru/VRU04/Kupferkugel.pdf
+  loesung: material/loesungen/vru/VRU04/VUe04_Aufgabe_2_17.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-blockkapazitaet
+  - wl-biot
+  herkunft: Übungsskript 2.17
+- id: vru05-a1
+  titel: Gewalztes Blech im Ölbad
+  quelle: material/uebungen/vru/VRU05/GewalztesBlech.pdf
+  loesung: material/loesungen/vru/VRU05/VUe05_GewalztesBlech.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-heisler
+  - wl-halbunendlich
+  - wl-konvektion-advektion
+  herkunft: Übungsskript 2.23
+- id: vru06-a1
+  titel: Wärmeübergang an beheizter Platte
+  quelle: material/uebungen/vru/VRU06/Aufgabe_WaermeuebergangPlatte.pdf
+  loesung: material/loesungen/vru/VRU06/VUe06_VUe01Konvektion_Aufgabe_3_8.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-erzwungen-umstroemt
+  - kv-grenzschicht-erzwungen
+  herkunft: Übungsskript 3.8
+- id: vru07-a1
+  titel: Bleileitung
+  quelle: material/uebungen/vru/VRU07/Bleirohr.pdf
+  loesung: material/loesungen/vru/VRU07/VUe07_Konvektion02_Aufgabe_3_2.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - kv-rohrstroemung
+  herkunft: Übungsskript 3.2
+- id: vru08-a1
+  titel: Puffmais in der Mikrowelle
+  quelle: material/uebungen/vru/VRU08/Puffmais.pdf
+  loesung: material/loesungen/vru/VRU08/VUe08_1_Puffmais.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-blockkapazitaet
+  - kv-natuerlich-umstroemt
+  herkunft: Klausur 2014H A2 (Lösung nur als Bild)
+- id: vru08-a2
+  titel: Eisschicht im Rohr auftauen
+  quelle: material/uebungen/vru/VRU08/Rohr_auftauen_Aufgabe.pdf
+  loesung: material/loesungen/vru/VRU08/VUe08_2_Loesung_Auftauaufgabe.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-zylinder-kugel
+  - kv-rohrstroemung
+  herkunft: Klausur 2015F A4 (auch VUe08_2_Loesung_Altklausuraufgabe_NEU.pdf)
+- id: vru09-a1
+  titel: Sonnenkollektor
+  quelle: material/uebungen/vru/VRU09/Aufgabe_1_1.pdf
+  loesung: material/loesungen/vru/VRU09/Aufgabe1_1_mitErgaenzungZumVideo.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  - st-reale-koerper-kirchhoff
+  herkunft: Übungsskript 1.1
+- id: vru09-a2
+  titel: Beschichtung Solarkollektor
+  quelle: material/uebungen/vru/VRU09/Aufgabe_Beschichtung.pdf
+  loesung: material/loesungen/vru/VRU09/Aufgabe_Beschichtung_PPT.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-reale-koerper-kirchhoff
+  - st-schwarzkoerper
+  herkunft: ak2019h-a1b
+- id: vru10-a1
+  titel: Strahlung im keilförmigen Spalt
+  quelle: material/uebungen/vru/VRU10/Aufgabe_1_4.pdf
+  loesung: material/loesungen/vru/VRU10/VRUe02_Aufgabe1_4.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  - st-strahlungsaustausch
+  herkunft: Übungsskript 1.4
+- id: vru10-a2
+  titel: Freilandschwein unter Heizstrahler
+  quelle: material/uebungen/vru/VRU10/Aufgabe_Freilandschwein.pdf
+  loesung: material/loesungen/vru/VRU10/VRUe02_Schwein.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - st-einstrahlzahlen
+  herkunft: Klausur 2009F A3 (Lösung nur als Bild)
+- id: vru11-a1
+  titel: Parallele Strahlung auf Zweischichtsystem
+  quelle: material/uebungen/vru/VRU11/Aufgabe_2011F_5.pdf
+  loesung: material/loesungen/vru/VRU11/VRUe03_Aufgabe5_Klausur2011F_1.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-reale-koerper-kirchhoff
+  - st-strahlungsaustausch
+  herkunft: Klausur 2011F A5 (Lösung nur als Bild)
+- id: vru11-a2
+  titel: Klausur 2011F A1a (Strahlung)
+  quelle: material/loesungen/vru/VRU11/2011F_1a.pdf (Aufgabe im Lösungsblatt)
+  loesung: material/loesungen/vru/VRU11/2011F_1a.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  herkunft: Klausur 2011F A1a – Aufgabe nur im handschriftlichen Lösungsblatt
+- id: vru11-a3
+  titel: Klausur 2011H A1d (Strahlung)
+  quelle: material/loesungen/vru/VRU11/2011H_1d.pdf (Aufgabe im Lösungsblatt)
+  loesung: material/loesungen/vru/VRU11/2011H_1d.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  herkunft: Klausur 2011H A1d – Aufgabe nur im handschriftlichen Lösungsblatt
+- id: vru12-a1
+  titel: Stahlband im Ofen (Stofftransport)
+  quelle: material/uebungen/vru/VRU12/VUe12_F2013_4_Aufgabe.pdf
+  loesung: material/loesungen/vru/VRU12/StahlblechCO2.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-diffusion-fick
+  - su-analogie-instationaer
+  herkunft: Klausur 2013H A4
+- id: vru13-a1
+  titel: n-Oktan-getränktes Rohr
+  quelle: material/uebungen/vru/VRU13/NOctanAufgabe.pdf
+  loesung: material/loesungen/vru/VRU13/NOctanLoesung_VUe13.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-stoffuebergang-advektiv
+  - kv-rohrstroemung
+  herkunft: Klausur 2012H A5
+- id: vru13-a2
+  titel: Stoffübergang in Rohrleitung
+  quelle: material/uebungen/vru/VRU13/StoffuebergangRohrAufgabe.pdf
+  loesung: material/loesungen/vru/VRU13/Rohrstroemung_Stoffuebertragung_Loesung_VUe13.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - su-stoffuebergang-advektiv
+  - kv-rohrstroemung
+  herkunft: Klausur 2011F A4
+- id: vru14-a1
+  titel: Freilandschwein als Kugel
+  quelle: material/uebungen/vru/VRU14/A_FreilandschweinKugel.pdf
+  loesung: material/loesungen/vru/VRU14/VUe14_hochladen.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-strahlungsaustausch
+  - kv-natuerlich-umstroemt
+  herkunft: Klausur 2009H A5
+- id: vru14-a2
+  titel: Gegrilltes Schwein (Strahlung)
+  quelle: material/uebungen/vru/VRU14/A_Freilandschwein_Strahlung.pdf
+  loesung: material/loesungen/vru/VRU14/VUe14_hochladen.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-flaechenhelligkeit-bilanz
+  herkunft: Altklausur A1b
+- id: vru14-a3
+  titel: Rippe Aluminium statt Kupfer
+  quelle: material/uebungen/vru/VRU14/A_Rippe_2011H_1c.pdf
+  loesung: material/loesungen/vru/VRU14/VUe14_hochladen.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - wl-rippen
+  herkunft: Klausur 2011H A1c
+- id: vru14-a4
+  titel: Solarmodul hinter Glas
+  quelle: material/uebungen/vru/VRU14/A_Solarmodul.pdf
+  loesung: material/loesungen/vru/VRU14/L_Solarmodul.pdf
+  loesung_vertrauen: offiziell
+  themen:
+  - st-einstrahlzahlen
+  - st-strahlungsaustausch
+  herkunft: Klausur 2016F A3

@@ -5,6 +5,7 @@ Nur **Muster** eintragen, die sich mehrfach gezeigt haben. Einzelfälle gehören
 
 ## Kurzprofil
 <!-- Max. 8 Stichpunkte. Dieser Abschnitt wird bei jedem Sessionstart automatisch eingespielt. -->
+- Lernweg (Wunsch 25.10.2026): Thema für Thema in Vorlesungsreihenfolge – erst verstehen (am Skript orientiert, auf meinem Niveau erklärt, Niveau dynamisch anpassen), dann Aufgaben rechnen
 - Arbeitsweise: meist Uni-Aufgaben durcharbeiten und erklären lassen (Upload im Chat oder Ordner `inbox/`)
 - Tutor-Stil: geführt mit gestuften Hinweisen; bei „Lösung“ den vollen Weg zeigen
 - Karteikarten: primär Anki (Export durch den Agenten), Chat-Abfrage nur auf Wunsch

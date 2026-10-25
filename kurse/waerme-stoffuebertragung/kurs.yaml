@@ -1,14 +1,26 @@
 id: waerme-stoffuebertragung
 name: Wärme- und Stoffübertragung
 kuerzel: wsu
-semester: ''
-uni: ''
-dozent: ''
+semester: WS 26/27 (Material-Basis WS 25/26)
+uni: RWTH Aachen, Lehrstuhl WSA
+dozent: Wilko Rohlfs (seit WS 25/26; Folien teils noch mit R. Kneer)
 klausur:
-  datum: null
-  dauer_min: null
-  hilfsmittel: ''
-  format: ''
-notation: {}
+  datum: null        # noch offen (vermutlich Februar 2027)
+  dauer_min: 120
+  hilfsmittel: "nur ausgedruckte offizielle Formelsammlung ohne eigene Anmerkungen + zugelassener Taschenrechner"
+  format: "4 Aufgaben, 60 Punkte, bestanden ab 30 (ohne Bonus); A1 = 3–4 unabhängige Kurzaufgaben, A2–A4 je ein Szenario"
+notation:
+  alpha: "Wärmeübergangskoeffizient α"
+  lambda: "Wärmeleitfähigkeit λ"
+  q_punkt: "Wärmestrom Q̇, Wärmestromdichte q̇″ (Striche = pro Fläche), volumetrische Quelle Φ̇‴"
+  W: "Wärmewiderstand W (nicht R!): W_Leit, W_konv; Q̇ = ΔT/W_ges; k = Wärmedurchgangskoeffizient (kA = 1/W_ges)"
+  m: "Rippenparameter m = sqrt(αU/(λA)) – nicht mit Masse verwechseln"
+  epsilon: "Emissionsgrad ε; α auch Absorptionsgrad (Strahlung), ρ Reflexions-, τ Transmissionsgrad"
+  Phi_ij: "Einstrahlzahl Φ_ij"
+  Q_hell: "Flächenhelligkeit als Q̇_i (Sonderschrift, FS WS.22) = reflektierter + transmittierter + emittierter Anteil"
+  xi: "Massenanteil ξ, Stoffmengenanteil ψ, Partialdichte ρ_i, Konzentration C_i; Diffusionskoeffizient D_ij"
+  g: "Stoffübergangskoeffizient g (nicht β!); Lewis-Gesetz g = α/c_p"
+  H_cc: "Henry-Koeffizient H^cc"
+  FS_seiten: "Formelsammlung immer mit gedruckter Seitenzahl zitieren (PDF-Seite = gedruckt + 4)"
 einstellungen:
   auffrischen_nach_tagen: 21
