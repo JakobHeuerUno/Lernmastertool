@@ -115,6 +115,9 @@ profil/lernprofil.md            kursübergreifendes Lernprofil
   Originalmaterial holen: `lern material holen <Cloud-Link> [--passwort …]` oder eigenen Moodle-Export mit
   `lern abgleich <ordner> --los` (beides per Prüfsumme in dieselben Pfade). Cloud-Links/Passwörter nur in `lern.lokal.yaml`
   (git-ignoriert) – **nie in versionierte Dateien**, das Repo ist öffentlich und das Material urheberrechtlich geschützt.
+- Persönlichen Branch sichern (optional): eigenes **privates** GitHub-Repo anlegen, dann `git remote add privat <url>` und
+  `git push -u privat <name>/<id>` (+ `git config branch.<name>/<id>.pushRemote privat`). Danach pusht `sitzung-ende` nach jedem
+  Commit dorthin. Den persönlichen Branch nie nach `origin` pushen (öffentlich).
 - Neuer Kurs: von `main` aus `git checkout -b kurs/<id>`, dann Skill `kurs-einrichten`, danach `<name>/<id>` abzweigen.
 - Originalmaterial (`inbox/`, `material/`, `text/`, `medien/`) ist ignoriert (Urheberrecht, Größe), bleibt beim
   Branch-Wechsel auf der Platte liegen. Auf `main` sieht `lern` keinen Kurs; `lern brief` meldet, wenn der Branch nicht passt.

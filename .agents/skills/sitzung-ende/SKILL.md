@@ -27,4 +27,5 @@ description: Lernsession in der LERNECKE sauber abschließen – Sitzungsnotiz m
 6. **Dashboard**: `lern dashboard` → Pfad nennen (`ausgabe/dashboard.html`).
 7. **Commit** des Lernstands (Repo-Wurzel) – nur auf dem persönlichen Branch `<name>/<id>` (`git branch --show-current` prüfen; nicht auf dem geteilten `kurs/<id>` oder `main`; gibt es noch keinen: `git checkout -b <name>/<id>`):
    `git add -A` und `git commit -m "Sitzung JJJJ-MM-TT: <Kurzbeschreibung>"`. (Originalmaterial ist per .gitignore ausgeschlossen.)
+   Hat der Branch einen Upstream (`git rev-parse --abbrev-ref @{u}` liefert z. B. `privat/<name>/<id>`): danach `git push` (sichert den Lernstand im eigenen privaten Repo). Ohne Upstream nicht pushen – vor allem nie den persönlichen Branch nach `origin` (öffentlich).
 8. **Verabschiedung**: 2–3 Sätze – Fortschritt heute, nächster Schritt, ggf. wann Nachrechnen fällig ist.
