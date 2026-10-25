@@ -1,4 +1,5 @@
 import json
+import shutil
 import sqlite3
 import zipfile
 from datetime import date
@@ -125,6 +126,19 @@ def test_brief_und_hook(repo, kurs):
     assert "Demo-Kurs" in daten["hookSpecificOutput"]["additionalContext"]
     schreibe_stand(repo)
     assert "Demo-Kurs" in (repo.wurzel / "STAND.md").read_text(encoding="utf-8")
+
+
+def test_brief_branch_hinweise(repo, kurs):
+    repo.setze_config("aktiver_kurs", "demo")
+    git = repo.wurzel / ".git"
+    (git / "refs" / "heads" / "kurs").mkdir(parents=True)
+    (git / "refs" / "heads" / "kurs" / "demo").write_text("0" * 40, encoding="utf-8")
+    (git / "HEAD").write_text("ref: refs/heads/kurs/demo\n", encoding="utf-8")
+    assert "Achtung Branch" not in brief(repo, heute=HEUTE)
+    (git / "HEAD").write_text("ref: refs/heads/master\n", encoding="utf-8")
+    assert "Achtung Branch" in brief(repo, heute=HEUTE)
+    shutil.rmtree(kurs.pfad)  # master ohne Kurs: auf Kurs-Branches verweisen
+    assert "git checkout kurs/demo" in brief(repo, heute=HEUTE)
 
 
 def test_hook_ohne_repo_ist_gueltiges_json():

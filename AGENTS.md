@@ -83,7 +83,9 @@ Regeln fürs Loggen:
 kurse/<kurs>/
   kurs.yaml, KURS.md            Kursinfos, Klausur, Notation, Hinweise
   inbox/                        neue Dateien vom Nutzer → einsortieren
-  material/<typ>/, material.yaml Originale + Index (vertrauen, themen)
+  INDEX.md                      Wegweiser: Thema → Formelsammlung/Skript/Folien/Aufgaben (zuerst lesen statt suchen)
+  material/<typ>/, material.yaml Originale + Index (vertrauen, themen); Unterordner erlaubt
+  medien/                       Videos/Audio (nicht in Git, nicht eingelesen; Verweise in INDEX.md)
   text/                         generierte Markdown-Extrakte (nicht bearbeiten)
   themen.yaml                   Themenlandkarte (ids stabil halten!)
   aufgaben.yaml, aufgaben/*.md  Aufgabenkatalog + je Aufgabe: Stellung, Lösungsweg, „Meine Stolperstellen“
@@ -98,6 +100,17 @@ profil/lernprofil.md            kursübergreifendes Lernprofil
 - `ereignisse.jsonl` nie von Hand editieren.
 - Sitzungsende (Nutzer verabschiedet sich, „Schluss für heute“) → Skill `sitzung-ende` (inkl. Git-Commit des Lernstands).
 
-## 6. Skills
+## 6. Git-Branches (ein Branch pro Kurs)
+
+- `master` = nur Grundgerüst (lern-Tool, Skills, Vorlagen, Tests, Setup, diese Datei) – **keine Kursordner**.
+- `kurs/<id>` (z. B. `kurs/waerme-stoffuebertragung`) = Grundgerüst + `kurse/<id>/` + `lern.yaml` mit `aktiver_kurs: <id>`.
+  Alle Lernarbeit und Commits (Lernstand, Aufgaben, Karten, Notizen, Lernprofil) nur dort.
+- Änderungen an Tool/Skills/AGENTS.md: auf `master` committen, danach in jedem Kurs-Branch `git merge master`.
+  Nie einen Kurs-Branch in `master` mergen.
+- Neuer Kurs: von `master` aus `git checkout -b kurs/<id>`, dann Skill `kurs-einrichten`.
+- Originalmaterial (`inbox/`, `material/`, `text/`, `medien/`) ist ignoriert, bleibt beim Branch-Wechsel auf der Platte liegen.
+  Auf `master` sieht `lern` keinen Kurs (keine `kurs.yaml`); `lern brief` warnt, wenn Branch und aktiver Kurs nicht passen.
+
+## 7. Skills
 
 `lernen` · `aufgabe` · `thema` · `kurs-einrichten` · `karten` · `anki` (Einrichtung, Sync, Handy; bei jedem ausdrücklichen Anki-Bezug) · `klausur` · `sitzung-ende` (in `.agents/skills/`, für Claude gespiegelt nach `.claude/skills/`).

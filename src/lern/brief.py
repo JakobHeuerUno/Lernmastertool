@@ -39,16 +39,50 @@ def letzte_sitzung(kurs: Kurs) -> dict | None:
     return sitzungen[-1] if sitzungen else None
 
 
+def git_branch(repo: Repo) -> str | None:
+    """Aktueller Git-Branch aus .git/HEAD (ohne git-Aufruf); None ohne Repo oder bei detached HEAD."""
+    head = repo.wurzel / ".git" / "HEAD"
+    if not head.is_file():
+        return None
+    m = re.match(r"ref: refs/heads/(.+)", head.read_text(encoding="utf-8").strip())
+    return m.group(1) if m else None
+
+
+def kurs_branches(repo: Repo) -> list[str]:
+    """Lokale Kurs-Branches (kurs/<id>), auch gepackte Refs."""
+    git = repo.wurzel / ".git"
+    heads = git / "refs" / "heads"
+    namen = {p.relative_to(heads).as_posix() for p in (heads / "kurs").rglob("*") if p.is_file()}
+    packed = git / "packed-refs"
+    if packed.is_file():
+        namen |= set(re.findall(r"refs/heads/(kurs/\S+)", packed.read_text(encoding="utf-8")))
+    return sorted(namen)
+
+
+def branch_hinweis(repo: Repo, kurs_id: str | None) -> list[str]:
+    """Warnt, wenn der ausgecheckte Branch nicht zum Kurs passt (master = nur Grundgerüst, kurs/<id> = Kurs)."""
+    branch = git_branch(repo)
+    if branch is None or kurs_id is None or branch == f"kurs/{kurs_id}":
+        return []
+    return [f"**Achtung Branch:** ausgecheckt ist `{branch}`, Kurs `{kurs_id}` gehört auf `kurs/{kurs_id}`. "
+            f"Lernstand nur dort committen (`git checkout kurs/{kurs_id}`); master nur für Tool/Skills.", ""]
+
+
 def brief(repo: Repo, kurs_id: str | None = None, heute: date | None = None) -> str:
     heute = heute or date.today()
     zeilen = [f"# LERNECKE – Lernstand ({heute:%d.%m.%Y})", ""]
     ids = repo.kurs_ids()
     if not ids:
+        branches = kurs_branches(repo)
+        if branches:
+            return "\n".join(zeilen + [f"Branch `{git_branch(repo)}` enthält keinen Kurs (master = nur Grundgerüst). "
+                                       "Zum Lernen Kurs-Branch auschecken:"] + [f"- `git checkout {b}`" for b in branches])
         return "\n".join(zeilen + ["Noch kein Kurs angelegt. Skill `kurs-einrichten` nutzen."])
     try:
         kurs = repo.kurs(kurs_id)
     except Exception as e:  # kein aktiver Kurs
         return "\n".join(zeilen + [str(e), "", "Kurse:"] + [f"- {i}" for i in ids])
+    zeilen += branch_hinweis(repo, kurs.id)
 
     f = fortschritt(kurs, heute)
     meta = kurs.meta
