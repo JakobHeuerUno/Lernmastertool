@@ -32,14 +32,14 @@ def _sha1(pfad: Path) -> str:
 
 
 def medien_index(kurs: Kurs) -> dict[str, dict]:
-    """medien.yaml aktualisieren (Videos sind nicht in material.yaml). Neu gehasht wird nur bei geänderter Größe."""
+    """medien.yaml aktualisieren (Videos sind nicht in material.yaml; medien/archiv/ bleibt außen vor). Neu gehasht wird nur bei geänderter Größe."""
     datei = kurs.pfad / "medien.yaml"
     alt = {m["datei"]: m for m in (lade_yaml(datei, {}) or {}).get("medien") or []}
     medien = kurs.pfad / "medien"
     neu = {}
     for p in sorted(medien.rglob("*")) if medien.is_dir() else []:
-        if not p.is_file() or p.name.startswith("."):
-            continue
+        if not p.is_file() or p.name.startswith(".") or p.relative_to(medien).parts[0] == "archiv":
+            continue  # medien/archiv/ = Ablage (entpackte Archive, Duplikate), nicht abgleichen
         rel = unicodedata.normalize("NFC", p.relative_to(kurs.pfad).as_posix())
         groesse = p.stat().st_size
         e = alt.get(rel)
