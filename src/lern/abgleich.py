@@ -89,7 +89,8 @@ def abgleich(kurs: Kurs, ordner: list[str], los: bool = False) -> Bericht:
 
     for o in ordner:
         basis = Path(o)
-        dateien = [basis] if basis.is_file() else sorted(p for p in basis.rglob("*") if p.is_file())
+        dateien = [basis] if basis.is_file() else sorted(
+            p for p in basis.rglob("*") if p.is_file() and not p.name.startswith("."))
         for p in dateien:
             herkunft = p.as_posix()
             if p.suffix.lower() in ARCHIVE and zipfile.is_zipfile(p):
