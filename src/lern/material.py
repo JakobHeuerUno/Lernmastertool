@@ -2,14 +2,17 @@
 
 Das Material bleibt aus urheberrechtlichen Gründen und wegen der Größe außerhalb des Repos. Der Link steht lokal in
 `lern.lokal.yaml` (git-ignoriert) oder wird beim Aufruf übergeben – nie in versionierten Dateien.
-Unterstützt: Sciebo/Nextcloud-Freigaben (auch mit Passwort, Ordner oder Datei), OneDrive, Google Drive, direkte URLs.
+Unterstützt: Sciebo/Nextcloud-Freigaben (auch mit Passwort, Ordner oder Datei), OneDrive, Google Drive (Datei
+oder Ordner, Freigabe „Jeder mit dem Link“), direkte URLs.
 """
 
 from __future__ import annotations
 
 import base64
+import html
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -92,6 +95,13 @@ def _dateiname(r, url: str, ersatz: str) -> str:
 def _laden(url: str, ziel_dir: Path, name: str | None = None, auth: tuple[str, str] | None = None) -> Path:
     """Streamt url nach ziel_dir/<name>; überspringt, wenn die Datei schon vollständig da ist."""
     with _oeffnen(url, auth) as r:
+        if "drive.usercontent.google.com" in url and "text/html" in (r.headers.get("Content-Type") or ""):
+            # große Drive-Dateien: Hinweisseite „Virenscan nicht möglich“ – Formular enthält die echte Download-URL
+            seite = r.read().decode("utf-8", "replace")
+            if m := re.search(r'<form[^>]*action="([^"]+)"', seite):
+                felder = dict(re.findall(r'<input[^>]*name="([^"]+)"[^>]*value="([^"]*)"', seite))
+                return _laden(html.unescape(m.group(1)) + "?" + urllib.parse.urlencode(felder), ziel_dir, name)
+            raise LernFehler("Google Drive liefert keine Datei – Freigabe auf „Jeder, der über den Link verfügt“ stellen.")
         ziel = ziel_dir / (name or _dateiname(r, url, "download.zip"))
         gesamt = int(r.headers.get("Content-Length") or 0)
         if ziel.is_file() and gesamt and ziel.stat().st_size == gesamt:
@@ -130,6 +140,24 @@ def _nextcloud_dateien(basis: str, token: str, passwort: str) -> list[str]:
     return gefunden or [""]  # Datei-Freigabe: die Freigabe selbst ist die Datei
 
 
+def _drive_ordner(ordner_id: str, pfad: str = "") -> list[tuple[str, str]]:
+    """(Datei-ID, relativer Pfad) aller Dateien eines öffentlich geteilten Drive-Ordners, rekursiv."""
+    try:
+        with _oeffnen(f"https://drive.google.com/embeddedfolderview?id={ordner_id}") as r:
+            seite = r.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        raise LernFehler(f"Drive-Ordner nicht lesbar (HTTP {e.code}) – Freigabe auf „Jeder, der über den Link "
+                         "verfügt“ stellen.") from e
+    dateien = []
+    for href, titel in re.findall(r'<a href="([^"]+)"[^>]*>.*?flip-entry-title">([^<]+)<', seite, flags=re.S):
+        rel = f"{pfad}{html.unescape(titel).strip()}"
+        if m := re.search(r"/folders/([\w-]+)", href):
+            dateien += _drive_ordner(m.group(1), rel + "/")
+        elif m := re.search(r"/file/d/([\w-]+)", href):
+            dateien.append((m.group(1), rel))
+    return dateien
+
+
 def holen(repo: Repo, kurs: Kurs, links: list[str], passwort: str | None = None) -> list[Path]:
     """Lädt alle Links nach .cache/material/<kurs>/ und gibt die lokalen Dateien zurück (für lern abgleich)."""
     if not links:
@@ -139,6 +167,11 @@ def holen(repo: Repo, kurs: Kurs, links: list[str], passwort: str | None = None)
     for nr, link in enumerate(links, 1):
         if Path(link).exists():  # lokale Datei/Ordner (z. B. USB-Stick, gemeinsamer Netzordner)
             dateien.append(Path(link))
+            continue
+        if m := re.search(r"drive\.google\.com/drive/(?:u/\d+/)?folders/([\w-]+)", link):
+            for datei_id, rel in _drive_ordner(m.group(1)):
+                url = f"https://drive.usercontent.google.com/download?id={datei_id}&export=download&confirm=t"
+                dateien.append(_laden(url, cache / str(nr) / Path(rel).parent, Path(rel).name))
             continue
         nc = _nextcloud(link)
         if nc and passwort:

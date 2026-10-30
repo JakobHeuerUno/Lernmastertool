@@ -32,7 +32,7 @@ git clone https://github.com/JakobHeuerUno/Lernmastertool LERNECKE && cd LERNECK
 git checkout kurs/waerme-stoffuebertragung        # geteiltes Kursgerüst, Lernstand 0 %
 git checkout -b <deinname>/waerme-stoffuebertragung   # dein persönlicher Branch für den Lernstand
 sh setup.sh                                        # Windows: powershell -ExecutionPolicy Bypass -File .\setup.ps1
-./lern material holen "<Cloud-Link>" --passwort "<…>"   # Material vom Kursersteller (Sciebo/OneDrive/Drive)
+./lern material holen "<Cloud-Link>" --passwort "<…>"   # Material vom Kursersteller (Sciebo/OneDrive/Google-Drive-Datei oder -Ordner)
 # oder eigenen Moodle-Export einordnen:
 ./lern abgleich "<Pfad zum Moodle-Export>"         # zeigt, was zugeordnet wird; danach mit --los ausführen
 ```
