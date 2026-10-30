@@ -492,3 +492,33 @@ def test_material_holen_sciebo_mit_passwort(repo, kurs, monkeypatch):
     (datei,) = material.holen(repo, kurs, ["https://rwth-aachen.sciebo.de/s/TOK"], "geheim")
     assert datei.name == "wsu-material.zip" and datei.read_bytes() == b"zip"
     assert aufrufe[-1] == ("GET", "https://rwth-aachen.sciebo.de/public.php/webdav/wsu-material.zip", ("TOK", "geheim"))
+
+
+def test_material_holen_google_drive_ordner(repo, kurs, monkeypatch):
+    import io
+    from lern import material
+    eintrag = '<div class="flip-entry"><a href="https://drive.google.com/{}" target="_blank"><div class="flip-entry-title">{}</div></a></div>'
+    seiten = {"ROOT": eintrag.format("drive/folders/SUB", "Videos") + eintrag.format("file/d/F1/view?usp=drive_web", "wsu-material.zip"),
+              "SUB": eintrag.format("file/d/F2/view", "wsu-medien.zip")}
+    warnung = ('<form id="download-form" action="https://drive.usercontent.google.com/download" method="get">'
+               '<input type="hidden" name="id" value="F2"><input type="hidden" name="uuid" value="U"></form>')
+
+    class Antwort(io.BytesIO):
+        def __init__(self, daten, art="application/octet-stream"):
+            super().__init__(daten)
+            self.headers = {"Content-Type": art}
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+
+    def oeffnen(url, auth=None, methode="GET", daten=None, kopf=None):
+        if "embeddedfolderview" in url:
+            return Antwort(seiten[url.split("id=")[1]].encode(), "text/html")
+        if "id=F2&export" in url:  # große Datei: erst Hinweisseite
+            return Antwort(warnung.encode(), "text/html; charset=utf-8")
+        return Antwort(url.encode())
+    monkeypatch.setattr(material, "_oeffnen", oeffnen)
+    dateien = material.holen(repo, kurs, ["https://drive.google.com/drive/u/0/folders/ROOT?usp=sharing"])
+    assert sorted(d.relative_to(repo.wurzel / ".cache").as_posix() for d in dateien) == [
+        "material/demo/1/Videos/wsu-medien.zip", "material/demo/1/wsu-material.zip"]
+    medien = next(d for d in dateien if d.name == "wsu-medien.zip")
+    assert medien.read_bytes() == b"https://drive.usercontent.google.com/download?id=F2&uuid=U"
